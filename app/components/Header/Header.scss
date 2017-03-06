@@ -1,0 +1,15 @@
+@import "~vars";
+
+.header {
+    padding: $spacing-normal;
+    background: $color-main-dark;
+    color: $color-white;
+    display: flex;
+    justify-content: space-between;
+    a {
+        color: $color-white;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

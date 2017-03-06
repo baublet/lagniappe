@@ -32,7 +32,8 @@ export default validate(merge(baseConfig, {
         test: /\.global\.scss$/,
         loaders: [
           'style-loader',
-          'css-loader?sourceMap',
+          'css-loader?sourceMap&importLoaders=1',
+          'postcss-loader',
           'sass-loader?sourceMap'
         ]
       },
@@ -42,6 +43,7 @@ export default validate(merge(baseConfig, {
         loaders: [
           'style-loader',
           'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+          'postcss-loader',
           'sass-loader?sourceMap'
         ]
       },

@@ -30,8 +30,11 @@ export default validate({
    * Determine the array of extensions that should be used to resolve modules.
    */
   resolve: {
-    extensions: ['', '.js', '.jsx', '.json'],
-    packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main']
+    extensions: ['', '.js', '.jsx', '.json', '.scss'],
+    packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main'],
+    alias: {
+      'vars': path.join(__dirname, 'app', 'sass-global') + '/01__settings.scss'
+    }
   },
 
   plugins: [],

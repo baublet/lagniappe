@@ -1,0 +1,25 @@
+$color-white: #fcfcfc;
+$color-light-gray: #eee;
+$color-gray: #ccc;
+$color-black: #333;
+
+$color-main: #0283e2;
+$color-main-dark: #0160a6;
+
+$color-red: darkred;
+$color-red-light: red;
+
+$spacing-normal: 1rem;
+$spacing-huge: $spacing-normal * 4;
+$spacing-large: $spacing-normal * 2;
+$spacing-small: $spacing-normal / 2;
+$spacing-tiny: $spacing-normal / 4;
+
+$font-family-primary: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+$font-family-code: monospace;
+
+$font-size-base: 16px;
+$font-size-huge: $font-size-base * 2.2;
+$font-size-large: $font-size-base * 1.6;
+$font-size-small: $font-size-base * .8;
+$font-size-tiny: $font-size-base * .6;

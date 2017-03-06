@@ -1,0 +1,98 @@
+@import "~vars";
+
+.commandWindow {
+    box-shadow: inset 0 0 15px rgba($color-black, .15);
+    overflow: auto;
+    background: $color-black;
+}
+
+.title {
+
+}
+
+.lines {
+    font-family: $font-family-code;
+    font-size: $font-size-small;
+    color: $color-white;
+    list-style-type: none;
+    margin: $spacing-normal 0;
+    counter-reset: commandWindowLines;
+}
+
+
+.wrapper {
+
+}
+
+.line {
+    clear: both;
+    padding: $spacing-tiny 0 $spacing-tiny $spacing-huge;
+    text-indent: -#{$spacing-huge + $spacing-small};
+    &::before {
+        content: counter(commandWindowLines) '.';
+        color: rgba($color-white, .15);
+        display: inline-block;
+        margin-right: $spacing-small;
+        counter-increment: commandWindowLines;
+        text-align: right;
+        pointer-events: none;
+        -webkit-user-select: none;
+        width: $spacing-huge;
+    }
+}
+
+.tabLabel {
+    cursor: pointer;
+    font-size: $font-size-tiny;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border: 1px solid rgba($color-black, .25);
+    border-bottom: 0;
+    overflow: hidden;
+    position: relative;
+    + .tabLabel {
+        margin-left: 1px;
+    }
+}
+
+.tabLabelActive {
+    font-weight: bold;
+    color: $color-white;
+    background: $color-black;
+    &:hover .labelRemove {
+        opacity: 1;
+    }
+}
+
+.tabLabelInactive {
+    background: $color-white;
+    .labelRemove {
+        display: none;
+    }
+}
+
+.labelText {
+    display: inline-block;
+    white-space: nowrap;
+    min-width: 1rem;
+    overflow: hidden;
+    padding: $spacing-small $spacing-normal;
+}
+
+.labelRemove {
+    position: absolute;
+    right: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    background-image: linear-gradient(90deg, rgba(0,0,0,0), rgba($color-black, 1));
+    color: $color-white;
+    box-sizing: content-box;
+    padding: 8px 5px 8px 15px;
+    line-height: 0;
+    font-weight: bold;
+    opacity: 0;
+    &:hover {
+        color: $color-white;
+    }
+}

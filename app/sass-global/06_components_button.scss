@@ -1,0 +1,13 @@
+.btn {
+    padding: $spacing-normal;
+    font-size: $font-size-base;
+    background: $color-main-dark;
+    color: $color-white;
+    font-weight: bold;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover, &:focus {
+        background: $color-main;
+    }
+}

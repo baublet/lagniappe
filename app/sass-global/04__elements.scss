@@ -1,0 +1,15 @@
+html, body {
+  color: $color-black;
+  font-family: $font-family-primary;
+  font-size: $font-size-base;
+  line-height: 1.2;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+@import "04_elements_typography.scss";
+@import "04_elements_links.scss";
+@import "04_elements_headings.scss";
