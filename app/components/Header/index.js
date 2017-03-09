@@ -7,7 +7,7 @@ export default class Header extends Component {
   render() {
     return (
         <div className={styles.header}>
-            <Link to="/" className="header__logo">RSC DevOps Management</Link>
+            <Link to="/" className="header__logo">DevOps Tool</Link>
             <div className="devopsHealth">
                 Health Metrics
             </div>

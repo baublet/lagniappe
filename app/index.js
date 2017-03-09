@@ -10,6 +10,10 @@ import './app.global.scss'
 export const store = configureStore()
 const history = syncHistoryWithStore(hashHistory, store)
 
+// We need to run this here as a require, because we can't properly initialize
+// our watchers until our store is initialized
+require('./watchers.js')
+
 render(
   <Provider store={store}>
     <Router history={history} routes={routes} />

@@ -1,6 +1,3 @@
-// @flow
-import type { counterStateType } from '../reducers/command'
-
 export const ADD_WINDOW = 'command/ADD_WINDOW'
 export const ADD_LINE = 'command/ADD_LINE'
 export const ADD_LINES = 'command/ADD_LINES'
