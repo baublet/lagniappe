@@ -1,4 +1,4 @@
-import { ADD_WINDOW, ADD_LINE, ADD_LINES, REMOVE_WINDOW, FOCUS_WINDOW } from '../actions/command'
+import { ADD_WINDOW, ADD_LINE, ADD_LINES, REMOVE_WINDOW, FINISH_WINDOW, FOCUS_WINDOW } from '../actions/command'
 import deepcopy from '../utils/deepcopy'
 
 export const defaultCommandState = {
@@ -19,9 +19,18 @@ export default function command (state = null, action) {
                 id: action.payload.windowId,
                 windowTitle: action.payload.windowTitle,
                 active: true,
+                finished: false,
                 lines: []
             })
             return addedWindowState
+
+        case FINISH_WINDOW:
+            const finishWindowState = deepcopy(state)
+            finishWindowState.windows.forEach( window => {
+                if(window.id !== action.payload.windowId) return
+                window.finished = true
+            })
+            return finishWindowState
 
         case FOCUS_WINDOW:
             const focusWindowState = deepcopy(state)

@@ -1,7 +1,23 @@
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
 import styles from './CommandWindow.scss'
 
 export default class CommandWindow extends Component {
+
+    scrollToBottom() {
+        const node = ReactDOM.findDOMNode(this.consoleBottom)
+        // This will be false if we're not currently rendering this window
+        if(!node) return
+        node.scrollIntoView({behavior: "smooth"})
+    }
+
+    componentDidMount() {
+        this.scrollToBottom()
+    }
+
+    componentDidUpdate() {
+        this.scrollToBottom()
+    }
 
     renderLines() {
         let lines = []
@@ -19,6 +35,8 @@ export default class CommandWindow extends Component {
                 <ol className={styles.lines}>
                     {lines}
                 </ol>
+                <div style={ {float:"left", clear: "both"} }
+                    ref={(el) => { this.consoleBottom = el }}></div>
             </div>
         )
     }

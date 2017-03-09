@@ -8,7 +8,6 @@ export default class Apps extends Component {
   render() {
     return (
         <div className={styles.container} data-tid="container">
-          <h2>Apps</h2>
         </div>
     );
   }

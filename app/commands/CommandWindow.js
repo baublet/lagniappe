@@ -1,5 +1,5 @@
 import { store } from '../index.js'
-import { addWindow, addLines } from '../actions/command'
+import { addWindow, addLines, finishWindow } from '../actions/command'
 
 export default class CommandWindow
 {
@@ -16,11 +16,17 @@ export default class CommandWindow
     {
         const lines = data.split('\n')
         this.addLinesToWindow(lines)
+        if(finished) this.finishWindow()
     }
 
     addLinesToWindow(lines)
     {
         store.dispatch( addLines(this.id, lines) )
+    }
+
+    finishWindow()
+    {
+        store.dispatch( finishWindow(this.id) )
     }
 
     guid() {

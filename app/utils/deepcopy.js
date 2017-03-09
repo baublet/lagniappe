@@ -1,5 +1,8 @@
 function deepcopy (object) {
-    //return JSON.parse(JSON.stringify(object))
+
+    return JSON.parse( JSON.stringify(object) )
+
+    // This implementation is slightly slower, sadly
     if(typeof object == 'object') {
         if(object.constructor === Array) {
             return object.slice(0)

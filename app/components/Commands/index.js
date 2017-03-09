@@ -26,7 +26,7 @@ class Commands extends Component
     renderTabs() {
         if(!this.props.command || !this.props.command.windows.length) return <strong></strong>
         return this.props.command.windows.map(window => {
-            return <CommandTab title={window.windowTitle} key={'tab-' + window.id} id={window.id} active={window.active} />
+            return <CommandTab title={window.windowTitle} key={'tab-' + window.id} id={window.id} active={window.active} finished={window.finished} />
         })
     }
 

@@ -59,6 +59,7 @@
     font-weight: bold;
     color: $color-white;
     background: $color-black;
+    opacity: 1;
     &:hover .labelRemove {
         opacity: 1;
     }
@@ -69,14 +70,19 @@
     .labelRemove {
         display: none;
     }
+    &.finished {
+        opacity: .5;
+    }
 }
+
+
 
 .labelText {
     display: inline-block;
     white-space: nowrap;
     min-width: 1rem;
     overflow: hidden;
-    padding: $spacing-small $spacing-normal;
+    padding: $spacing-small;
 }
 
 .labelRemove {

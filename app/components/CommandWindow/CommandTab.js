@@ -17,7 +17,8 @@ export default class CommandTab extends Component {
 
     render() {
         const active = this.props.active ? styles.tabLabelActive : styles.tabLabelInactive
-        const className = styles.tabLabel + ' ' + active
+        const finished = this.props.finished ? styles.finished : ''
+        const className = styles.tabLabel + ' ' + active + ' ' + finished
         const title = this.props.title
         const windowId = 'window-' + this.props.id
         return (

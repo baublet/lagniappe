@@ -1,3 +1,5 @@
+import { spawn } from 'child_process'
+
 export default class CommandProcess
 {
     /**
@@ -27,7 +29,7 @@ export default class CommandProcess
 
     constructor(command, callback)
     {
-        this.commands = command.isArray && command.isArray() ? command : [command]
+        this.commands = command.length ? command : [command]
         this.callback = callback
     }
 
@@ -37,26 +39,41 @@ export default class CommandProcess
 
         this.commands.forEach(command => {
 
+            console.log(command)
+
             runningCommands++
 
-            const spawn = require('child_process').spawn
-            const ls = spawn(command.command, command.args, command.options)
-            const signature = command.id ? command.id + ': ' : ''
+            const process = spawn(command.command, command.args, command.options)
+            const signature = command.id ? command.id : command.command
 
-            ls.stdout.on('data', (data) => {
-                this.callback(signature + data, false, false)
+            process.stdout.on('data', data => {
+                data = data + ''
+                data = this.addSignature(command, data)
+                this.callback(data, false, false)
             })
 
-            ls.stderr.on('data', (data) => {
-                this.callback(signature + data, true, false)
+            process.stderr.on('data', data => {
+                data = data + ''
+                data = this.addSignature(command, data)
+                this.callback(data, true, false)
             })
 
-            ls.on('close', (code) => {
+            process.on('close', (code) => {
                 runningCommands--
-                this.callback(`Child process ${signature} exited with code ${code}`, !code, !!runningCommands)
+                const finished = runningCommands > 0 ? false : true
+                this.callback(`${signature}: Process exited with code ${code}`, !code, finished)
             })
 
         })
+    }
+
+    addSignature(command, data)
+    {
+        if(!command.id) return data
+        const lines = data.split('\n')
+        const signature = command.id + ': '
+        const newLines = lines.map(line => signature + line)
+        return newLines.join('\n')
     }
 
 }

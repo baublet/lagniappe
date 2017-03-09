@@ -4,6 +4,7 @@ import type { counterStateType } from '../reducers/command'
 export const ADD_WINDOW = 'command/ADD_WINDOW'
 export const ADD_LINE = 'command/ADD_LINE'
 export const ADD_LINES = 'command/ADD_LINES'
+export const FINISH_WINDOW = 'command/FINISH_WINDOW'
 export const REMOVE_WINDOW = 'command/REMOVE_WINDOW'
 export const FOCUS_WINDOW = 'command/FOCUS_WINDOW'
 
@@ -38,6 +39,18 @@ export function focusWindow(windowId)
     return dispatch => {
         dispatch({
             type: FOCUS_WINDOW,
+            payload: {
+                windowId
+            }
+        })
+    }
+}
+
+export function finishWindow(windowId)
+{
+    return dispatch => {
+        dispatch({
+            type: FINISH_WINDOW,
             payload: {
                 windowId
             }
