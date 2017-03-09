@@ -27,6 +27,8 @@ Although you should know a fair bit of React and Redux to get the most out of th
 
 ### Commands
 
+Commands are classes that let you run asynchronous commands from the command line of the user's computer, and pipe the output to a command window. 
+
 ### Watchers
 
 Watchers are intended to be super simple classes describing a periodic command you want to run and the resulting flag you want to set on the application's state tree. You will never have to write a custom reducer or action creator for a watcher. This is all done under the hood.

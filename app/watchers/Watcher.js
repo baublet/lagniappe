@@ -1,11 +1,11 @@
-import { store } from './index.js'
+import { store } from '../index.js'
 import { setWatcherData } from '../actions/watcher.js'
 import { exec } from 'child_process'
 
 export default class Watcher {
 
     // Every watcher must have the following variables defined
-    constructor() {
+    _constructor() {
         // A unique name for this watcher. This is the name with which you will access
         // the watcher via Redux.
         this.name = 'my-watcher-name'
@@ -19,8 +19,6 @@ export default class Watcher {
 
         // The command you want this watcher to run
         this.command = 'docker ps -a'
-
-        throw "Custom watchers require a constructor method that set this.name, this.interval, this.timeout, and this.command!"
     }
 
     // Watchers MUST have this method defined. It takes the variable `commandOutput`
@@ -69,7 +67,8 @@ export default class Watcher {
         }
 
         this._paused = false
-        this._interval = setInterval(this.execute, this.interval)
+        this._interval = setInterval(this.execute.bind(this), this.interval)
+        this.execute()
     }
 
 }

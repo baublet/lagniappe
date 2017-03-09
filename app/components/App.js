@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 import Header from '../components/Header'
 import Pages from '../components/Header/Pages'
@@ -14,7 +15,7 @@ class App extends Component {
   render() {
     return (
       <div className="applicationWindow">
-        <Header />
+        <Header watchers={this.props.watchers} />
         <Pages router={this.props.router} />
         <div className="mainWindow">
             {this.props.children}
@@ -26,4 +27,10 @@ class App extends Component {
   }
 }
 
-export default App
+function mapStateToProps(state) {
+   return {
+       watchers: state.watcher
+   }
+}
+
+export default connect(mapStateToProps)(App)
