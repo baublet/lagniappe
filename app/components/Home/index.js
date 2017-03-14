@@ -7,6 +7,9 @@ import Command from '../../commands/Command'
 import MultipleCommands from '../../commands/MultipleCommands'
 import Tail from '../../commands/Tail'
 
+import Panel from '../Panel'
+import PanelHeading from '../Panel/Heading'
+
 import styles from './Home.scss'
 
 
@@ -30,11 +33,14 @@ export default class Home extends Component
 
     render() {
         return (
-            <div className={styles.container} data-tid="container">
-              <Button onClick={this.testCommand}>Test Command</Button>
-              <Button onClick={this.testMultipleCommands}>Multiple Commands</Button>
-              <Button onClick={this.testLongRunningCommand}>Tail</Button>
-            </div>
+            <Panel type="fullWidth">
+                <PanelHeading>Development Environment</PanelHeading>
+                <div className="buttonGroup">
+                  <Button onClick={this.testCommand}>Test Command</Button>
+                  <Button onClick={this.testMultipleCommands}>Multiple Commands</Button>
+                  <Button onClick={this.testLongRunningCommand}>Tail</Button>
+                </div>
+            </Panel>
         )
     }
 

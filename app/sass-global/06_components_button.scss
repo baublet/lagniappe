@@ -1,13 +1,23 @@
 .btn {
-    padding: $spacing-normal;
-    font-size: $font-size-base;
+    padding: $spacing-small;
+    font-size: $font-size-small;
     background: $color-main-dark;
     color: $color-white;
-    font-weight: bold;
     border: 0;
     border-radius: 5px;
     cursor: pointer;
+    min-width: 5rem;
     &:hover, &:focus {
         background: $color-main;
     }
+}
+
+.btnLarge {
+    padding: $spacing-normal;
+    font-size: $font-size-base;
+    font-weight: bold;
+}
+
+.btnSmall {
+    font-size: $font-size-tiny;
 }

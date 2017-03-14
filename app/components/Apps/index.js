@@ -7,7 +7,7 @@ import styles from './Apps.scss';
 export default class Apps extends Component {
   render() {
     return (
-        <div className={styles.container} data-tid="container">
+        <div className={styles.container}>
         </div>
     );
   }

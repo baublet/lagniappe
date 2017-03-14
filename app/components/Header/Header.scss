@@ -2,6 +2,7 @@
 
 .header {
     padding: $spacing-normal;
+    margin: 0;
     background: $color-main-dark;
     color: $color-white;
     display: flex;
@@ -11,5 +12,9 @@
         &:hover {
             text-decoration: underline;
         }
+    }
+    * {
+        margin: 0;
+        padding: 0;
     }
 }

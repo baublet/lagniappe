@@ -1,11 +1,12 @@
 html, body {
   color: $color-black;
+  background: $color-white;
   font-family: $font-family-primary;
   font-size: $font-size-base;
   line-height: 1.2;
   overflow: hidden;
-  margin: 0;
-  padding: 0;
+  margin: 0 !important;
+  padding: 0 !important;
   height: 100vh;
   width: 100vw;
 }

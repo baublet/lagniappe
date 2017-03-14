@@ -8,6 +8,7 @@
     flex-direction: column;
     flex-grow: 0;
     max-height: 300px;
+    border-top: 1px solid $color-gray;
 }
 
 .commandsContainer__header {
@@ -31,16 +32,23 @@
     background: $color-gray;
     font-size: 0;
     max-height: $spacing-small;
-    height: $spacing-small;
+    height: $spacing-tiny;
     left: 0;
     right: 0;
-    top: -($spacing-normal / 2);
+    top: -($spacing-tiny / 2);
     overflow: visible;
     cursor: row-resize;
     transition: transform .15s ease-in-out;
     -webkit-user-select: none;
+    background-clip: padding-box;
+    border: 15px solid transparent;
+    border-right: 0;
+    border-left: 0;
 }
 
 .dragging {
     transform: scaleY(4);
+    border: 75px solid transparent;
+    border-right: 0;
+    border-left: 0;
 }

@@ -1,0 +1,18 @@
+@import "~vars";
+
+.panel {
+    padding: $spacing-small $spacing-normal;
+    max-width: 50%;
+    background: $color-light-gray;
+}
+
+.fullWidth {
+    width: 100%;
+    max-width: none;
+}
+
+.panelHeading {
+    font-size: $font-size-large;
+    font-weight: bold;
+    border-bottom: 1px solid rgba($color-black, .25)
+}
