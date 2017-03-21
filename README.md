@@ -1,20 +1,24 @@
-# Electron DevOps Tool
+# lagniappe
 
-A framework for simplifying developer operations.
+**lagniappe** (/ˈlænjæp/ lan-yap) is a framework written for [Electron](https://electron.atom.io). It aims to simplify developer operations by giving software teams a unified interface for complicated command line operations.
 
 ## What is it?
 
-Devops is hard. There a ton of commands to remember, concerns about cross-platform availability, software suites to install, people of different experience levels to address, and frequent pain points that make it often one of the most frustrating aspects of development.
+DevOps is hard. There a ton of commands to remember, concerns about cross-platform availability, many software suites to install, people of different experience levels to address, and frequent pain points that make it often one of the most frustrating aspects of a development team.
 
-This tool is designed to help DevOps engineers consolidate the process of running local development environments and housing a team's documentation by balling them into a cross-platform Electron application.
+This tool is designed to help teams consolidate the process of running local development environments by balling common commands into a cross-platform Electron application.
 
 Developers and DevOps engineers can run the program from `yarn dev` so they can add new commands or adjust settings as necessary; the quality assurance team can run an auto-updating GUI customized for their needs; and the creative team can run their own custom staging environment.
+
+## Install
+
+At the moment, there are no build scripts. That is on the horizon. To start the application, you have to run the tool in dev mode. Fork this repo, clone it to your local machine, CD into the directory, and run `yarn && yarn dev` if you use Yarn, or `npm install && npm run dev` for NPM.
 
 ## Documentation
 
 **Note:** A working knowledge of React, Redux, and Node are required to gain the most benefit from this framework.
 
-At its core, this tool is merely a way to layout a React/Redux front end modified and interacting with the user's environment via:
+At its core, this tool is merely a way to layout a React/Redux front end interacting with the user's native command-line environment via:
 
 * Commands `app/commands`
     * Commands that spawn child processes and output the result to the command console.
@@ -27,9 +31,9 @@ Although you should know a fair bit of React and Redux to get the most out of th
 
 ### Commands
 
-Commands are classes that let you run asynchronous commands from the command line of the user's computer. They are configured to allow you to pipe the output to a command window with trivial effort. These commands are run in a different thread than the main Electron thread, so should not block your application's rendering.
+Commands are classes that let you run asynchronous commands from the command line of the user's computer. They are configured to allow you to pipe the output to a command window with trivial effort. These commands are run in a different thread than the main Electron thread, and will not block your application's rendering.
 
-They return promises, allowing you to chain commands in a sequence. Have a long string of commands to run one after the other? Check out the `CommandSequence` class for information on how to do that.
+They return promises, allowing you to chain commands in a sequence. Have a long string of commands to run one after the other? Check out the `CommandSequence` class for information on how to do that, or see the example below.
 
 #### Example Command
 
@@ -76,7 +80,7 @@ import GitStatus from 'app/commands/GitStatus.js'
 
 #### Command Window
 
-The same command, but sending its contents to a command window, rather than to the javascript console:
+The same command, but sending its contents to a command window in the lagniappe UI, rather than to the javascript console:
 
 ```js
 // app/commands/GitStatus.js
@@ -178,7 +182,7 @@ You can also tap into the power of the `CommandProcess` class that spawns multip
 import CommandSequence from './CommandSequence'
 import CommandWindow from './CommandWindow'
 
-export default class GitCreateBranchAndClearCache
+export default class GitClearCacheAndCreateNewBranch
 {
     execute(branchName)
     {
@@ -339,3 +343,60 @@ export default (
 Now, when you click the `Git` link, your custom component, in `components/Git.js` or `components/Git/index.js` will be displayed in the main content area.
 
 ### Layout Components
+
+lagniappe ships with [Material UI](http://www.material-ui.com/) for you to use. Use its [component documentation](http://www.material-ui.com/#/components/app-bar) when building your UI.
+
+#### Grid
+
+There is a very simple nine-column grid for you to use as React components:
+
+```js
+import Grid from 'components/Grid'
+import Row from 'components/Row'
+import Col from 'components/Col'
+...
+<Grid>
+    <Row>
+        <Col span="3">Three</Col>
+        <Col span="3">Three</Col>
+        <Col span="3">Three</Col>
+    </Row>
+    <Row>
+        <Col span="3">Three</Col>
+        <Col span="6">Six</Col>
+    </Row>
+    <Row>
+        <Col span="9">Full</Col>
+    </Row>
+</Grid>
+```
+
+When laying out your UI, you will probably need to use this grid a lot. It will define your spacing and arrangement, and help maintain a degree of visual consistency.
+
+#### Customization
+
+You can customize the color schemes and most of the application's UI at any point by customizing either the global styles or Material UI.
+
+Most of the application's CSS variables live in the `app/sass-global` directory. Everything that is a setting is listed under items beginning with `01`. You can find a handy collection of mixins in files beginning with `02`. The project's global CSS is loosely organized corresponding to the [ITCSS](http://itcss.io/) methodology pioneered by [Harry Roberts](https://csswizardry.com/).
+
+*Note* that many custom components use their own, self-contained markup next to their components. To, for example, customize the command window's behavior, look, and feel, see `app/components/CommandWindow.js` and `app/components/CommandWindow.scss`.
+
+For more on customizing Material UI, see the framework's [customization documentation](http://www.material-ui.com/#/customization/themes). In this project, we only initialize the MUI theme provider for individual pages (defined as routes). You can see where the happens in `app/components/App.js`.
+
+## Road Map
+
+* Initial release for feedback
+* Documentation support (in Markdown)
+* Compilation/build scripts for the app
+* Automatic updates
+* Multiple platform support and documentation
+
+## Credits
+
+This framework was built using a variety of technologies for the Digital Marketing team at Radio Systems Corporation. I am open sourcing it as a way to share bugs, allow cool contributions, and highlight any bugs that may arise.
+
+* [Electron](https://electron.atom.io/)
+* [React](https://facebook.github.io/react/), [Redux](http://redux.js.org/)
+* @chentsulin's [Electron React/Redux Boilerplate](https://github.com/chentsulin/electron-react-boilerplate)
+* [Material UI](http://www.material-ui.com/)
+* [Node.js](https://nodejs.org/en/)

@@ -1,6 +1,6 @@
 {
-  "name": "devops-tool",
-  "productName": "DevOps Tool",
+  "name": "lagniappe",
+  "productName": "lagniappe",
   "version": "0.1.0",
   "description": "Electron, React, and Redux UI framework for controlling complicated development environments from a GUI.",
   "main": "main.js",
