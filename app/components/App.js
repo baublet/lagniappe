@@ -7,6 +7,19 @@ import Pages from '../components/Header/Pages'
 import Commands from '../components/Commands'
 import Footer from '../components/Footer'
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
+import {lightBlue500, lightBlue900, lightGreenA200} from 'material-ui/styles/colors'
+
+const muiTheme = getMuiTheme({
+  palette: {
+    primary1Color: lightBlue500,
+    primary2Color: lightBlue900,
+    accent1Color: lightGreenA200,
+    pickerHeaderColor: lightBlue500
+  }
+})
+
 class App extends Component {
   props: {
     children: HTMLElement
@@ -18,7 +31,9 @@ class App extends Component {
         <Header watchers={this.props.watchers} />
         <Pages router={this.props.router} />
         <div className="mainWindow">
-            {this.props.children}
+            <MuiThemeProvider muiTheme={muiTheme}>
+                {this.props.children}
+            </MuiThemeProvider>
         </div>
         <Commands />
         <Footer />

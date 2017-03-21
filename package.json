@@ -5,7 +5,7 @@
   "description": "Electron, React, and Redux UI framework for controlling complicated development environments from a GUI.",
   "main": "main.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 jest \"(\\\\|/)test(\\\\|/)(?!.*e2e\\.spec\\.js).+\\.spec\\.js\"",
+    "test": "mocha --require babel-register --colors app/**/*.test.js",
     "test-all": "npm run lint && npm run flow && npm run test && npm run build",
     "test-watch": "npm test -- --watch",
     "test-e2e": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 jest ./test/e2e.spec.js",
@@ -26,7 +26,6 @@
     "package-linux": "npm run build && build --linux",
     "package-all": "npm run build && build -mwl",
     "cleanup": "mop -v",
-    "test": "mocha --require babel-register --colors app/**/*.test.js",
     "test:watch": "mocha --require babel-register --colors --watch app/**/*.test.js"
   },
   "browserslist": "electron 1.4",
@@ -189,6 +188,7 @@
   "dependencies": {
     "electron-debug": "^1.1.0",
     "font-awesome": "^4.7.0",
+    "material-ui": "^0.17.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.2",

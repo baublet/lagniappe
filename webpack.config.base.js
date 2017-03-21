@@ -34,7 +34,8 @@ export default validate({
     packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main'],
     alias: {
       'vars': path.join(__dirname, 'app', 'sass-global') + '/01__settings.scss'
-    }
+    },
+    root: path.resolve('./app'),
   },
 
   plugins: [],

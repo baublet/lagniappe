@@ -27,43 +27,48 @@ export default class CommandProcess
      * }
      */
 
-    constructor(command, callback)
+    constructor(commands, callback)
     {
-        this.commands = command.length ? command : [command]
+        this.commands = commands.length ? commands : [commands]
         this.callback = callback
+        this.execute = this.execute.bind(this)
     }
 
     execute()
     {
-        let runningCommands = 0
+        return new Promise((resolve, reject) => {
+            let runningCommands = 0
 
-        this.commands.forEach(command => {
+            this.commands.forEach(command => {
 
-            console.log(command)
+                runningCommands++
 
-            runningCommands++
+                const process = spawn(command.command, command.args, command.options)
+                const signature = command.id ? command.id : command.command
 
-            const process = spawn(command.command, command.args, command.options)
-            const signature = command.id ? command.id : command.command
+                process.stdout.on('data', data => {
+                    data = data + ''
+                    data = this.addSignature(command, data)
+                    this.callback(data, false, false)
+                })
 
-            process.stdout.on('data', data => {
-                data = data + ''
-                data = this.addSignature(command, data)
-                this.callback(data, false, false)
+                process.stderr.on('data', data => {
+                    data = data + ''
+                    data = this.addSignature(command, data)
+                    this.callback(data, true, false)
+                    reject()
+                })
+
+                process.on('close', (code) => {
+                    runningCommands--
+                    const finished = runningCommands > 0 ? false : true
+                    this.callback(`${signature}: Process exited with code ${code}`, !code, finished)
+                    if(finished) {
+                        resolve()
+                    }
+                })
+
             })
-
-            process.stderr.on('data', data => {
-                data = data + ''
-                data = this.addSignature(command, data)
-                this.callback(data, true, false)
-            })
-
-            process.on('close', (code) => {
-                runningCommands--
-                const finished = runningCommands > 0 ? false : true
-                this.callback(`${signature}: Process exited with code ${code}`, !code, finished)
-            })
-
         })
     }
 

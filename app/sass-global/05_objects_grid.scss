@@ -1,7 +1,30 @@
+.grid {
+    margin: $spacing-normal -#{$spacing-small};
+}
+
 .row {
     display: flex;
+    align-content: space-between;
+    + .row {
+        margin-top: $spacing-normal;
+    }
 }
 
 .col  {
     flex-grow: 1;
+    background: #eee;
+    margin: 0 $spacing-small;
+    padding: $spacing-small;
+}
+
+.col--span- {
+    &3 {
+        width: 30%;
+    }
+    &6 {
+        width: calc(60% + #{$spacing-normal});
+    }
+    &9 {
+        width: calc(90% + (2 * #{$spacing-normal}));
+    }
 }

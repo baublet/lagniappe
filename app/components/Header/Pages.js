@@ -1,4 +1,3 @@
-// @flow
 import React, { Component } from 'react'
 import PageLink from './PageLink'
 
@@ -14,10 +13,6 @@ class Pages extends Component {
         <div className={styles.header__pages}>
             <PageLink to="/">Main</PageLink>
             <PageLink to="/apps">Apps</PageLink>
-            <PageLink to="/email">Email</PageLink>
-            <PageLink to="/testing">Testing</PageLink>
-            <PageLink to="/git">Git</PageLink>
-            <PageLink to="/tools">Tools</PageLink>
         </div>
       )
     }
