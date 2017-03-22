@@ -1,4 +1,3 @@
-// @flow
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -30,38 +29,51 @@ export default class Home extends Component
         command.execute()
     }
 
-    testTale() {
+    testTail() {
         let command = new Tail('package.json')
         command.execute()
     }
 
     render() {
         return (
-            <div>
-                <Panel type="fullWidth">
-                    <PanelHeading>Development Environment</PanelHeading>
-                    <div className="buttonGroup">
-                        <RaisedButton label="Default" primary={true} onClick={this.testCommand} />
-                        <RaisedButton label="Sequence" primary={true} onClick={this.testMultipleCommands} />
-                        <RaisedButton label="Tail" primary={true} onClick={this.testTail} />
-                    </div>
-                </Panel>
-
-                <Grid>
-                    <Row>
-                        <Col span="3">Three</Col>
-                        <Col span="3">Three</Col>
-                        <Col span="3">Three</Col>
-                    </Row>
-                    <Row>
-                        <Col span="3">Three</Col>
-                        <Col span="6">Six</Col>
-                    </Row>
-                    <Row>
-                        <Col span="9">Full</Col>
-                    </Row>
-                </Grid>
-            </div>
+            <Panel type="fullWidth">
+                <PanelHeading>Development Environment</PanelHeading>
+                <div className="buttonGroup">
+                    <RaisedButton label="Default" primary={true} onClick={this.testCommand} />
+                    <RaisedButton label="Sequence" primary={true} onClick={this.testMultipleCommands} />
+                    <RaisedButton label="Tail" primary={true} onClick={this.testTail} />
+                </div>
+                <div className="buttonGroup">
+                    <RaisedButton label="Default" primary={true} onClick={this.testCommand} />
+                    <RaisedButton label="Sequence" primary={true} onClick={this.testMultipleCommands} />
+                    <RaisedButton label="Tail" primary={true} onClick={this.testTail} />
+                </div>
+                <div className="buttonGroup">
+                    <RaisedButton label="Default" primary={true} onClick={this.testCommand} />
+                    <RaisedButton label="Sequence" primary={true} onClick={this.testMultipleCommands} />
+                    <RaisedButton label="Tail" primary={true} onClick={this.testTail} />
+                </div>
+                <div className="buttonGroup">
+                    <RaisedButton label="Default" primary={true} onClick={this.testCommand} />
+                    <RaisedButton label="Sequence" primary={true} onClick={this.testMultipleCommands} />
+                    <RaisedButton label="Tail" primary={true} onClick={this.testTail} />
+                </div>
+                <div className="buttonGroup">
+                    <RaisedButton label="Default" primary={true} onClick={this.testCommand} />
+                    <RaisedButton label="Sequence" primary={true} onClick={this.testMultipleCommands} />
+                    <RaisedButton label="Tail" primary={true} onClick={this.testTail} />
+                </div>
+                <div className="buttonGroup">
+                    <RaisedButton label="Default" primary={true} onClick={this.testCommand} />
+                    <RaisedButton label="Sequence" primary={true} onClick={this.testMultipleCommands} />
+                    <RaisedButton label="Tail" primary={true} onClick={this.testTail} />
+                </div>
+                <div className="buttonGroup">
+                    <RaisedButton label="Default" primary={true} onClick={this.testCommand} />
+                    <RaisedButton label="Sequence" primary={true} onClick={this.testMultipleCommands} />
+                    <RaisedButton label="Tail" primary={true} onClick={this.testTail} />
+                </div>
+            </Panel>
         )
     }
 

@@ -3,52 +3,15 @@
 .commandsContainer {
     background: $color-light-gray;
     padding: $spacing-normal;
-    position: relative;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    flex-grow: 0;
-    max-height: 300px;
-    border-top: 1px solid $color-gray;
-}
-
-.commandsContainer__header {
-    text-transform: uppercase;
-    color: $color-gray;
-    font-size: $font-size-base;
-    margin: -#{$spacing-normal} 0 0 -#{$spacing-normal};
-    padding: $spacing-small;
+    flex-grow: 1;
+    flex-basis: 25%;
 }
 
 .commandsContainer__tabsContainer {
     display: flex;
     overflow: hidden;
     min-height: $spacing-normal * 1.5;
-}
-
-.dragger {
-    position: absolute;
-    display: block;
-    color: rgba(0,0,0,0);
-    background: $color-gray;
-    font-size: 0;
-    max-height: $spacing-small;
-    height: $spacing-tiny;
-    left: 0;
-    right: 0;
-    top: -($spacing-tiny / 2);
-    overflow: visible;
-    cursor: row-resize;
-    transition: transform .15s ease-in-out;
-    -webkit-user-select: none;
-    background-clip: padding-box;
-    border: 15px solid transparent;
-    border-right: 0;
-    border-left: 0;
-}
-
-.dragging {
-    transform: scaleY(4);
-    border: 75px solid transparent;
-    border-right: 0;
-    border-left: 0;
 }

@@ -5,16 +5,9 @@ import { Link } from 'react-router'
 import styles from "./Commands.scss"
 import CommandWindow from '../CommandWindow'
 import CommandTab from '../CommandWindow/CommandTab'
-import CommandDragger from './CommandDragger'
 
 class Commands extends Component
 {
-    constructor(props) {
-        super(props)
-        this.state = {
-            height: 300
-        }
-    }
 
     renderWindows() {
         if(!this.props.command || !this.props.command.windows.length) return <strong></strong>
@@ -30,35 +23,15 @@ class Commands extends Component
         })
     }
 
-    windowCount() {
-        return !this.props.command ? 0 : this.props.command.windows.length
-    }
-
-    resize(y) {
-        const newHeight = this.state.height + y
-        let height = newHeight > 640 ? 640 : newHeight
-        height = newHeight < 100 ? 100 : newHeight
-        this.setState({
-            height
-        })
-    }
-
     render()
     {
         const windows = this.renderWindows()
         const tabs = this.renderTabs()
-        const windowCount = this.windowCount()
-        const height = this.state.height ? this.state.height : 300
-        const heightPx = height + 'px'
-        const commandWindowStyle = {
-            height: heightPx,
-            maxHeight: heightPx
-        }
+        const id = this.props.id ? this.props.id : 'console'
+        const style = this.props.style ? this.props.style : {}
 
         return (
-            <div className={styles.commandsContainer} style={commandWindowStyle}>
-                <CommandDragger onResize={this.resize.bind(this)} />
-                <h1 className={styles.commandsContainer__header}>Commands ({windowCount})</h1>
+            <div className={styles.commandsContainer} id={id} style={style}>
                 <div className={styles.commandsContainer__tabsContainer}>
                     {tabs}
                 </div>
@@ -66,6 +39,7 @@ class Commands extends Component
             </div>
         )
     }
+
 }
 
 function mapStateToProps(state) {

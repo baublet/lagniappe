@@ -36,7 +36,8 @@ export default class CommandWindow extends Component {
                     {lines}
                 </ol>
                 <div style={ {float:"left", clear: "both"} }
-                    ref={(el) => { this.consoleBottom = el }}></div>
+                    ref={(el) => { this.consoleBottom = el }}>
+                </div>
             </div>
         )
     }

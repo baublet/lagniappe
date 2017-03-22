@@ -1,9 +1,11 @@
 @import "~vars";
 
 .commandWindow {
-    box-shadow: inset 0 0 15px rgba($color-black, .15);
-    overflow: auto;
+    overflow: hidden;
+    overflow-y: scroll;
     background: $color-black;
+    max-height: 100%;
+    border: 3px solid rgba($color-black, .5);
 }
 
 .title {

@@ -386,6 +386,7 @@ For more on customizing Material UI, see the framework's [customization document
 ## Road Map
 
 * Initial release for feedback
+* Abandon much of the custom stuff and Material UI for [AntReact](https://ant.design/docs/react/introduce)
 * Documentation support (in Markdown)
 * Compilation/build scripts for the app
 * Automatic updates

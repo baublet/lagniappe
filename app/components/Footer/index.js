@@ -6,7 +6,7 @@ import styles from './Footer.scss'
 export default class Footer extends Component {
   render() {
     return (
-        <div className={styles.footer}>
+        <div className={styles.footer} id="footer">
             This is in the footer
         </div>
     )

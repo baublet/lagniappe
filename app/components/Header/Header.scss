@@ -6,6 +6,7 @@
     background: $color-main-dark;
     color: $color-white;
     display: flex;
+    flex-grow: 0;
     justify-content: space-between;
     a {
         color: $color-white;

@@ -3,6 +3,7 @@
 .header__pages {
     background: $color-main;
     display: flex;
+    flex-grow: 0;
 }
 
 .header__pages__page {
