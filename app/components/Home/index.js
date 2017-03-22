@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
-import RaisedButton from 'material-ui/RaisedButton'
+import { Button } from 'antd'
+import 'antd/lib/button/style/css'
 
 import Command from 'commands/Command'
 import SequenceTest from 'commands/SequenceTest'
@@ -39,39 +40,9 @@ export default class Home extends Component
             <Panel type="fullWidth">
                 <PanelHeading>Development Environment</PanelHeading>
                 <div className="buttonGroup">
-                    <RaisedButton label="Default" primary={true} onClick={this.testCommand} />
-                    <RaisedButton label="Sequence" primary={true} onClick={this.testMultipleCommands} />
-                    <RaisedButton label="Tail" primary={true} onClick={this.testTail} />
-                </div>
-                <div className="buttonGroup">
-                    <RaisedButton label="Default" primary={true} onClick={this.testCommand} />
-                    <RaisedButton label="Sequence" primary={true} onClick={this.testMultipleCommands} />
-                    <RaisedButton label="Tail" primary={true} onClick={this.testTail} />
-                </div>
-                <div className="buttonGroup">
-                    <RaisedButton label="Default" primary={true} onClick={this.testCommand} />
-                    <RaisedButton label="Sequence" primary={true} onClick={this.testMultipleCommands} />
-                    <RaisedButton label="Tail" primary={true} onClick={this.testTail} />
-                </div>
-                <div className="buttonGroup">
-                    <RaisedButton label="Default" primary={true} onClick={this.testCommand} />
-                    <RaisedButton label="Sequence" primary={true} onClick={this.testMultipleCommands} />
-                    <RaisedButton label="Tail" primary={true} onClick={this.testTail} />
-                </div>
-                <div className="buttonGroup">
-                    <RaisedButton label="Default" primary={true} onClick={this.testCommand} />
-                    <RaisedButton label="Sequence" primary={true} onClick={this.testMultipleCommands} />
-                    <RaisedButton label="Tail" primary={true} onClick={this.testTail} />
-                </div>
-                <div className="buttonGroup">
-                    <RaisedButton label="Default" primary={true} onClick={this.testCommand} />
-                    <RaisedButton label="Sequence" primary={true} onClick={this.testMultipleCommands} />
-                    <RaisedButton label="Tail" primary={true} onClick={this.testTail} />
-                </div>
-                <div className="buttonGroup">
-                    <RaisedButton label="Default" primary={true} onClick={this.testCommand} />
-                    <RaisedButton label="Sequence" primary={true} onClick={this.testMultipleCommands} />
-                    <RaisedButton label="Tail" primary={true} onClick={this.testTail} />
+                    <Button type="primary" onClick={this.testCommand}>Default</Button>
+                    <Button type="primary" onClick={this.testMultipleCommands}>Multiple Commands</Button>
+                    <Button type="primary" onClick={this.testTail}>Tail</Button>
                 </div>
             </Panel>
         )

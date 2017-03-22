@@ -121,6 +121,7 @@
     "babel-loader": "^6.2.10",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-dev-expression": "^0.2.1",
+    "babel-plugin-import": "^1.1.1",
     "babel-plugin-tcomb": "^0.3.24",
     "babel-plugin-transform-class-properties": "^6.22.0",
     "babel-plugin-transform-es2015-classes": "^6.22.0",
@@ -186,8 +187,10 @@
     "webpack-validator": "^2.3.0"
   },
   "dependencies": {
+    "antd": "^2.8.2",
     "electron-debug": "^1.1.0",
     "font-awesome": "^4.7.0",
+    "less-loader": "^4.0.2",
     "material-ui": "^0.17.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",

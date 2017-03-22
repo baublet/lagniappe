@@ -28,6 +28,16 @@ export default validate(merge(baseConfig, {
 
   module: {
     loaders: [
+
+      // Ant Design loader -- we don't want to use importLoaders for these files
+      {
+          test: /^.*\.css$/,
+          loaders: [
+            'style-loader',
+            'css-loader?sourceMap'
+          ]
+      },
+
       {
         test: /\.global\.scss$/,
         loaders: [
