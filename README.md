@@ -281,44 +281,9 @@ state = {
 
 ### Sections
 
-Although you don't have to use the layout shipped with this tool, if you do, there are a number of helpers available to help you build your interface. One of these are sections.
+TBD
 
-A typical devops tool will have several sections to help manage an environment. To see the sections and modify them, you need to be aware of two files:
-
-* `app/components/Header/Pages.js` - This file controls the layout of section links.
-* `app/routes.js` - Link routes to your new section.
-
-To add a section to your application, edit `Pages.js` to add your new link:
-
-```js
-// app/components/Header/Pages.js
-
-import React, { Component } from 'react'
-import PageLink from './PageLink'
-
-import styles from './Pages.scss'
-
-class Pages extends Component {
-    getChildContext() {
-      return {router: this.props.router}
-    }
-
-    render() {
-      return (
-        <div className={styles.header__pages}>
-            <PageLink to="/">Main</PageLink>
-            <PageLink to="/git">Git</PageLink>  // Your new link
-        </div>
-      )
-    }
-}
-
-Pages.childContextTypes = {
-  router: React.PropTypes.object
-}
-
-export default Pages
-```
+### Routes
 
 Then, in `router.js`, link your `/git` route to your section component:
 
@@ -344,34 +309,49 @@ Now, when you click the `Git` link, your custom component, in `components/Git.js
 
 ### Layout Components
 
-lagniappe ships with [Material UI](http://www.material-ui.com/) for you to use. Use its [component documentation](http://www.material-ui.com/#/components/app-bar) when building your UI.
+lagniappe ships with the [Ant Design component library for React](https://ant.design/) for you to use. Use its [component documentation](https://ant.design/docs/react/introduce) when building your UI.
 
-#### Grid
+### Spacing
 
-There is a very simple nine-column grid for you to use as React components:
+To help with spacing your components, use our custom classes:
 
-```js
-import Grid from 'components/Grid'
-import Row from 'components/Row'
-import Col from 'components/Col'
-...
-<Grid>
-    <Row>
-        <Col span="3">Three</Col>
-        <Col span="3">Three</Col>
-        <Col span="3">Three</Col>
-    </Row>
-    <Row>
-        <Col span="3">Three</Col>
-        <Col span="6">Six</Col>
-    </Row>
-    <Row>
-        <Col span="9">Full</Col>
-    </Row>
-</Grid>
+```css
+.t-spacing {
+    margin-top: $spacing-large
+}
 ```
 
-When laying out your UI, you will probably need to use this grid a lot. It will define your spacing and arrangement, and help maintain a degree of visual consistency.
+The same classes exist for:
+
+```css
+/* Top */
+.t-spacing
+.t-spacing--large
+.t-spacing--huge
+.t-spacing--small
+.t-spacing--tiny
+
+/* Right */
+.r-spacing
+.r-spacing--large
+.r-spacing--huge
+.r-spacing--small
+.r-spacing--tiny
+
+/* Bottom */
+.b-spacing
+.b-spacing--large
+.b-spacing--huge
+.b-spacing--small
+.b-spacing--tiny
+
+/* Left */
+.l-spacing
+.l-spacing--large
+.l-spacing--huge
+.l-spacing--small
+.l-spacing--tiny
+```
 
 #### Customization
 

@@ -5,7 +5,7 @@ import { exec } from 'child_process'
 export default class Watcher {
 
     // Every watcher must have the following variables defined
-    _constructor() {
+    constructor() {
         // A unique name for this watcher. This is the name with which you will access
         // the watcher via Redux.
         this.name = 'my-watcher-name'
