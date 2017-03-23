@@ -7,17 +7,28 @@
     flex-direction: column;
 }
 
+.sideBarWindowContainer {
+    flex-grow: 1;
+    display: flex;
+    align-items: stretch;
+}
+
 .mainWindow {
     flex-grow: 1;
     position: relative;
     display: flex;
     flex-direction: column;
-    height: 100%;
 }
 
 .mainWindow--viewport {
     padding: $spacing-normal;
     flex-grow: 1;
     flex-basis: 75%;
+    overflow: auto;
+    border-left: 1px solid $color-gray;
+}
+
+.sideBar {
+    background: #333;
     overflow: auto;
 }

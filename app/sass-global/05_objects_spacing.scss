@@ -1,0 +1,19 @@
+$spacers: top right bottom left;
+
+@each $spacer in $spacers {
+    .#{str-slice($spacer, 0, 1)}-spacing {
+        margin-#{$spacer}: $spacing-normal;
+        &--large {
+            margin-#{$spacer}: $spacing-large;
+        }
+        &--huge {
+            margin-#{$spacer}: $spacing-huge;
+        }
+        &--small {
+            margin-#{$spacer}: $spacing-small;
+        }
+        &--tiny {
+            margin-#{$spacer}: $spacing-tiny;
+        }
+    }
+}

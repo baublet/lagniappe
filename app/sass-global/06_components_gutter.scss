@@ -1,24 +1,15 @@
 .gutter {
     background: $color-light-gray;
-    border: 1px solid $color-gray;
     position: relative;
-    &:before {
-        content: "...";
-        font-weight: bold;
-        color: $color-gray;
-        position: absolute;
-        left: 50%;
-        top: 0%;
-        transform: translate(-50%, -50%);
-    }
 }
 
 .gutter-vertical {
-    border-left: 0;
-    border-right: 0;
+    z-index: $layer-vertical-gutter;
+    cursor: row-resize;
+    border-top: 1px solid $color-gray;
 }
 
 .gutter-horizontal {
-    border-top: 0;
-    border-bottom: 0;
+    z-index: $layer-horizontal-gutter;
+    cursor: col-resize;
 }

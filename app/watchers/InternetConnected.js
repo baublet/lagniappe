@@ -9,7 +9,7 @@ export default class InternetConnected extends Watcher {
         this.name = 'internet_connected'
         this.interval = 15000
         this.timeout = 500
-        this.command = 'ping google.com'
+        this.command = 'ping googleasdfasdf.com'
     }
 
     filter(commandOutput) {

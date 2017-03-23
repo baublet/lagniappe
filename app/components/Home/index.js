@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 import { Button } from 'antd'
-import 'antd/lib/button/style/css'
 
 import Command from 'commands/Command'
 import SequenceTest from 'commands/SequenceTest'
@@ -10,9 +9,7 @@ import Tail from 'commands/Tail'
 import Panel from '../Panel'
 import PanelHeading from '../Panel/Heading'
 
-import Grid from 'components/Grid'
-import Row from 'components/Row'
-import Col from 'components/Col'
+import { Row, Col } from 'antd'
 
 import styles from './Home.scss'
 
@@ -39,11 +36,11 @@ export default class Home extends Component
         return (
             <Panel type="fullWidth">
                 <PanelHeading>Development Environment</PanelHeading>
-                <div className="buttonGroup">
+                <Button.Group className="t-spacing">
                     <Button type="primary" onClick={this.testCommand}>Default</Button>
                     <Button type="primary" onClick={this.testMultipleCommands}>Multiple Commands</Button>
                     <Button type="primary" onClick={this.testTail}>Tail</Button>
-                </div>
+                </Button.Group>
             </Panel>
         )
     }

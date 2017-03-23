@@ -1,15 +1,18 @@
-// @flow
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 import styles from './Header.scss'
 
+import { Icon, Tooltip } from 'antd'
+
 export default class Header extends Component {
 
     internetStatus() {
-        const style = { color: this.props.watchers.internet_connected ? "green" : "rgba(0, 0, 0, .25)" }
+        const type = this.props.watchers.internet_connected ? "link" : "disconnect"
         const title = this.props.watchers.internet_connected ? "You are connected to the internet" : "You have no internet connectivity"
         return (
-            <i className="fa fa-plug" aria-hidden="true" style={style} title={title}></i>
+            <Tooltip placement="bottomRight" title={title}>
+                <Icon type={type} />
+            </Tooltip>
         )
     }
 

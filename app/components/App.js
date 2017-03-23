@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Header from 'components/Header'
-import Pages from 'components/Header/Pages'
+import Navigation from 'components/Navigation'
 import Commands from 'components/Commands'
 import Footer from 'components/Footer'
 
@@ -15,15 +15,27 @@ class App extends Component {
 
   componentDidMount() {
 
-    this.split = Split(['#page', '#console'], {
+    this.hsplit = Split(['#page', '#console'], {
         direction: 'vertical',
         cursor: 'row-resize',
+        gutterSize: 5,
         elementStyle: (dimension, size, gutterSize) => {
             return {
                 'flex-basis': 'calc(' + size + '% - ' + gutterSize + 'px)'
             }
         }
     })
+
+    this.vsplit = Split(['#sideBar', '#mainWindow'], {
+        sizes: [15, 85],
+        gutterSize: 5,
+        elementStyle: (dimension, size, gutterSize) => {
+            return {
+                'flex-basis': 'calc(' + size + '% - ' + gutterSize + 'px)'
+            }
+        }
+    })
+
   }
 
   render() {
@@ -31,12 +43,16 @@ class App extends Component {
     return (
       <div className="applicationWindow">
         <Header watchers={this.props.watchers} />
-        <Pages router={this.props.router} />
-        <div className="mainWindow" id="mainWindow">
-            <div className="mainWindow--viewport" id="page">
-                {this.props.children}
+        <div className="sideBarWindowContainer">
+            <div className="sideBar" id="sideBar">
+                <Navigation />
             </div>
-            <Commands id="console" />
+            <div className="mainWindow" id="mainWindow">
+                <div className="mainWindow--viewport" id="page">
+                    {this.props.children}
+                </div>
+                <Commands id="console" />
+            </div>
         </div>
         <Footer />
       </div>
