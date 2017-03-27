@@ -4,12 +4,32 @@
  * https://webpack.github.io/docs/hot-module-replacement-with-webpack.html
  */
 
-import webpack from 'webpack';
-import validate from 'webpack-validator';
-import merge from 'webpack-merge';
-import baseConfig from './webpack.config.base';
+import webpack from 'webpack'
+import validate from 'webpack-validator'
+import merge from 'webpack-merge'
+import baseConfig from './webpack.config.base'
+import { existsSync } from 'fs'
+import { join, resolve } from 'path'
+import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
 const port = process.env.PORT || 3000;
+
+
+const packageJsonPath = './package.json'
+const packageObject = existsSync(packageJsonPath) ? require(packageJsonPath) : {}
+
+let theme = {}
+if (packageObject.theme && typeof(packageObject.theme) === 'string') {
+  let cfgPath = packageObject.theme
+  // relative path
+  if (cfgPath.charAt(0) === '.') {
+    cfgPath = resolve(cfgPath)
+  }
+  const getThemeConfig = require(cfgPath)
+  theme = getThemeConfig()
+} else if (packageObject.theme && typeof(packageObject.theme) === 'object') {
+  theme = packageObject.theme
+}
 
 export default validate(merge(baseConfig, {
   debug: true,
@@ -37,6 +57,20 @@ export default validate(merge(baseConfig, {
             'css-loader?sourceMap'
           ]
       },
+
+      {
+        test(filePath) {
+          return /\.less$/.test(filePath) && !/\.module\.less$/.test(filePath);
+        },
+        loaders: [
+          'style-loader',
+          'css-loader?sourceMap&importLoaders=0',
+          'postcss-loader',
+          `less-loader?{"sourceMap":true,"modifyVars":${JSON.stringify(theme)}}`
+        ],
+      },
+
+
 
       {
         test: /\.global\.scss$/,

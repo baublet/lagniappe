@@ -281,11 +281,28 @@ state = {
 
 ### Sections
 
-TBD
+Sections are added in two steps: first, we add the need page to the Navigation pane, then we add the appropriate route.
 
-### Routes
+#### Navigation.js
 
-Then, in `router.js`, link your `/git` route to your section component:
+In `app/components/Navigation/index.js`, you will find the component responsible for your application's navigation. It consists of menu items and submenu items. Each item will have a `key="/some-action"` property attached to it. This is the route that your application's new page will be displayed on.
+
+Let's say you want to add a new page called "Git Repositories":
+
+```jsx
+<Menu theme='dark' style={{ width: '100%' }} mode="inline" onClick={navigateTo}>
+  <SubMenu key="manage" title={<span><Icon type="dot-chart" /><span>Default</span></span>}>
+    <Menu.Item key="/">Home</Menu.Item>
+    <Menu.Item key="/git-repos">Git Repositories</Menu.Item>
+  </SubMenu>
+</Menu>
+```
+
+The code above will add the new menu item, adjacent to the "Home" item under the "Default" submenu. Now, we need to define the route.
+
+#### Routes
+
+Then, in `router.js`, link your `/git-repos` route to your section component:
 
 ```js
 // app/router.js
@@ -294,18 +311,18 @@ import React from 'react'
 import { Route, IndexRoute } from 'react-router'
 import App from './components/App'
 import Home from './components/Home'
-import Git from './components/Git'          // Path to your component
+import GitRepos from './components/GitRepos'          // Path to your component
 
 
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={Home} />
-    <Route path="/git" component={Git} />   // This tells React Router that `/git` loads the `Git` component
+    <Route path="/git-repos" component={GitRepos} />   // This tells React Router that `/git-repos` loads the `GitRepos` component
   </Route>
 )
 ```
 
-Now, when you click the `Git` link, your custom component, in `components/Git.js` or `components/Git/index.js` will be displayed in the main content area.
+Now, when you click the `GitRepos` link, your custom component, in `components/GitRepos.js` or `components/GitRepos/index.js` will be displayed in the main content area. From there, you can customize this component to layout any set of commands or watchers as you need.
 
 ### Layout Components
 
@@ -325,43 +342,44 @@ The same classes exist for:
 
 ```css
 /* Top */
-.t-spacing
-.t-spacing--large
-.t-spacing--huge
-.t-spacing--small
-.t-spacing--tiny
+.t-spacing {}
+.t-spacing--large {}
+.t-spacing--huge {}
+.t-spacing--small {}
+.t-spacing--tiny {}
 
 /* Right */
-.r-spacing
-.r-spacing--large
-.r-spacing--huge
-.r-spacing--small
-.r-spacing--tiny
+.r-spacing {}
+.r-spacing--large {}
+.r-spacing--huge {}
+.r-spacing--small {}
+.r-spacing--tiny {}
 
 /* Bottom */
-.b-spacing
-.b-spacing--large
-.b-spacing--huge
-.b-spacing--small
-.b-spacing--tiny
+.b-spacing {}
+.b-spacing--large {}
+.b-spacing--huge {}
+.b-spacing--small {}
+.b-spacing--tiny {}
 
 /* Left */
-.l-spacing
-.l-spacing--large
-.l-spacing--huge
-.l-spacing--small
-.l-spacing--tiny
+.l-spacing {}
+.l-spacing--large {}
+.l-spacing--huge {}
+.l-spacing--small {}
+.l-spacing--tiny {}
 ```
 
 #### Customization
 
-You can customize the color schemes and most of the application's UI at any point by customizing either the global styles or Material UI.
+Where possible, this framework tries to abstract the work of styling to two places:
+
+* Theming Ant Design is done as an override of its internal LESS variables. To set its colors, edit `./theme.js` in the root folder of the project. **You must recompile webpack for changes to the Ant theme to appear.**
+* The SASS settings file, `app/sass-global/01__settings.scss` -- for global styles and settings independent from individual component markup.
 
 Most of the application's CSS variables live in the `app/sass-global` directory. Everything that is a setting is listed under items beginning with `01`. You can find a handy collection of mixins in files beginning with `02`. The project's global CSS is loosely organized corresponding to the [ITCSS](http://itcss.io/) methodology pioneered by [Harry Roberts](https://csswizardry.com/).
 
 *Note* that many custom components use their own, self-contained markup next to their components. To, for example, customize the command window's behavior, look, and feel, see `app/components/CommandWindow.js` and `app/components/CommandWindow.scss`.
-
-For more on customizing Material UI, see the framework's [customization documentation](http://www.material-ui.com/#/customization/themes). In this project, we only initialize the MUI theme provider for individual pages (defined as routes). You can see where the happens in `app/components/App.js`.
 
 ## Road Map
 
