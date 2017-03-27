@@ -1,0 +1,7 @@
+@import "~vars";
+
+.navigation {
+    position: relative;
+    z-index: $layer-navigation;
+    width: 100%;
+}

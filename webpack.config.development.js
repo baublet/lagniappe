@@ -31,6 +31,10 @@ if (packageObject.theme && typeof(packageObject.theme) === 'string') {
   theme = packageObject.theme
 }
 
+let globals = new webpack.DefinePlugin({
+  'process.env.NODE_ENV': JSON.stringify('development'),
+})
+
 export default validate(merge(baseConfig, {
   debug: true,
 
@@ -125,9 +129,7 @@ export default validate(merge(baseConfig, {
      * NODE_ENV should be production so that modules do not perform certain
      * development checks
      */
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development')
-    })
+    globals
   ],
 
   /**

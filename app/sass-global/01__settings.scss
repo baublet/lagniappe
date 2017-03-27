@@ -2,12 +2,7 @@ $color-white: #fcfcfc;
 $color-light-gray: #eee;
 $color-gray: #ccc;
 $color-black: #333;
-
-$color-main: #2196F3;
-$color-main-dark: #1976D2;
-
 $color-red: darkred;
-$color-red-light: red;
 
 $spacing-normal: 1rem;
 $spacing-huge: $spacing-normal * 4;
@@ -24,6 +19,8 @@ $font-size-large: $font-size-base * 1.6;
 $font-size-small: $font-size-base * .8;
 $font-size-tiny: $font-size-base * .6;
 
+$layer-header: 900;
 $layer-horizontal-gutter: 300;
 $layer-vertical-gutter: 200;
 $layer-footer: 100;
+$layer-navigation: 100;

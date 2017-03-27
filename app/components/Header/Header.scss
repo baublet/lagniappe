@@ -1,14 +1,14 @@
 @import "~vars";
 
 .header {
-    padding: $spacing-normal;
     margin: 0;
-    background: $color-main-dark;
+    padding: 0 $spacing-normal;
     color: $color-white;
-    display: flex;
     flex-grow: 0;
     flex-shrink: 0;
-    justify-content: space-between;
+    box-shadow: 0 0 15px rgba($color-black, .5);
+    position: relative;
+    z-index: $layer-header;
     a {
         color: $color-white;
         &:hover {
@@ -19,4 +19,9 @@
         margin: 0;
         padding: 0;
     }
+}
+
+
+.devopsHealth {
+    text-align: right;
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 import styles from './Header.scss'
+import { Layout, Row, Col } from 'antd'
 
 import { Icon, Tooltip } from 'antd'
 
@@ -18,12 +19,16 @@ export default class Header extends Component {
 
     render() {
         return (
-            <div className={styles.header}>
-                <Link to="/" className="header__logo">DevOps Tool</Link>
-                <div className="devopsHealth">
-                    {this.internetStatus()}
-                </div>
-            </div>
+            <Layout.Header className={styles.header}>
+                <Row>
+                    <Col span={8}>
+                        <Link to="/" className="header__logo">langiappe</Link>
+                    </Col>
+                    <Col span={16} className={styles.devopsHealth}>
+                        {this.internetStatus()}
+                    </Col>
+                </Row>
+            </Layout.Header>
         )
     }
 }

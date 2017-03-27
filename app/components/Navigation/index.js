@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Menu, Icon } from 'antd'
 import { browserHistory } from 'react-router'
+import styles from './Navigation.scss'
 
 const SubMenu = Menu.SubMenu
 
@@ -17,7 +18,7 @@ export default class Navigation extends Component
     render() {
         const navigateTo = this.navigateTo.bind(this)
         return(
-            <Menu theme='dark' style={{ width: '100%' }} mode="inline" onClick={navigateTo}>
+            <Menu theme='dark' className={styles.navigation} mode="inline" onClick={navigateTo}>
               <SubMenu key="manage" title={<span><Icon type="dot-chart" /><span>DM Team</span></span>}>
                 <Menu.Item key="/">Environment</Menu.Item>
                 <Menu.Item key="/config">Configuration</Menu.Item>
