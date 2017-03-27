@@ -9,13 +9,29 @@ import Footer from 'components/Footer'
 import Split from 'split.js'
 
 class App extends Component {
-  props: {
-    children: HTMLElement
-  }
+
+    constructor(props) {
+        super(props)
+
+        this.hsizes = localStorage.getItem('split-horizontal-sizes')
+        if (this.hsizes) {
+            this.hsizes = JSON.parse(this.hsizes)
+        } else {
+            this.hsizes = [50, 50]
+        }
+
+        this.vsizes = localStorage.getItem('split-vertical-sizes')
+        if (this.vsizes) {
+            this.vsizes = JSON.parse(this.vsizes)
+        } else {
+            this.vsizes = [20, 80]
+        }
+    }
 
   componentDidMount() {
 
     this.hsplit = Split(['#page', '#console'], {
+        sizes: this.hsizes,
         direction: 'vertical',
         cursor: 'row-resize',
         gutterSize: 5,
@@ -23,16 +39,22 @@ class App extends Component {
             return {
                 'flex-basis': 'calc(' + size + '% - ' + gutterSize + 'px)'
             }
+        },
+        onDragEnd: () => {
+            localStorage.setItem('split-horizontal-sizes', JSON.stringify(this.hsplit.getSizes()))
         }
     })
 
     this.vsplit = Split(['#sideBar', '#mainWindow'], {
-        sizes: [15, 85],
+        sizes: this.vsizes,
         gutterSize: 5,
         elementStyle: (dimension, size, gutterSize) => {
             return {
                 'flex-basis': 'calc(' + size + '% - ' + gutterSize + 'px)'
             }
+        },
+        onDragEnd: () => {
+            localStorage.setItem('split-vertical-sizes', JSON.stringify(this.vsplit.getSizes()))
         }
     })
 
@@ -40,12 +62,14 @@ class App extends Component {
 
   render() {
 
+    const router = this.props.router
+
     return (
       <div className="applicationWindow">
         <Header watchers={this.props.watchers} />
         <div className="sideBarWindowContainer">
             <div className="sideBar" id="sideBar">
-                <Navigation />
+                <Navigation router={router} />
             </div>
             <div className="mainWindow" id="mainWindow">
                 <div className="mainWindow--viewport" id="page">

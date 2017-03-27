@@ -1,18 +1,28 @@
 import React, { Component } from 'react'
 import { Menu, Icon } from 'antd'
+import { browserHistory } from 'react-router'
 
 const SubMenu = Menu.SubMenu
 
 export default class Navigation extends Component
 {
 
+    navigateTo({item, key, keyPath}) {
+        const route = key
+        if(this.props.router.location.pathname == route) return
+        this.props.router.push(key)
+        console.log('Navigating to ', key)
+    }
+
     render() {
+        const navigateTo = this.navigateTo.bind(this)
         return(
-            <Menu theme='dark' style={{ width: '100%' }} mode="inline">
+            <Menu theme='dark' style={{ width: '100%' }} mode="inline" onClick={navigateTo}>
               <SubMenu key="manage" title={<span><Icon type="dot-chart" /><span>DM Team</span></span>}>
                 <Menu.Item key="/">Environment</Menu.Item>
                 <Menu.Item key="/config">Configuration</Menu.Item>
                 <Menu.Item key="/trouble">Troubleshooting</Menu.Item>
+                <Menu.Item key="/apps">Applications</Menu.Item>
               </SubMenu>
               <SubMenu key="devs" title={<span><Icon type="code-o" /><span>Development</span></span>}>
                 <Menu.Item key="/dev-dash">Dashboard</Menu.Item>

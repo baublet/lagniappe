@@ -8,6 +8,7 @@ export default class Apps extends Component {
   render() {
     return (
         <div className={styles.container}>
+            Applications!
         </div>
     );
   }
