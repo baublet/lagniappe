@@ -6,6 +6,8 @@ import Navigation from 'components/Navigation'
 import Commands from 'components/Commands'
 import Footer from 'components/Footer'
 
+import Startup from 'components/Startup'
+
 import Split from 'split.js'
 
 class App extends Component {
@@ -66,6 +68,7 @@ class App extends Component {
 
     return (
       <div className="applicationWindow">
+        <Startup />
         <Header watchers={this.props.watchers} />
         <div className="sideBarWindowContainer">
             <div className="sideBar" id="sideBar">

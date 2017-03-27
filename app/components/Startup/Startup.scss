@@ -1,0 +1,43 @@
+@import "~vars";
+
+.startupWrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: $layer-startup;
+}
+
+.startupFade {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba($color-black, .75);
+}
+
+.startupModal {
+    max-width: 90vw;
+    max-height: 90vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: $color-white;
+    position: absolute;
+    padding: $spacing-normal;
+    border-radius: 5px;
+    box-shadow: 15px 15px 5px rgba($color-black, .15);
+}
+
+.messageBox {
+    font-size: $font-size-tiny;
+    white-space: no-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.startupProgress {
+    margin-top: $spacing-normal;
+}
