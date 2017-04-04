@@ -29,6 +29,66 @@ At its core, this tool is merely a way to layout a React/Redux front end interac
 
 Although you should know a fair bit of React and Redux to get the most out of this framework, it is possible to just use Watchers and Commands to do the bulk -- perhaps even all -- of what you need without writing additional action creators or reducers.
 
+### Dependencies
+
+Your development environment will probably require certain custom command line tools. To define your dependencies, locate the classes in the `app/dependencies` directory. In there, you can find a handful of examples. Dependency definition classes extend the base `app/dependencies/Dependency.js` class, and contain a constructor that looks like:
+
+```js
+import Dependency from './Dependency'
+
+/**
+ * The base class for defining your application's dependencies and installation
+ * proceedures.
+ */
+export default class Homebrew extends Dependency {
+
+    constructor()
+    {
+        // Required
+        super()
+
+        // Name of this dependency for UI and logging purposes
+        this.dependencyName = 'Homebrew'
+
+        // The command to check whether or not this dependency is installed
+        this.command = 'brew -v'
+
+        // A regular expression of what you expect the command to output if the
+        // dependency is installed
+        this.expectedOutput = /Homebrew/i
+
+        // The commands required to install this dependency
+        this.installationCommand = '/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
+
+        // The commands required to uninstall this dependency
+        this.uninstallCommand = 'curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall --output ./uninstall && chmod +x ./uninstall && ./uninstall -f && rm -rf ./uninstall'
+    }
+
+}
+```
+
+To define where in the chain of dependencies that class goes, add it to the dependecy array in `app/dependencies/index.js`:
+
+```js
+import Homebrew from './Homebrew'
+import Git from './Git'
+import Go from './Go'
+
+// Add your dependencies here, IN THE PROPER ORDER! E.g., you probably can't
+// install nginx on OSX easily without Homebrew, so Homebrew should go first.
+const dependencies = [
+    new Homebrew(),
+    new Git(),
+    new Go(),
+]
+
+...
+```
+
+#### But I don't have dependencies
+
+No worries! You can totally remove the modal by removing the startup component, `<Startup />` in `/Users/rmpoe/Desktop/Development/dm-management/app/components/App.js`.
+
 ### Commands
 
 Commands are classes that let you run asynchronous commands from the command line of the user's computer. They are configured to allow you to pipe the output to a command window with trivial effort. These commands are run in a different thread than the main Electron thread, and will not block your application's rendering.
