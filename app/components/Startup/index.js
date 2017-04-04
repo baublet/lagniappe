@@ -4,6 +4,8 @@ import { Button } from 'antd'
 
 import { Row, Col, Steps, Spin, Progress } from 'antd'
 
+import Dependencies from 'dependencies'
+
 import styles from './Startup.scss'
 
 export default class Startup extends Component
@@ -16,6 +18,39 @@ export default class Startup extends Component
             stepNumber: 0,
             progressPercent: 0
         }
+    }
+
+    componentDidMount() {
+
+        const progressTicks = Dependencies.getDependenciesCount() * 2
+        let   progressTick  = 0
+
+        setTimeout(() => {
+            Dependencies.checkInstalled(dependencyName => {
+                this.setState({
+                    currentMessage: 'Checking ' + dependencyName + '...',
+                    stepNumber: 1,
+                    progressPercent: 15 + ((progressTick / progressTicks) * 100)
+                })
+                progressTick++
+            }).then(() => {
+                Dependencies.install(dependencyName => {
+                    this.setState({
+                        currentMessage: 'Installing ' + dependencyName + '... This may take a few minutes',
+                        stepNumber: 2,
+                        progressPercent: 15 + ((progressTick / progressTicks) * 100)
+                    })
+                    progressTick++
+                }).then(() => {
+                    console.log('All done')
+                    this.setState({
+                        currentMessage: 'All done!',
+                        stepNumber: 2,
+                        progressPercent: 100
+                    })
+                })
+            })
+        }, 500)
     }
 
     dependencies() {
@@ -32,6 +67,9 @@ export default class Startup extends Component
     render() {
         const progress = this.state.progressPercent
         const message = this.state.currentMessage
+
+        if(progress > 99) return null
+
         return (
             <div className={styles.startupWrapper}>
                 <div className={styles.startupFade}>&nbsp;</div>
