@@ -26,6 +26,9 @@ export default class Header extends Component {
                     </Col>
                     <Col span={16} className={styles.devopsHealth}>
                         {this.internetStatus()}
+                        <Link to="/config">
+                            <Icon type="setting" />
+                        </Link>
                     </Col>
                 </Row>
             </Layout.Header>

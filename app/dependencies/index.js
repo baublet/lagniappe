@@ -13,7 +13,10 @@ const dependencies = [
 class Dependencies {
     constructor(dependencies) {
         this.dependencies = dependencies
-        this.dependencyStatus = []
+    }
+
+    getDependencies() {
+        return this.dependencies
     }
 
     getDependenciesCount() {
@@ -60,7 +63,6 @@ class Dependencies {
                 callback(dependency.dependencyName)
                 return dependency.install().then(output => {
                     dependency._installationOutput = output
-                    console.log(output)
                 })
             })
         })

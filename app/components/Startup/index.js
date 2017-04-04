@@ -42,7 +42,6 @@ export default class Startup extends Component
                     })
                     progressTick++
                 }).then(() => {
-                    console.log('All done')
                     this.setState({
                         currentMessage: 'All done!',
                         stepNumber: 2,
@@ -50,7 +49,7 @@ export default class Startup extends Component
                     })
                 })
             })
-        }, 500)
+        }, 250)
     }
 
     dependencies() {
