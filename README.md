@@ -18,7 +18,7 @@
     * [Example Watcher](#example-watcher)
 * [User Interface](#user-interface)
   * [Sections](#sections)
-    * [Navigation.js](#navigationjs)
+    * [Navigation](#navigation)
     * [Routes](#routes)
   * [Layout Components](#layout-components)
   * [Spacing](#spacing)
@@ -367,7 +367,7 @@ state = {
 
 Sections are added in two steps: first, we add the need page to the Navigation pane, then we add the appropriate route.
 
-#### Navigation.js
+#### Navigation
 
 In `app/components/Navigation/index.js`, you will find the component responsible for your application's navigation. It consists of menu items and submenu items. Each item will have a `key="/some-action"` property attached to it. This is the route that your application's new page will be displayed on.
 
@@ -467,8 +467,6 @@ Most of the application's CSS variables live in the `app/sass-global` directory.
 
 ## Road Map
 
-* Initial release for feedback
-* Abandon much of the custom stuff and Material UI for [AntReact](https://ant.design/docs/react/introduce)
 * Documentation support (in Markdown)
 * Compilation/build scripts for the app
 * Automatic updates
@@ -480,6 +478,6 @@ This framework was built using a variety of technologies for the Digital Marketi
 
 * [Electron](https://electron.atom.io/)
 * [React](https://facebook.github.io/react/), [Redux](http://redux.js.org/)
-* @chentsulin's [Electron React/Redux Boilerplate](https://github.com/chentsulin/electron-react-boilerplate)
-* [Material UI](http://www.material-ui.com/)
+* [@chentsulin](https://github.com/chentsulin)'s [Electron React/Redux Boilerplate](https://github.com/chentsulin/electron-react-boilerplate)
+* [Ant.Design](https://ant.design/docs/react/introduce)
 * [Node.js](https://nodejs.org/en/)
