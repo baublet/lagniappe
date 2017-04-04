@@ -2,6 +2,31 @@
 
 **lagniappe** (/ˈlænjæp/ lan-yap) is a framework written for [Electron](https://electron.atom.io). It aims to simplify developer operations by giving software teams a unified interface for complicated command line operations.
 
+**Table of Contents**
+
+- [lagniappe](#)
+	- [What is it?](#)
+	- [Install](#)
+	- [Documentation](#)
+		- [Dependencies](#)
+			- [But I don't have dependencies](#)
+		- [Commands](#)
+			- [Example Command](#)
+			- [Command Window](#)
+			- [Multiple Commands](#)
+			- [Command Sequence](#)
+		- [Watchers](#)
+			- [Example Watcher](#)
+	- [User Interface](#)
+		- [Sections](#)
+			- [Navigation.js](#)
+			- [Routes](#)
+		- [Layout Components](#)
+		- [Spacing](#)
+			- [Customization](#)
+	- [Road Map](#)
+	- [Credits](#)
+
 ## What is it?
 
 DevOps is hard. There a ton of commands to remember, concerns about cross-platform availability, many software suites to install, people of different experience levels to address, and frequent pain points that make it often one of the most frustrating aspects of a development team.
