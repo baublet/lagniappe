@@ -1,0 +1,23 @@
+strong {
+    font-weight: bold;
+}
+
+em {
+    font-style: italic;
+}
+
+code {
+    background: $color-light-gray;
+    padding: $spacing-tiny;
+    font-family: monospace;
+}
+
+pre {
+    margin: $spacing-normal 0;
+}
+
+pre,
+pre code {
+    display: block;
+    padding: $spacing-small;
+}

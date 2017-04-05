@@ -1,0 +1,21 @@
+@import "~vars";
+
+.tree {
+    padding-left: $spacing-normal;
+    list-style-type: none;
+    font-size: $font-size-small;
+    strong {
+        opacity: .5;
+    }
+}
+
+.treeIcon {
+    font-size: $font-size-small;
+    opacity: .25;
+    color: $color-black;
+}
+
+.treeWrapper {
+    border-left: 1px solid $color-light-gray;
+    padding-left: 16px;
+}

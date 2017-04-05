@@ -66,4 +66,25 @@ export default class Dependency {
             })
         })
     }
+
+    // Returns a promise that, when resolved, indicates whether or not the command
+    // was successfully uninstalled. Resolve signature:
+    // {
+    //      success: true|false         Installed or not
+    //      error: (string)             Error message (if applicable)
+    //      output: string              Full output (for logging purposes)
+    // }
+    uninstall()
+    {
+        return new Promise((resolve, reject) => {
+            exec(this.uninstallCommand, { name: 'lagniappe' }, (error, stdout, stderr) => {
+                const success = error ? false : true
+                resolve({
+                    success,
+                    error,
+                    output: stdout + stderr
+                })
+            })
+        })
+    }
 }

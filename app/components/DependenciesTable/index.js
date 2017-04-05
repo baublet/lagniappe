@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { Table, Button, Popconfirm } from 'antd'
 
-import { exec } from 'child_process'
-
 import Dependencies from 'dependencies'
 
 import styles from './DependenciesTable.scss'
@@ -36,12 +34,7 @@ class DependenciesTable extends Component {
             const newState = Object.assign({}, this.state)
             newState.tableData[dependencyColumn.key].loading = true
             this.setState(newState)
-            exec(dependency.installationCommand, { name: 'lagniappe' }, (error, stdout, stderr) => {
-                const success = error ? false : true
-                if(!success) {
-                    alert('ERROR: ' + stderr)
-                    return
-                }
+            dependency.install().then(() => {
                 const newState = Object.assign({}, this.state)
                 newState.tableData[dependencyColumn.key].loading = false
                 newState.tableData[dependencyColumn.key]._installed = true
@@ -56,12 +49,7 @@ class DependenciesTable extends Component {
             const newState = Object.assign({}, this.state)
             newState.tableData[dependencyColumn.key].loading = true
             this.setState(newState)
-            exec(dependency.uninstallCommand, { name: 'lagniappe' }, (error, stdout, stderr) => {
-                const success = error ? false : true
-                if(!success) {
-                    alert('ERROR: ' + stderr)
-                    return
-                }
+            dependency.uninstall().then(() => {
                 const newState = Object.assign({}, this.state)
                 newState.tableData[dependencyColumn.key].loading = false
                 newState.tableData[dependencyColumn.key]._installed = false
