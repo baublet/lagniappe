@@ -36,7 +36,7 @@ export default class Dependency {
         console.log('Checking ', this.dependencyName)
         return new Promise((resolve, reject) => {
             // Run the command
-            exec(this.command, {}, (error, stdout, stderr) => {
+            exec(this.command, { name: 'lagniappe' }, (error, stdout, stderr) => {
                 const output = stdout ? stdout : stderr
                 console.log(output)
                 // Get the output
@@ -56,7 +56,7 @@ export default class Dependency {
     install()
     {
         return new Promise((resolve, reject) => {
-            exec(this.installationCommand, {}, (error, stdout, stderr) => {
+            exec(this.installationCommand, { name: 'lagniappe' }, (error, stdout, stderr) => {
                 const success = error ? false : true
                 resolve({
                     success,

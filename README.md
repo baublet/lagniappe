@@ -8,7 +8,8 @@
 * [Install](#install)
 * [Documentation](#documentation)
   * [Dependencies](#dependencies)
-    * [But I don't have dependencies](#but-i-dont-have-dependencies)
+    * [I need root](#i-need-root)
+    * [I don't have dependencies](#i-dont-have-dependencies)
   * [Commands](#commands)
     * [Example Command](#example-command)
     * [Command Window](#command-window)
@@ -109,7 +110,34 @@ const dependencies = [
 ...
 ```
 
-#### But I don't have dependencies
+#### I need root
+
+If your dependency requires root, you will have to override the `install` and `uninstall` methods of the `Dependency.js` to use a library like (sudo-prompt)[https://github.com/jorangreef/sudo-prompt]. So your dependency may look like:
+
+```js
+import { exec } from 'sudo-prompt'
+
+export default class Git extends Dependency {
+    ...
+    // Note, that this must return a promise!
+    install() {
+        return new Promise((resolve, reject) => {
+            exec(this.installationCommand, { name: 'lagniappe' }, (error, stdout, stderr) => {
+                const success = error ? false : true
+                resolve({
+                    success,
+                    error,
+                    output: stdout + stderr
+                })
+            })
+        })
+    }
+}
+```
+
+**Note:** Dependency `install` and `uninstall` methods must return a promise that resolves when the command is completed.
+
+#### I don't have dependencies
 
 No worries! You can totally remove the modal by removing the startup component, `<Startup />` in `/Users/rmpoe/Desktop/Development/dm-management/app/components/App.js`.
 
