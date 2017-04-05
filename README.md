@@ -509,3 +509,4 @@ This framework was built using a variety of technologies for the Digital Marketi
 * [@chentsulin](https://github.com/chentsulin)'s [Electron React/Redux Boilerplate](https://github.com/chentsulin/electron-react-boilerplate)
 * [Ant.Design](https://ant.design/docs/react/introduce)
 * [Node.js](https://nodejs.org/en/)
+# video-notes
