@@ -69,24 +69,34 @@ export default class Homebrew extends Dependency {
 
     constructor()
     {
-        // Required
+        // Required in derived classes
         super()
 
         // Name of this dependency for UI and logging purposes
-        this.dependencyName = 'Homebrew'
+        this.dependencyName = 'Git'
 
         // The command to check whether or not this dependency is installed
-        this.command = 'brew -v'
+        this.command = 'git --version'
+        // This command should never require sudo
 
         // A regular expression of what you expect the command to output if the
         // dependency is installed
-        this.expectedOutput = /Homebrew/i
+        this.expectedOutput = /git version/i
 
         // The commands required to install this dependency
-        this.installationCommand = '/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
+        this.installCommand = 'brew install git'
+        // If your command requires sudo/root privileges, make this true
+        this.installRequiresSudo = false
 
         // The commands required to uninstall this dependency
-        this.uninstallCommand = 'curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall --output ./uninstall && chmod +x ./uninstall && ./uninstall -f && rm -rf ./uninstall'
+        this.uninstallCommand = 'brew uninstall git'
+        // If your command requires sudo/root privileges, make this true
+        this.uninstallRequiresSudo = true
+
+        // If true, this dependency will be installed automatically using the
+        // above command if the user doesn't have it
+        this.required = true
+
     }
 
 }
@@ -109,33 +119,6 @@ const dependencies = [
 
 ...
 ```
-
-#### I need root
-
-If your dependency requires root, you will have to override the `install` and `uninstall` methods of the `Dependency.js` to use a library like (sudo-prompt)[https://github.com/jorangreef/sudo-prompt]. So your dependency may look like:
-
-```js
-import { exec } from 'sudo-prompt'
-
-export default class Git extends Dependency {
-    ...
-    // Note, that this must return a promise!
-    install() {
-        return new Promise((resolve, reject) => {
-            exec(this.installationCommand, { name: 'lagniappe' }, (error, stdout, stderr) => {
-                const success = error ? false : true
-                resolve({
-                    success,
-                    error,
-                    output: stdout + stderr
-                })
-            })
-        })
-    }
-}
-```
-
-**Note:** Dependency `install` and `uninstall` methods must return a promise that resolves when the command is completed.
 
 #### I don't have dependencies
 

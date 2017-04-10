@@ -28,10 +28,10 @@
 
 .line {
     clear: both;
-    padding: $spacing-tiny 0 $spacing-tiny $spacing-huge;
-    text-indent: -#{$spacing-huge + $spacing-small};
+    padding: $spacing-tiny 0 $spacing-tiny 0;
+    position: relative;
     &::before {
-        content: counter(commandWindowLines) '.';
+        content: counter(commandWindowLines);
         color: rgba($color-white, .15);
         display: inline-block;
         margin-right: $spacing-small;
@@ -39,7 +39,10 @@
         text-align: right;
         pointer-events: none;
         -webkit-user-select: none;
-        width: $spacing-huge;
+        position: absolute;
+        right: 100%;
+        top: 50%;
+        transform: translateY(-50%);
     }
 }
 

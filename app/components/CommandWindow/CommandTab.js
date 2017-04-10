@@ -5,7 +5,21 @@ import { focusWindow, removeWindow } from '../../actions/command'
 
 export default class CommandTab extends Component {
 
-    focusMe() {
+    handleMouseDown(e) {
+        switch(e.button) {
+            case 0:
+                return this.focusMe(e)
+            case 1:
+                return this.removeMe(e)
+            case 2:
+                e.preventDefault()
+                break;
+            default:
+                return this.focusMe(e)
+        }
+    }
+
+    focusMe(e) {
         if(this.props.active) return
         store.dispatch(focusWindow(this.props.id))
     }
@@ -24,7 +38,7 @@ export default class CommandTab extends Component {
         return (
             <div className={className}>
                 {active ? <a className={styles.labelRemove} href="#" onClick={this.removeMe.bind(this)}>x</a> : ''}
-                <span className={styles.labelText} onClick={this.focusMe.bind(this)}>{title}</span>
+                <span className={styles.labelText} onClick={this.focusMe.bind(this)} onMouseDown={this.handleMouseDown.bind(this)}>{title}</span>
             </div>
         )
     }

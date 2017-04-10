@@ -17,7 +17,7 @@ export default class Go extends Dependency {
 
         this.expectedOutput = /go version/i
 
-        this.installationCommand = 'brew install go'
+        this.installCommand = 'brew install go'
 
         this.uninstallCommand = 'brew uninstall go'
 

@@ -26,7 +26,7 @@ export default class CommandWindow extends Component {
     }
 
     render() {
-        if(!this.props.active) return <div className="screenReaderText"></div>
+        if(!this.props.active) return false
         const title = this.props.title
         const lines = this.renderLines()
         const windowId = 'window-' + this.props.id

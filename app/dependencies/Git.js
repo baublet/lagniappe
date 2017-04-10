@@ -17,7 +17,7 @@ export default class Git extends Dependency {
 
         this.expectedOutput = /git version/i
 
-        this.installationCommand = 'brew install git'
+        this.installCommand = 'brew install git'
 
         this.uninstallCommand = 'brew uninstall git'
 

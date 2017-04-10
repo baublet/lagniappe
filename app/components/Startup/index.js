@@ -67,7 +67,7 @@ export default class Startup extends Component
         const progress = this.state.progressPercent
         const message = this.state.currentMessage
 
-        if(progress > 99) return null
+        if(progress > 99) return false
 
         return (
             <div className={styles.startupWrapper}>
