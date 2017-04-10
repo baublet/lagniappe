@@ -130,6 +130,8 @@ Commands are classes that let you run asynchronous commands from the command lin
 
 They return promises, allowing you to chain commands in a sequence. Have a long string of commands to run one after the other? Check out the `CommandSequence` class for information on how to do that, or see the example below.
 
+**Note:** your commands should be designed to not use sudo. If you need root privileges, make a custom command class that uses something like [shell.js](https://github.com/shelljs/shelljs) and/or [sudo-prompt](https://github.com/jorangreef/sudo-prompt) (which is installed by default with this framework).
+
 #### Example Command
 
 This simple command logs the results of `git status` to the javascript console.
