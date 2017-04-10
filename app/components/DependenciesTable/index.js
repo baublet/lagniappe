@@ -17,7 +17,8 @@ class DependenciesTable extends Component {
             data.push({
                 key: i,
                 name: dependency.dependencyName,
-                status: dependency._installed == false ? 'Not Installed' : 'Installed',
+                required: dependency.required ? 'Required' : 'Optional',
+                status: !dependency._installed ? 'Not Installed' : 'Installed',
                 dependency,
                 loading: false,
             })
@@ -37,7 +38,6 @@ class DependenciesTable extends Component {
             dependency.install().then(() => {
                 const newState = Object.assign({}, this.state)
                 newState.tableData[dependencyColumn.key].loading = false
-                newState.tableData[dependencyColumn.key]._installed = true
                 this.setState(newState)
             })
         }
@@ -52,7 +52,6 @@ class DependenciesTable extends Component {
             dependency.uninstall().then(() => {
                 const newState = Object.assign({}, this.state)
                 newState.tableData[dependencyColumn.key].loading = false
-                newState.tableData[dependencyColumn.key]._installed = false
                 this.setState(newState)
             })
         }
@@ -65,27 +64,33 @@ class DependenciesTable extends Component {
             dataIndex: 'name',
             key: 'name'
         }, {
+            title: 'Required',
+            dataIndex: 'required',
+            key: 'required'
+        }, {
             title: 'Action',
             dataIndex: 'action',
             key: 'action',
             className: styles.toolbar,
             render: (text, dependency) => {
-                let confirmTitle = dependency._installed ? 'Are you sure want to uninstall ' : 'Are you sure you want to uninstall '
-                confirmTitle += dependency.dependencyName + '?'
+                const installed = dependency.dependency._installed
+                const name = dependency.dependency.dependencyName
+                let confirmTitle = installed ? 'Are you sure want to uninstall ' : 'Are you sure you want to uninstall '
+                confirmTitle += name + '?'
                 return (
                     <div>
 
                         <span className={styles.status}>
-                            {dependency._installed == false ? 'Not Installed' : 'Installed'}
+                            {installed ? 'Installed' : 'Not Installed'}
                         </span>
 
-                        { dependency._installed == false ?
-                            <Popconfirm placement="topRight" title={confirmTitle} onConfirm={this.install(dependency).bind(this)} okText="Install" cancelText="Cancel">
-                                <Button type="primary" loading={dependency.loading}>Install</Button>
-                            </Popconfirm>
-                          :
+                        { installed ?
                             <Popconfirm placement="topRight" title={confirmTitle} onConfirm={(this.uninstall(dependency).bind(this))} okText="Uninstall" cancelText="Cancel">
                                 <Button loading={dependency.loading}>Uninstall</Button>
+                            </Popconfirm>
+                            :
+                            <Popconfirm placement="topRight" title={confirmTitle} onConfirm={this.install(dependency).bind(this)} okText="Install" cancelText="Cancel">
+                                <Button type="primary" loading={dependency.loading}>Install</Button>
                             </Popconfirm>
                         }
 

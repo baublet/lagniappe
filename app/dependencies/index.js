@@ -58,7 +58,7 @@ class Dependencies {
     install(callback) {
         let promise = Promise.resolve()
         this.dependencies.forEach(dependency => {
-            if(dependency._installed) return
+            if(dependency._installed || !dependency.required) return
             promise = promise.then(() => {
                 callback(dependency.dependencyName)
                 return dependency.install().then(output => {

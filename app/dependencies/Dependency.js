@@ -23,6 +23,14 @@ export default class Dependency {
 
         // The commands required to install this dependency
         this.installationCommand = 'brew install git'
+
+        // If true, this dependency will be installed automatically using the
+        // above command if the user doesn't have it
+        this.required = true
+
+        // Internal properties
+        // ---
+        this._installed = false
     }
 
 
@@ -40,7 +48,10 @@ export default class Dependency {
                 const output = stdout ? stdout : stderr
                 console.log(output)
                 // Get the output
-                if(this.expectedOutput.exec(output)) resolve(true)
+                if(this.expectedOutput.exec(output)) {
+                    this._installed = true
+                    resolve(true)
+                }
                 resolve(false)
             })
         })
@@ -58,6 +69,9 @@ export default class Dependency {
         return new Promise((resolve, reject) => {
             exec(this.installationCommand, { name: 'lagniappe' }, (error, stdout, stderr) => {
                 const success = error ? false : true
+                if(success) {
+                    this._installed = true
+                }
                 resolve({
                     success,
                     error,
