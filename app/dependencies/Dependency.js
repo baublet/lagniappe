@@ -1,4 +1,5 @@
 import { exec } from 'child_process'
+import logger from 'logger.js'
 
 /**
  * The base class for defining your application's dependencies and installation
@@ -41,12 +42,12 @@ export default class Dependency {
     // dependency is installed
     isInstalled()
     {
-        console.log('Checking ', this.dependencyName)
+        logger.debug('Checking if ', this.dependencyName, ' is installed')
         return new Promise((resolve, reject) => {
             // Run the command
             exec(this.command, { name: 'lagniappe' }, (error, stdout, stderr) => {
                 const output = stdout ? stdout : stderr
-                console.log(output)
+                logger.debug(output)
                 // Get the output
                 if(this.expectedOutput.exec(output)) {
                     this._installed = true
@@ -66,11 +67,15 @@ export default class Dependency {
     // }
     install()
     {
+        logger.info('Installing ', this.dependencyName)
         return new Promise((resolve, reject) => {
             exec(this.installationCommand, { name: 'lagniappe' }, (error, stdout, stderr) => {
                 const success = error ? false : true
                 if(success) {
                     this._installed = true
+                    logger.error('FAILED to install ', this.dependencyName, ' Error: ', error, stderr, stdout)
+                } else {
+                    logger.info('Successfully installed ', this.dependencyName)
                 }
                 resolve({
                     success,
@@ -90,9 +95,16 @@ export default class Dependency {
     // }
     uninstall()
     {
+        logger.info('Uninstalling ', this.dependencyName)
         return new Promise((resolve, reject) => {
             exec(this.uninstallCommand, { name: 'lagniappe' }, (error, stdout, stderr) => {
                 const success = error ? false : true
+                if(success) {
+                    this._installed = false
+                    logger.error('FAILED to uninstall ', this.dependencyName, ' Error: ', error, stderr, stdout)
+                } else {
+                    logger.info('Successfully uninstalled ', this.dependencyName)
+                }
                 resolve({
                     success,
                     error,

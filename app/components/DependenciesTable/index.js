@@ -57,6 +57,32 @@ class DependenciesTable extends Component {
         }
     }
 
+    actionColumn(text, row) {
+        const installed = row.dependency._installed
+        const name = row.dependency.dependencyName
+        let confirmTitle = installed ? 'Are you sure want to uninstall ' : 'Are you sure you want to uninstall '
+        confirmTitle += name + '?'
+        return (
+            <div>
+
+                <span className={styles.status}>
+                    {installed ? 'Installed' : 'Not Installed'}
+                </span>
+
+                { installed ?
+                    <Popconfirm placement="topRight" title={confirmTitle} onConfirm={(this.uninstall(row).bind(this))} okText="Uninstall" cancelText="Cancel">
+                        <Button loading={row.loading}>Uninstall</Button>
+                    </Popconfirm>
+                    :
+                    <Popconfirm placement="topRight" title={confirmTitle} onConfirm={this.install(row).bind(this)} okText="Install" cancelText="Cancel">
+                        <Button type="primary" loading={row.loading}>Install</Button>
+                    </Popconfirm>
+                }
+
+            </div>
+        )
+    }
+
     render() {
 
         const columns = [{
@@ -72,31 +98,7 @@ class DependenciesTable extends Component {
             dataIndex: 'action',
             key: 'action',
             className: styles.toolbar,
-            render: (text, dependency) => {
-                const installed = dependency.dependency._installed
-                const name = dependency.dependency.dependencyName
-                let confirmTitle = installed ? 'Are you sure want to uninstall ' : 'Are you sure you want to uninstall '
-                confirmTitle += name + '?'
-                return (
-                    <div>
-
-                        <span className={styles.status}>
-                            {installed ? 'Installed' : 'Not Installed'}
-                        </span>
-
-                        { installed ?
-                            <Popconfirm placement="topRight" title={confirmTitle} onConfirm={(this.uninstall(dependency).bind(this))} okText="Uninstall" cancelText="Cancel">
-                                <Button loading={dependency.loading}>Uninstall</Button>
-                            </Popconfirm>
-                            :
-                            <Popconfirm placement="topRight" title={confirmTitle} onConfirm={this.install(dependency).bind(this)} okText="Install" cancelText="Cancel">
-                                <Button type="primary" loading={dependency.loading}>Install</Button>
-                            </Popconfirm>
-                        }
-
-                    </div>
-                )
-            }
+            render: this.actionColumn.bind(this)
         }]
 
 

@@ -203,7 +203,8 @@
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
     "source-map-support": "^0.4.10",
-    "split.js": "^1.2.0"
+    "split.js": "^1.2.0",
+    "winston": "^2.3.1"
   },
   "devEngines": {
     "node": ">=6.x",
