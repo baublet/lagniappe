@@ -8,7 +8,6 @@
 * [Install](#install)
 * [Documentation](#documentation)
   * [Dependencies](#dependencies)
-    * [I need root](#i-need-root)
     * [I don't have dependencies](#i-dont-have-dependencies)
   * [Commands](#commands)
     * [Example Command](#example-command)
