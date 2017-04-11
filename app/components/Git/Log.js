@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
-import { Timeline, Spin, Tooltip, Button } from 'antd'
+import { Timeline, Spin, Tooltip, Button, Menu, Dropdown, Icon } from 'antd'
 
 import GitLog from 'commands/Git/Log'
 
@@ -35,12 +35,28 @@ export default class Log extends Component
         })
     }
 
+    rowOperations(commitHash) {
+        return (
+            <Menu>
+                <Menu.Item>
+                    Create Revert Commit
+                </Menu.Item>
+                <Menu.Item>
+                    Roll Back to Here
+                </Menu.Item>
+            </Menu>
+        )
+    }
+
     logRow(log, key) {
         const date = Date.parse(log.date)
         const dateObject = new Date(date)
         return (
             <Timeline.Item key={key}>
                 <div className={styles.meta}>
+                    <Dropdown overlay={this.rowOperations(log.commit)} placement="bottomRight">
+                            <Icon type="down-circle" className={styles.operationsButton} />
+                    </Dropdown>
                     <div className={styles.author}>{log.author}</div>
                     <div className={styles.date}>
                         <Tooltip placement="top" title={dateObject.toLocaleString()}>

@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
-import { Button, Row, Col, Spin } from 'antd'
+import { Button, Row, Col, Spin, Icon, Menu } from 'antd'
 
 import CurrentBranch from 'commands/Git/CurrentBranch'
 import Status from 'commands/Git/Status'
 import Checkout from 'commands/Git/Checkout'
 import Branches from './Branches'
+import Operations from './Operations'
 
 import config from 'config'
 import styles from './Git.scss'
@@ -77,7 +78,7 @@ export default class Git extends Component
             <div>
                 <Row>
                     <Col span={24}>
-                        <h2>Git Version Control</h2>
+                        <h1><Icon type="copy" /> Git</h1>
                         <h4>
                             <span className="headingGhost headingGhost--block">Current Branch:</span>
                             <Button type="default" shape="circle" icon="retweet" size="small" onClick={this.handleRefresh.bind(this)} />
@@ -91,7 +92,7 @@ export default class Git extends Component
                         <Log ref="log" />
                     </Col>
                     <Col span={10}>
-                        <h3>Operations</h3>
+                        <Operations branch={currentBranch} />
                         <Branches ref="branches" switchToBranch={this.switchToBranch.bind(this)} />
                     </Col>
                 </Row>
