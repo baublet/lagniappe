@@ -1,0 +1,53 @@
+@import '~vars';
+
+.commit {
+    font-size: $font-size-tiny;
+    color: rgba($color-black, .5);
+    font-weight: bold;
+    display: inline-block;
+}
+
+.author {
+
+}
+
+.meta {
+    display: flex;
+    align-items: baseline;
+}
+
+.message {
+    margin-top: $spacing-small;
+    overflow-wrap: break-word;
+}
+
+.author {
+    font-weight: bold;
+}
+
+.date {
+    margin-left: $spacing-tiny;
+    color: rgba($color-black, .5);
+    font-style: italic;
+    font-size: $font-size-tiny;
+}
+
+.branch {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    font-size: $font-size-small;
+    margin: $spacing-tiny;
+    text-indent: -#{$spacing-normal};
+    padding-left: $spacing-normal;
+    color: $color-black;
+    display: block;
+}
+
+.currentBranch {
+    font-weight: bold;
+}
+
+.loading {
+    pointer-events: none;
+    opacity: .25;
+}

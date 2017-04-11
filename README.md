@@ -286,13 +286,13 @@ export default class GitClearCacheAndCreateNewBranch
         const sequence = [
             // Stash our changes and clear the (.gitignored) `/var/cache` directory simultaneously
             [
-                { command: 'git', args: ['stash'], options: { cwd} },
-                { command: 'rm', args: ['-rf', 'var/cache/*'], options: { cwd} },
+                { command: 'git', args: ['stash'], options: { cwd } },
+                { command: 'rm', args: ['-rf', 'var/cache/*'], options: { cwd } },
             ],
             // Then proceed with the command
-            { command: 'git', args: ['checkout', 'master'], options: { cwd} },
-            { command: 'git', args: ['reset', '--hard', 'origin/master'], options: { cwd} }
-            { command: 'git', args: ['checkout', '-b', branchName], options: { cwd} }
+            { command: 'git', args: ['checkout', 'master'], options: { cwd } },
+            { command: 'git', args: ['reset', '--hard', 'origin/master'], options: { cwd } }
+            { command: 'git', args: ['checkout', '-b', branchName], options: { cwd } }
         ]
 
         const window = new CommandWindow('Clean Branch: ' + branchName)
@@ -479,7 +479,6 @@ Most of the application's CSS variables live in the `app/sass-global` directory.
 
 ## Road Map
 
-* Documentation support (in Markdown)
 * Compilation/build scripts for the app
 * Automatic updates
 * Multiple platform support and documentation

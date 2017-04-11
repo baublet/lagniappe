@@ -60,6 +60,7 @@ export default class Navigation extends Component
               <SubMenu key="devs" title={<span><Icon type="code-o" /><span>Development</span></span>}>
                 <Menu.Item key="/dev-dash">Dashboard</Menu.Item>
                 <Menu.Item key="/provision">Provisioner</Menu.Item>
+                <Menu.Item key="/git">Git</Menu.Item>
                 <Menu.Item key="/dbs">Databases</Menu.Item>
                 <Menu.Item key="/logs">Logs</Menu.Item>
                 <Menu.Item key="/email">Email</Menu.Item>

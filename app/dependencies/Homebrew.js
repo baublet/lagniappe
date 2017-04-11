@@ -12,17 +12,12 @@ export default class Homebrew extends Dependency {
         super()
 
         this.dependencyName = 'Homebrew'
-
         this.command = 'brew -v'
-
         this.expectedOutput = /Homebrew/i
-
         this.installCommand = '/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
         this.installRequiresSudo = true
-
         this.uninstallCommand = 'curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall --output ./uninstall && chmod +x ./uninstall && ./uninstall -f && rm -rf ./uninstall'
         this.uninstallRequiresSudo = true
-
         this.required = true
     }
 

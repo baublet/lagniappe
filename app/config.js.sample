@@ -1,0 +1,5 @@
+const config = {
+    cwd: '/path/to/my/source/files'
+}
+
+export default config

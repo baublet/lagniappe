@@ -12,15 +12,10 @@ export default class Go extends Dependency {
         super()
 
         this.dependencyName = 'Go'
-
         this.command = 'go version'
-
         this.expectedOutput = /go version/i
-
         this.installCommand = 'brew install go'
-
         this.uninstallCommand = 'brew uninstall go'
-
         this.required = false
     }
 

@@ -12,15 +12,10 @@ export default class Git extends Dependency {
         super()
 
         this.dependencyName = 'Git'
-
         this.command = 'git --version'
-
         this.expectedOutput = /git version/i
-
         this.installCommand = 'brew install git'
-
         this.uninstallCommand = 'brew uninstall git'
-
         this.required = true
     }
 

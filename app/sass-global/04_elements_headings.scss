@@ -16,11 +16,13 @@ h1 {
 
 h2 {
     font-size: $font-size-large;
+    border-bottom: 1px solid $color-light-gray;
 }
 
 h3 {
     font-size: $font-size-base;
     text-transform: uppercase;
+    border-bottom: 1px solid $color-light-gray;
 }
 
 h4 {
