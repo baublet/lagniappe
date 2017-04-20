@@ -56,7 +56,6 @@ export default class CommandProcess
                     data = data + ''
                     data = this.addSignature(command, data)
                     this.callback(data, true, false)
-                    reject()
                 })
 
                 process.on('close', (code) => {

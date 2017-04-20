@@ -18,14 +18,15 @@ export function addWindow(windowId, windowTitle)
     }
 }
 
-export function addLines(windowId, lines)
+export function addLines(windowId, lines, error)
 {
     return dispatch => {
         dispatch({
             type: ADD_LINES,
             payload: {
                 windowId,
-                lines
+                lines,
+                error
             }
         })
     }

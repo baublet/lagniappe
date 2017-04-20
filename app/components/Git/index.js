@@ -61,6 +61,20 @@ export default class Git extends Component
         })
     }
 
+    detachedIndicator(branch) {
+        if(branch.includes('detached ')) {
+            return (
+                <span>
+                    &nbsp;&nbsp;
+                    <Button type="primary" icon="swap-left" size="small" onClick={() => { this.switchToBranch('master') }}>
+                        Back to Master
+                    </Button>
+                </span>
+            )
+        }
+        return false
+    }
+
     render() {
         const loading = !! this.state.loading
         const rendered = this.renderPage()
@@ -84,15 +98,16 @@ export default class Git extends Component
                             <Button type="default" shape="circle" icon="retweet" size="small" onClick={this.handleRefresh.bind(this)} />
                             &nbsp;&nbsp;
                             {currentBranch}
+                            {this.detachedIndicator(currentBranch)}
                         </h4>
                     </Col>
                 </Row>
                 <Row className="t-spacing--large" gutter={16}>
                     <Col span={14}>
-                        <Log ref="log" />
+                        <Log ref="log" refresh={this.handleRefresh.bind(this)} />
                     </Col>
                     <Col span={10}>
-                        <Operations branch={currentBranch} />
+                        <Operations branch={currentBranch} refresh={this.handleRefresh.bind(this)} />
                         <Branches ref="branches" switchToBranch={this.switchToBranch.bind(this)} />
                     </Col>
                 </Row>

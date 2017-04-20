@@ -3,6 +3,8 @@ import { Link } from 'react-router'
 import { Timeline, Spin, Tooltip, Button, Menu, Dropdown, Icon } from 'antd'
 
 import GitLog from 'commands/Git/Log'
+import Rollback from 'commands/Git/Rollback'
+import Revert from 'commands/Git/Revert'
 
 import timeSince from 'utils/timesince'
 
@@ -35,13 +37,36 @@ export default class Log extends Component
         })
     }
 
+    revert(commitHash) {
+        const revert = new Revert()
+        revert.execute(config.cwd, commitHash).then(() => { this.props.refresh() })
+    }
+
+    rollback(commitHash) {
+        const rollback = new Rollback()
+        rollback.execute(config.cwd, commitHash).then(() => { this.props.refresh() })
+    }
+
+    menuSelect(commitHash) {
+        return ({ item, key, selectedKeys }) => {
+            switch(key) {
+                case "revert":
+                    this.revert(commitHash)
+                    break
+                case "rollback":
+                    this.rollback(commitHash)
+                    break
+            }
+        }
+    }
+
     rowOperations(commitHash) {
         return (
-            <Menu>
-                <Menu.Item>
+            <Menu onSelect={this.menuSelect(commitHash).bind(this)}>
+                <Menu.Item key="revert">
                     Create Revert Commit
                 </Menu.Item>
-                <Menu.Item>
+                <Menu.Item key="rollback">
                     Roll Back to Here
                 </Menu.Item>
             </Menu>

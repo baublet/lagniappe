@@ -5,27 +5,79 @@ import { Icon, Menu, Popconfirm } from 'antd'
 import config from 'config'
 import styles from './Git.scss'
 
+import Pull from 'commands/Git/Pull'
+import Push from 'commands/Git/Push'
+import ResetHardWithMaster from 'commands/Git/ResetHardWithMaster'
+import Undo from 'commands/Git/Undo'
+import Status from 'commands/Git/Status'
 
 export default class Operations extends Component
 {
 
-    resetHardHead() {
-        alert('hey')
+    resetHard() {
+        const reset = new ResetHardWithMaster()
+        reset.execute(config.cwd).then(() => { this.props.refresh() })
+    }
+
+    pull() {
+        const pull = new Pull()
+        pull.execute(config.cwd).then(() => { this.props.refresh() })
+    }
+
+    push() {
+        const push = new Push()
+        push.execute(config.cwd).then(() => { this.props.refresh() })
+    }
+
+    undo() {
+        const undo = new Undo()
+        undo.execute(config.cwd).then(() => { this.props.refresh() })
+    }
+
+    status() {
+        const status = new Status()
+        status.execute(config.cwd).then(() => { this.props.refresh() })
+    }
+
+    menuSelect({ item, key, selectedKeys }) {
+        switch(key) {
+            case "resetHardHead":
+                this.resetHard()
+                break
+            case "pull":
+                this.pull()
+                break
+            case "push":
+                this.push()
+                break
+            case "undoLastCommit":
+                this.undo()
+                break
+            case "status":
+                this.status()
+                break
+        }
     }
 
     render() {
         return (
             <div className="b-spacing--large">
                 <h3>Operations</h3>
-                <Menu className={styles.operationsMenu} selectedKeys={[]}>
-                    <Menu.Item>
+                <Menu className={styles.operationsMenu} selectedKeys={[]} onSelect={this.menuSelect.bind(this)}>
+                    <Menu.Item key="status">
+                        <Icon type="file-text" /> Status
+                    </Menu.Item>
+                    <Menu.Item key="pull">
                         <Icon type="swap-left" /> Pull from Origin
                     </Menu.Item>
-                    <Menu.Item>
-                        <Icon type="swap" /> Push to Origin
+                    <Menu.Item key="push">
+                        <Icon type="swap-right" /> Push to Origin
                     </Menu.Item>
-                    <Menu.Item>
+                    <Menu.Item key="resetHardHead">
                         <Icon type="retweet" /> Synchronize with Origin
+                    </Menu.Item>
+                    <Menu.Item key="undoLastCommit">
+                        <Icon type="rollback" /> Undo Last Commit
                     </Menu.Item>
                 </Menu>
             </div>

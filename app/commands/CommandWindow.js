@@ -1,5 +1,5 @@
-import { store } from '../index.js'
-import { addWindow, addLines, finishWindow } from '../actions/command'
+import { store } from 'index.js'
+import { addWindow, addLines, finishWindow } from 'actions/command'
 
 export default class CommandWindow
 {
@@ -15,13 +15,13 @@ export default class CommandWindow
     callback(data, error, finished = false)
     {
         const lines = data.split('\n')
-        this.addLinesToWindow(lines)
+        this.addLinesToWindow(lines, error)
         if(finished) this.finishWindow()
     }
 
-    addLinesToWindow(lines)
+    addLinesToWindow(lines, error)
     {
-        store.dispatch( addLines(this.id, lines) )
+        store.dispatch( addLines(this.id, lines, error) )
     }
 
     finishWindow()
