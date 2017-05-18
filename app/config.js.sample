@@ -1,5 +1,16 @@
 const config = {
-    cwd: '/path/to/my/source/files'
+    // Your application's current working directory
+    cwd: '/path/to/my/source/files',
+
+    // Application-level configuration
+    app: {
+        title: 'lagniappe',
+        width: 1024,
+        height: 728,
+        frame: false,
+        resizable: true,
+        transparent: false,
+    }
 }
 
 export default config

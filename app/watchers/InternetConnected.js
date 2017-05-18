@@ -13,7 +13,6 @@ export default class InternetConnected extends Watcher {
     }
 
     filter(commandOutput) {
-        console.log('Filtering watcher InternetConnected')
         if(commandOutput.includes('bytes from')) {
             return true
         }

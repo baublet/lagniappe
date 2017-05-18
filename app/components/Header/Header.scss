@@ -9,6 +9,8 @@
     box-shadow: 0 0 15px rgba($color-black, .5);
     position: relative;
     z-index: $layer-header;
+    -webkit-app-region: drag;
+    app-region: drag;
     a {
         color: $color-white;
         &:hover {
