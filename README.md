@@ -1,42 +1,22 @@
 # lagniappe
 
-**lagniappe** (/ˈlænjæp/ lan-yap) is a framework written for [Electron](https://electron.atom.io). It aims to simplify developer operations by giving software teams a unified interface for complicated command line operations.
-
-**Table of Contents**
-
-* [What is it?](#what-is-it)
-* [Install](#install)
-* [Documentation](#documentation)
-  * [Dependencies](#dependencies)
-    * [I don't have dependencies](#i-dont-have-dependencies)
-  * [Commands](#commands)
-    * [Example Command](#example-command)
-    * [Command Window](#command-window)
-    * [Multiple Commands](#multiple-commands)
-    * [Command Sequence](#command-sequence)
-  * [Watchers](#watchers)
-    * [Example Watcher](#example-watcher)
-* [User Interface](#user-interface)
-  * [Sections](#sections)
-    * [Navigation](#navigation)
-    * [Routes](#routes)
-  * [Layout Components](#layout-components)
-  * [Spacing](#spacing)
-    * [Customization](#customization)
-* [Road Map](#road-map)
-* [Credits](#credits)
+**lagniappe** (/ˈlænjæp/ lan-yap) is a framework written in [Electron](https://electron.atom.io) and React. It helps engineers simplify developer operations by giving software teams a unified interface to wrap complicated command line operations.
 
 ## What is it?
 
-DevOps is hard. There a ton of commands to remember, concerns about cross-platform availability, many software suites to install, people of different experience levels to address, and frequent pain points that make it often one of the most frustrating aspects of a development team.
+DevOps are hard. There a ton of commands to remember, concerns about cross-platform availability, many software suites to install, people of different experience levels to address, and frequent pain points that make it often one of the most frustrating aspects of a development team.
 
 This tool is designed to help teams consolidate the process of running local development environments by balling common commands into a cross-platform Electron application.
 
-Developers and DevOps engineers can run the program from `yarn dev` so they can add new commands or adjust settings as necessary; the quality assurance team can run an auto-updating GUI customized for their needs; and the creative team can run their own custom staging environment.
+Developers and DevOps engineers can run the program from `yarn dev` so they can add new commands or adjust settings as necessary; the quality assurance team can run a GUI customized for their needs; and so on.
 
-## Install
+## Getting Started
 
-At the moment, there are no build scripts. That is on the horizon. To start the application, you have to run the tool in dev mode. Fork this repo, clone it to your local machine, CD into the directory, and run `yarn && yarn dev` if you use Yarn, or `npm install && npm run dev` for NPM.
+1) Clone this repo via `git clone https://github.com/baublet/lagniappe.git`.
+2) Copy `app/config.js.sample` to `app/config.js` and customize any options in it you like.
+3) CD into your `lagniappe` folder and run `yarn && yarn dev` if you use Yarn, or `npm install && npm run dev` for NPM.
+3) Run `yarn dev` (`npm run dev` if you use NPM) to boot the application in a development environment
+4) To build binaries, run `yarn package` (`npm run package`).
 
 ## Documentation
 
