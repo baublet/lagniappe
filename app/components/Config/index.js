@@ -3,6 +3,8 @@ import { Table, Collapse, Icon } from 'antd'
 
 import DependenciesTable from 'components/DependenciesTable'
 
+const CollapsePanel = Collapse.Panel
+
 class Config extends Component {
 
     render() {
@@ -11,9 +13,9 @@ class Config extends Component {
             <div className={className}>
                 <h1><Icon type="setting" /> Configuration</h1>
                 <Collapse defaultActiveKey={['dependencies']}>
-                    <Collapse.Panel header="Application Dependencies" key="dependencies">
+                    <CollapsePanel header="Application Dependencies" key="dependencies">
                         <DependenciesTable />
-                    </Collapse.Panel>
+                    </CollapsePanel>
                 </Collapse>
             </div>
         )

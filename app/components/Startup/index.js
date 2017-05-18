@@ -8,6 +8,8 @@ import Dependencies from 'dependencies'
 
 import styles from './Startup.scss'
 
+const StepsStep = Steps.Step
+
 export default class Startup extends Component
 {
 
@@ -56,9 +58,9 @@ export default class Startup extends Component
         const currentStep = this.state.stepNumber
         return (
             <Steps direction="vertical" size="small" current={currentStep}>
-              <Steps.Step title="User Interface" description="Loading the user interface" />
-              <Steps.Step title="Dependencies" description="Checking dependencies" />
-              <Steps.Step title="Installing Dependencies" description="Installing necessary dependencies" />
+              <StepsStep title="User Interface" description="Loading the user interface" />
+              <StepsStep title="Dependencies" description="Checking dependencies" />
+              <StepsStep title="Installing Dependencies" description="Installing necessary dependencies" />
             </Steps>
         )
     }

@@ -35,7 +35,9 @@ export default class Watcher {
     // watcher state tree (via the `connect` function in `react-redux`) and alter
     // the component's messaging depending on the state of `watcher.appRunning`.
     filter(comandOutput) {
-        throw "Custom watchers must have a filter method defined"
+        if (process.env.NODE_ENV === 'development') {
+            throw "Custom watchers must have a filter method defined"
+        }
     }
 
     // Do not overwrite the below methods unless you know what you're doing
@@ -61,7 +63,9 @@ export default class Watcher {
 
     start() {
         // We can set the timeout to zero for a near-indefinite timeout
-        if(this.timeout == 0) this.timeout = 999999
+        if(this.timeout == 0) {
+            this.timeout = 999999
+        }
         if(!this.name || !this.interval || !this.timeout || !this.command) {
             throw "Custom watchers require a constructor method that set this.name, this.interval, this.timeout, and this.command!"
         }

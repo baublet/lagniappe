@@ -5,6 +5,8 @@ import { Layout, Row, Col } from 'antd'
 
 import { Icon, Tooltip } from 'antd'
 
+const LayoutHeader = Layout.Header
+
 export default class Header extends Component {
 
     internetStatus() {
@@ -19,7 +21,7 @@ export default class Header extends Component {
 
     render() {
         return (
-            <Layout.Header className={styles.header}>
+            <LayoutHeader className={styles.header}>
                 <Row>
                     <Col span={8}>
                         <Link to="/" className="header__logo">langiappe</Link>
@@ -31,7 +33,7 @@ export default class Header extends Component {
                         </Link>
                     </Col>
                 </Row>
-            </Layout.Header>
+            </LayoutHeader>
         )
     }
 }

@@ -7,6 +7,8 @@ import AllBranches from 'commands/Git/AllBranches'
 import config from 'config'
 import styles from './Git.scss'
 
+const InputSearch = Input.Search
+
 export default class Branches extends Component
 {
 
@@ -82,7 +84,7 @@ export default class Branches extends Component
         return (
             <div>
                 <h3>Branches</h3>
-                <Input.Search
+                <InputSearch
                     placeholder="Search for a branch"
                     style={{ width: '100%' }}
                     onSearch={this.searchForBranch.bind(this)}

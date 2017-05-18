@@ -14,7 +14,13 @@
   "env": {
     "production": {
       "presets": ["react-optimize"],
-      "plugins": ["babel-plugin-dev-expression"]
+      "plugins": [
+        "babel-plugin-dev-expression",
+        ["import", {
+            "libraryName": "antd",
+            "style": true
+        }]
+      ],
     },
     "development": {
       "plugins": [

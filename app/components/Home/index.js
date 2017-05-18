@@ -13,6 +13,7 @@ import { Row, Col } from 'antd'
 
 import styles from './Home.scss'
 
+const ButtonGroup = Button.Group
 
 export default class Home extends Component
 {
@@ -36,11 +37,11 @@ export default class Home extends Component
         return (
             <Panel type="fullWidth">
                 <PanelHeading>Development Environment</PanelHeading>
-                <Button.Group className="t-spacing">
+                <ButtonGroup className="t-spacing">
                     <Button type="primary" onClick={this.testCommand}>Default</Button>
                     <Button type="primary" onClick={this.testMultipleCommands}>Multiple Commands</Button>
                     <Button type="primary" onClick={this.testTail}>Tail</Button>
-                </Button.Group>
+                </ButtonGroup>
             </Panel>
         )
     }

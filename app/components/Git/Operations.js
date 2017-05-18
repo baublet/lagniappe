@@ -11,6 +11,8 @@ import ResetHardWithMaster from 'commands/Git/ResetHardWithMaster'
 import Undo from 'commands/Git/Undo'
 import Status from 'commands/Git/Status'
 
+const MenuItem = Menu.Item
+
 export default class Operations extends Component
 {
 
@@ -64,21 +66,21 @@ export default class Operations extends Component
             <div className="b-spacing--large">
                 <h3>Operations</h3>
                 <Menu className={styles.operationsMenu} selectedKeys={[]} onSelect={this.menuSelect.bind(this)}>
-                    <Menu.Item key="status">
+                    <MenuItem key="status">
                         <Icon type="file-text" /> Status
-                    </Menu.Item>
-                    <Menu.Item key="pull">
+                    </MenuItem>
+                    <MenuItem key="pull">
                         <Icon type="swap-left" /> Pull from Origin
-                    </Menu.Item>
-                    <Menu.Item key="push">
+                    </MenuItem>
+                    <MenuItem key="push">
                         <Icon type="swap-right" /> Push to Origin
-                    </Menu.Item>
-                    <Menu.Item key="resetHardHead">
+                    </MenuItem>
+                    <MenuItem key="resetHardHead">
                         <Icon type="retweet" /> Synchronize with Origin
-                    </Menu.Item>
-                    <Menu.Item key="undoLastCommit">
+                    </MenuItem>
+                    <MenuItem key="undoLastCommit">
                         <Icon type="rollback" /> Undo Last Commit
-                    </Menu.Item>
+                    </MenuItem>
                 </Menu>
             </div>
         )

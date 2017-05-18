@@ -11,6 +11,9 @@ import timeSince from 'utils/timesince'
 import styles from './Git.scss'
 import config from 'config'
 
+const MenuItem = Menu.Item
+const TimelineItem = Timeline.Item
+
 export default class Log extends Component
 {
 
@@ -63,12 +66,12 @@ export default class Log extends Component
     rowOperations(commitHash) {
         return (
             <Menu onSelect={this.menuSelect(commitHash).bind(this)}>
-                <Menu.Item key="revert">
+                <MenuItem key="revert">
                     Create Revert Commit
-                </Menu.Item>
-                <Menu.Item key="rollback">
+                </MenuItem>
+                <MenuItem key="rollback">
                     Roll Back to Here
-                </Menu.Item>
+                </MenuItem>
             </Menu>
         )
     }
@@ -77,7 +80,7 @@ export default class Log extends Component
         const date = Date.parse(log.date)
         const dateObject = new Date(date)
         return (
-            <Timeline.Item key={key}>
+            <TimelineItem key={key}>
                 <div className={styles.meta}>
                     <Dropdown overlay={this.rowOperations(log.commit)} placement="bottomRight">
                             <Icon type="down-circle" className={styles.operationsButton} />
@@ -91,7 +94,7 @@ export default class Log extends Component
                 </div>
                 <div className={styles.commit}>{log.commit}</div>
                 <div className={styles.message}>{log.message.join("\n")}</div>
-            </Timeline.Item>
+            </TimelineItem>
         )
     }
 

@@ -7,6 +7,8 @@ import docTree from 'documentation.js'
 import styles from './Navigation.scss'
 
 const SubMenu = Menu.SubMenu
+const MenuItem = Menu.Item
+const MenuDivider = Menu.Divider
 
 export default class Navigation extends Component
 {
@@ -33,7 +35,7 @@ export default class Navigation extends Component
 
         for(let i = 0; i < tree._paths.length; i++) {
             nodes.push(
-                <Menu.Item key={tree._paths[i].url}><Icon type="file" /> {tree._paths[i].display}</Menu.Item>
+                <MenuItem key={tree._paths[i].url}><Icon type="file" /> {tree._paths[i].display}</MenuItem>
             )
         }
 
@@ -52,28 +54,28 @@ export default class Navigation extends Component
         return(
             <Menu theme='dark' className={styles.navigation} mode="inline" onClick={navigateTo}>
               <SubMenu key="manage" title={<span><Icon type="dot-chart" /><span>DM Team</span></span>}>
-                <Menu.Item key="/">Environment</Menu.Item>
-                <Menu.Item key="/config">Configuration</Menu.Item>
-                <Menu.Item key="/trouble">Troubleshooting</Menu.Item>
-                <Menu.Item key="/apps">Applications</Menu.Item>
+                <MenuItem key="/">Environment</MenuItem>
+                <MenuItem key="/config">Configuration</MenuItem>
+                <MenuItem key="/trouble">Troubleshooting</MenuItem>
+                <MenuItem key="/apps">Applications</MenuItem>
               </SubMenu>
               <SubMenu key="devs" title={<span><Icon type="code-o" /><span>Development</span></span>}>
-                <Menu.Item key="/dev-dash">Dashboard</Menu.Item>
-                <Menu.Item key="/provision">Provisioner</Menu.Item>
-                <Menu.Item key="/git">Git</Menu.Item>
-                <Menu.Item key="/dbs">Databases</Menu.Item>
-                <Menu.Item key="/logs">Logs</Menu.Item>
-                <Menu.Item key="/email">Email</Menu.Item>
-                <Menu.Item key="/testing">Automated Tests</Menu.Item>
+                <MenuItem key="/dev-dash">Dashboard</MenuItem>
+                <MenuItem key="/provision">Provisioner</MenuItem>
+                <MenuItem key="/git">Git</MenuItem>
+                <MenuItem key="/dbs">Databases</MenuItem>
+                <MenuItem key="/logs">Logs</MenuItem>
+                <MenuItem key="/email">Email</MenuItem>
+                <MenuItem key="/testing">Automated Tests</MenuItem>
               </SubMenu>
               <SubMenu key="qa" title={<span><Icon type="smile-o" /><span>Quality Assurance</span></span>}>
-                <Menu.Item key="/open-tickets">Tickets</Menu.Item>
-                <Menu.Item key="/dbs">Databases</Menu.Item>
-                <Menu.Item key="/testing">Automated Tests</Menu.Item>
+                <MenuItem key="/open-tickets">Tickets</MenuItem>
+                <MenuItem key="/dbs">Databases</MenuItem>
+                <MenuItem key="/testing">Automated Tests</MenuItem>
               </SubMenu>
               <SubMenu key="docs" title={<span><Icon type="copy" /><span>Documentation</span></span>}>
-                <Menu.Item key="/docs">Home</Menu.Item>
-                <Menu.Divider />
+                <MenuItem key="/docs">Home</MenuItem>
+                <MenuDivider />
                 {docsMenu}
               </SubMenu>
             </Menu>
