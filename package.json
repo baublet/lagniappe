@@ -30,7 +30,7 @@
   },
   "browserslist": "electron 1.4",
   "build": {
-    "productName": "ElectronReact",
+    "productName": "lagniappe",
     "appId": "org.develar.ElectronReact",
     "category": "public.app-category.tools",
     "dmg": {
