@@ -53,7 +53,7 @@ At its core, this tool is merely a way to layout a React/Redux front end interac
 
 Although you should know a fair bit of React and Redux to get the most out of this framework, it is possible to just use Watchers and Commands to do the bulk -- perhaps even all -- of what you need without writing additional action creators or reducers.
 
-### Dependencies
+### How-To
 
 Your development environment will probably require certain custom command line tools. To define your dependencies, locate the classes in the `app/dependencies` directory. In there, you can find a handful of examples. Dependency definition classes extend the base `app/dependencies/Dependency.js` class, and contain a constructor that looks like:
 
@@ -476,6 +476,14 @@ Where possible, this framework tries to abstract the work of styling to two plac
 Most of the application's CSS variables live in the `app/sass-global` directory. Everything that is a setting is listed under items beginning with `01`. You can find a handy collection of mixins in files beginning with `02`. The project's global CSS is loosely organized corresponding to the [ITCSS](http://itcss.io/) methodology pioneered by [Harry Roberts](https://csswizardry.com/).
 
 *Note* that many custom components use their own, self-contained markup next to their components. To, for example, customize the command window's behavior, look, and feel, see `app/components/CommandWindow.js` and `app/components/CommandWindow.scss`.
+
+## Documentation
+
+In the navigation menu, there is a special tab called "Documentation" where you can put your domain-specific documentation. It is organized in the `app/documentation` folder tree. Any file you put there will be rendered as a [Markdown](https://daringfireball.net/projects/markdown/syntax) file.
+
+Put documentation in subfolders for even better organization.
+
+Markdown in `app/documentation/home.md` will be rendered on the main documentation page, along with a table of contents.
 
 ## Road Map
 

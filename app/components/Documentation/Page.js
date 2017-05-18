@@ -5,7 +5,7 @@ import Markdown from 'react-markdown'
 class Page extends Component {
 
     componentWillReceiveProps(nextProps) {
-        const path = nextProps.router.location.pathname.substr(5)
+        const path = nextProps.path || nextProps.router.location.pathname.substr(5)
         if(this.state && path == this.state.path) return
         this.loadPage(path)
     }
