@@ -2,6 +2,29 @@
 
 **lagniappe** (/ˈlænjæp/ lan-yap) is a framework written in [Electron](https://electron.atom.io) and React. It helps engineers simplify developer operations by giving software teams a unified interface to wrap complicated command line operations.
 
+  * [What is it?](#what-is-it-)
+  * [Getting Started](#getting-started)
+  * [Documentation](#documentation)
+    + [How-To](#how-to)
+      - [I don't have dependencies](#i-don-t-have-dependencies)
+    + [Commands](#commands)
+      - [Example Command](#example-command)
+      - [Command Window](#command-window)
+      - [Multiple Commands](#multiple-commands)
+      - [Command Sequence](#command-sequence)
+    + [Watchers](#watchers)
+      - [Example Watcher](#example-watcher)
+    + [Domain-Level Documentation](#domain-level-documentation)
+  * [User Interface](#user-interface)
+    + [Sections](#sections)
+      - [Navigation](#navigation)
+      - [Routes](#routes)
+    + [Layout Components](#layout-components)
+    + [Spacing](#spacing)
+    + [Customization](#customization)
+  * [Road Map](#road-map)
+  * [Credits](#credits)
+
 ## What is it?
 
 DevOps are hard. There a ton of commands to remember, concerns about cross-platform availability, many software suites to install, people of different experience levels to address, and frequent pain points that make it often one of the most frustrating aspects of a development team.
@@ -353,6 +376,14 @@ state = {
 }
 ```
 
+### Domain-Level Documentation
+
+In the navigation menu, there is a special tab called "Documentation" where you can put your domain-specific documentation. It is organized in the `app/documentation` folder tree. Any file you put there will be rendered as a [Markdown](https://daringfireball.net/projects/markdown/syntax) file.
+
+Put documentation in subfolders for even better organization.
+
+Markdown in `app/documentation/home.md` will be rendered on the main documentation page, along with a table of contents.
+
 ## User Interface
 
 ### Sections
@@ -368,8 +399,8 @@ Let's say you want to add a new page called "Git Repositories":
 ```jsx
 <Menu theme='dark' style={{ width: '100%' }} mode="inline" onClick={navigateTo}>
   <SubMenu key="manage" title={<span><Icon type="dot-chart" /><span>Default</span></span>}>
-    <Menu.Item key="/">Home</Menu.Item>
-    <Menu.Item key="/git-repos">Git Repositories</Menu.Item>
+    <MenuItem key="/">Home</MenuItem>
+    <MenuItem key="/git-repos">Git Repositories</MenuItem>
   </SubMenu>
 </Menu>
 ```
@@ -446,7 +477,7 @@ The same classes exist for:
 .l-spacing--tiny {}
 ```
 
-#### Customization
+### Customization
 
 Where possible, this framework tries to abstract the work of styling to two places:
 
@@ -457,17 +488,8 @@ Most of the application's CSS variables live in the `app/sass-global` directory.
 
 *Note* that many custom components use their own, self-contained markup next to their components. To, for example, customize the command window's behavior, look, and feel, see `app/components/CommandWindow.js` and `app/components/CommandWindow.scss`.
 
-## Documentation
-
-In the navigation menu, there is a special tab called "Documentation" where you can put your domain-specific documentation. It is organized in the `app/documentation` folder tree. Any file you put there will be rendered as a [Markdown](https://daringfireball.net/projects/markdown/syntax) file.
-
-Put documentation in subfolders for even better organization.
-
-Markdown in `app/documentation/home.md` will be rendered on the main documentation page, along with a table of contents.
-
 ## Road Map
 
-* Compilation/build scripts for the app
 * Automatic updates
 * Multiple platform support and documentation
 
