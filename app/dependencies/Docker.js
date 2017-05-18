@@ -6,17 +6,17 @@ import Dependency from './Dependency'
  */
 export default class Docker extends Dependency {
 
-    constructor()
+    default()
     {
-        // Required
-        super()
-
         this.dependencyName = 'Docker'
         this.command = 'docker -v'
         this.expectedOutput = /Docker version/i
+        this.required = true
+    }
+
+    mac() {
         this.installCommand = 'brew cask install docker'
         this.uninstallCommand = 'brew cask uninstall docker'
-        this.required = true
     }
 
 }

@@ -1,6 +1,7 @@
 import { exec } from 'child_process'
 import { exec as sudo } from 'sudo-prompt'
 import logger from 'logger.js'
+import os from 'os'
 
 /**
  * The base class for defining your application's dependencies and install
@@ -8,11 +9,8 @@ import logger from 'logger.js'
  */
 export default class Dependency {
 
-    constructor()
+    default()
     {
-        // Required in derived classes
-        // super()
-
         // Name of this dependency for UI and logging purposes
         this.dependencyName = 'Git'
 
@@ -43,9 +41,32 @@ export default class Dependency {
         this._installed = false
     }
 
+    /**
+     * OS-specific methods that are called after the constructor
+     */
+    linux() {}
+    mac() {}
+    windows() {}
+
 
     // No need to edit below these lines
     // ---------------------------------
+    
+    constructor()
+    {
+        this.default()
+        switch(os.platform()) {
+            case 'darwin':
+                this.mac()
+                break
+            case 'win32':
+                this.windows()
+                break
+            case 'linux':
+                this.linux()
+                break
+        }
+    }
 
     // Returns a promise that, when resolved, lets you know whether or not this
     // dependency is installed

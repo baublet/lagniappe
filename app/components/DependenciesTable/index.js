@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Table, Button, Popconfirm } from 'antd'
 
-import Dependencies from 'dependencies'
+import Dependencies from 'dependencies/index'
 
 import styles from './DependenciesTable.scss'
 
@@ -60,7 +60,7 @@ class DependenciesTable extends Component {
     actionColumn(text, row) {
         const installed = row.dependency._installed
         const name = row.dependency.dependencyName
-        let confirmTitle = installed ? 'Are you sure want to uninstall ' : 'Are you sure you want to uninstall '
+        let confirmTitle = installed ? 'Are you sure want to uninstall ' : 'Are you sure you want to install '
         confirmTitle += name + '?'
         return (
             <div>

@@ -6,17 +6,17 @@ import Dependency from './Dependency'
  */
 export default class Go extends Dependency {
 
-    constructor()
+    default()
     {
-        // Required
-        super()
-
         this.dependencyName = 'Go'
         this.command = 'go version'
         this.expectedOutput = /go version/i
+        this.required = false
+    }
+
+    mac() {
         this.installCommand = 'brew install go'
         this.uninstallCommand = 'brew uninstall go'
-        this.required = false
     }
 
 }

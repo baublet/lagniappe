@@ -1,14 +1,4 @@
-import Homebrew from './Homebrew'
-import Git from './Git'
-import Go from './Go'
-
-// Add your dependencies here, IN THE PROPER ORDER! E.g., you probably can't
-// install nginx on OSX easily without Homebrew, so Homebrew has to go first.
-const dependencies = [
-    new Homebrew(),
-    new Git(),
-    new Go(),
-]
+import dependencies from 'dependencies'
 
 class Dependencies {
     constructor(dependencies) {

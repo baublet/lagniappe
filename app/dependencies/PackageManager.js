@@ -1,16 +1,15 @@
 import Dependency from './Dependency'
 
-/**
- * The base class for defining your application's dependencies and installation
- * proceedures.
- */
-export default class Homebrew extends Dependency {
 
-    constructor()
+export default class PackageManager extends Dependency {
+
+    default()
     {
-        // Required
-        super()
+        this.dependencyName = 'PackageManager'
+        this.required = true
+    }
 
+    mac() {
         this.dependencyName = 'Homebrew'
         this.command = 'brew -v'
         this.expectedOutput = /Homebrew/i
@@ -18,7 +17,14 @@ export default class Homebrew extends Dependency {
         this.installRequiresSudo = true
         this.uninstallCommand = 'curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall --output ./uninstall && chmod +x ./uninstall && ./uninstall -f && rm -rf ./uninstall'
         this.uninstallRequiresSudo = true
-        this.required = true
+    }
+
+    windows() {
+
+    }
+
+    linux() {
+
     }
 
 }

@@ -34,7 +34,7 @@ const installExtensions = async () => {
 
     const forceDownload = !!process.env.UPGRADE_EXTENSIONS
 
-    // TODO: Use async interation statement.
+    // TODO: Use async iteration statement.
     //       Waiting on https://github.com/tc39/proposal-async-iteration
     //       Promises will fail silently, which isn't what we want in development
     return Promise

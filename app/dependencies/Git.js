@@ -6,17 +6,17 @@ import Dependency from './Dependency'
  */
 export default class Git extends Dependency {
 
-    constructor()
+    default()
     {
-        // Required
-        super()
-
         this.dependencyName = 'Git'
         this.command = 'git --version'
         this.expectedOutput = /git version/i
+        this.required = true
+    }
+
+    mac() {
         this.installCommand = 'brew install git'
         this.uninstallCommand = 'brew uninstall git'
-        this.required = true
     }
 
 }

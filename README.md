@@ -5,7 +5,8 @@
   * [What is it?](#what-is-it-)
   * [Getting Started](#getting-started)
   * [Documentation](#documentation)
-    + [How-To](#how-to)
+    + [Dependencies](#dependencies)
+      - [OS-Aware Dependencies](#os-aware-dependencies)
       - [I don't have dependencies](#i-don-t-have-dependencies)
     + [Commands](#commands)
       - [Example Command](#example-command)
@@ -56,7 +57,7 @@ At its core, this tool is merely a way to layout a React/Redux front end interac
 
 Although you should know a fair bit of React and Redux to get the most out of this framework, it is possible to just use Watchers and Commands to do the bulk -- perhaps even all -- of what you need without writing additional action creators or reducers.
 
-### How-To
+### Dependencies
 
 Your development environment will probably require certain custom command line tools. To define your dependencies, locate the classes in the `app/dependencies` directory. In there, you can find a handful of examples. Dependency definition classes extend the base `app/dependencies/Dependency.js` class, and contain a constructor that looks like:
 
@@ -67,13 +68,10 @@ import Dependency from './Dependency'
  * The base class for defining your application's dependencies and installation
  * proceedures.
  */
-export default class Homebrew extends Dependency {
+export default class Git extends Dependency {
 
-    constructor()
+    mac()
     {
-        // Required in derived classes
-        super()
-
         // Name of this dependency for UI and logging purposes
         this.dependencyName = 'Git'
 
@@ -104,7 +102,7 @@ export default class Homebrew extends Dependency {
 }
 ```
 
-To define where in the chain of dependencies that class goes, add it to the dependecy array in `app/dependencies/index.js`:
+To define where in the chain of dependencies that class goes, add it to the dependecy array in `app/dependencies.js`:
 
 ```js
 import Homebrew from './Homebrew'
@@ -121,6 +119,36 @@ const dependencies = [
 
 ...
 ```
+
+#### OS-Aware Dependencies
+
+Some dependencies will require difference management commands and configurations across platforms. lagniappe strives to work cross platform. To that end, your dependency classes may have three methods defining the various operating systems' configuration.
+
+```js
+export default class Git extends Dependency {
+    default()
+    {
+        // This is run before all of the below
+    }
+
+    linux()
+    {
+        // Runs in linux environments
+    }
+
+    mac()
+    {
+        // Runs in Mac environments
+    }
+
+    windows()
+    {
+        // Runs in Windows environments
+    }
+}
+```
+
+Leave any of the them blank if you don't have operating-system-specific commands for that dependency, or throw an errer (e.g., an `alert()`) informing the user that they cannot run this program on that OS.
 
 #### I don't have dependencies
 
@@ -490,8 +518,9 @@ Most of the application's CSS variables live in the `app/sass-global` directory.
 
 ## Road Map
 
-* Automatic updates
-* Multiple platform support and documentation
+* Out of the box Docker support
+* Out of the box Vagrant support
+* Out of the box Valet support
 
 ## Credits
 
