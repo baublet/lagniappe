@@ -38,6 +38,7 @@ Developers and DevOps engineers can run the program from `yarn dev` so they can 
 
 1) Clone this repo via `git clone https://github.com/baublet/lagniappe.git`.
 2) Copy `app/config.js.sample` to `app/config.js` and customize any options in it you like.
+3) Copy `app/dependencies.js.sample` to `app/dependencies.js` and customize any dependencies you need/want.
 3) CD into your `lagniappe` folder and run `yarn && yarn dev` if you use Yarn, or `npm install && npm run dev` for NPM.
 3) Run `yarn dev` (`npm run dev` if you use NPM) to boot the application in a development environment
 4) To build binaries, run `yarn package` (`npm run package`).
@@ -96,7 +97,6 @@ export default class Git extends Dependency {
         // If true, this dependency will be installed automatically using the
         // above command if the user doesn't have it
         this.required = true
-
     }
 
 }
@@ -116,7 +116,6 @@ const dependencies = [
     new Git(),
     new Go(),
 ]
-
 ...
 ```
 
