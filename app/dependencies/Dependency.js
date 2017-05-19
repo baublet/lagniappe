@@ -13,6 +13,10 @@ export default class Dependency {
     {
         // Name of this dependency for UI and logging purposes
         this.dependencyName = 'Git'
+        // Link to this dependency (a URL for the software website)
+        this.dependencyLink = 'https://git-scm.com/'
+        // Link to this software's documentation
+        this.dependencyDocumentation = 'https://git-scm.com/documentation'
 
         // The command to check whether or not this dependency is installed
         this.command = 'git --version'
@@ -22,12 +26,26 @@ export default class Dependency {
         // dependency is installed
         this.expectedOutput = /git version/i
 
-        // The commands required to install this dependency
+        // Flag this as true if you allow automatic installation. If it's false,
+        // we will skip it in the dependency checking step.
+        this.allowAutomatedInstall = true
+        // The link to this dependency's installation instructions. Useful for
+        // dependencies that you can't automatically install
+        this.installLink = 'https://git-scm.com/downloads'
+        // The commands required to install this dependency. Leave this false if
+        // there is no automatic installation procedure
         this.installCommand = 'brew install git'
         // If your command requires sudo/root privileges, make this true
         this.installRequiresSudo = false
 
-        // The commands required to uninstall this dependency
+        // Flag this as false to disallow automated uninstallation. This is
+        // necessary for many package managers
+        this.allowAutomatedUninstall = true
+        // Link to instructions on how to uninstall this software. Useful for
+        // packages that the user has to install manually
+        this.uninstallLink = ''
+        // The commands required to uninstall this dependency. Leave this false
+        // if there is no automatic uninstallation procedure
         this.uninstallCommand = 'brew uninstall git'
         // If your command requires sudo/root privileges, make this true
         this.uninstallRequiresSudo = true
@@ -35,14 +53,14 @@ export default class Dependency {
         // If true, this dependency will be installed automatically using the
         // above command if the user doesn't have it
         this.required = true
-
-        // Internal properties
-        // ---
-        this._installed = false
     }
 
     /**
-     * OS-specific methods that are called after the constructor
+     * OS-specific methods that are called after the constructor. Use the same
+     * above variables for these methods so that you can run environment-aware
+     * commands. For example, the process to install git on Windows is different
+     * than the process to install git on MacOS. Use these classes to alter
+     * this.command to reflect that.
      */
     linux() {}
     mac() {}
@@ -54,7 +72,27 @@ export default class Dependency {
     
     constructor()
     {
+        this.dependencyName = 'NO DEPENDENCY NAME SET!'
+        this.dependencyLink = 'https://www.github.com/baublet/lagniappe'
+        this.dependencyDocumentation = 'https://www.github.com/baublet/lagniappe'
+        this.command = ''
+        this.expectedOutput = ''
+        this.allowAutomatedInstall = true
+        this.installCommand = ''
+        this.installLink = 'https://www.github.com/baublet/lagniappe'
+        this.installRequiresSudo = false
+        this.allowAutomatedUninstall = true
+        this.uninstallLink = 'https://www.github.com/baublet/lagniappe'
+        this.uninstallCommand = ''
+        this.uninstallRequiresSudo = false
+        this.required = true
+
+        this._installed = false
+
+        // Attach any default settings to this class
         this.default()
+
+        // Then, do the OS-specific settings
         switch(os.platform()) {
             case 'darwin':
                 this.mac()

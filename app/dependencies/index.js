@@ -48,7 +48,12 @@ class Dependencies {
     install(callback) {
         let promise = Promise.resolve()
         this.dependencies.forEach(dependency => {
-            if(dependency._installed || !dependency.required) return
+            if(dependency._installed || !dependency.required) {
+                return
+            }
+            if(!dependency.allowAutomatedInstallation) {
+                return
+            }
             promise = promise.then(() => {
                 callback(dependency.dependencyName)
                 return dependency.install().then(output => {

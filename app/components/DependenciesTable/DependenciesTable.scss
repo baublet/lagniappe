@@ -8,3 +8,46 @@
     font-weight: bold;
     margin-right: $spacing-normal;
 }
+
+.dependencyName {
+    font-weight: bold;
+    font-size: $font-size-large;
+    cursor: pointer;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.statusCol {
+    vertical-align: middle;
+}
+
+.installed, .notInstalled {
+    font-size: $font-size-large;
+}
+
+.installed {
+    color: $color-green;
+}
+
+.notInstalled {
+    color: $color-red;
+}
+
+.dependencyDescription {
+    margin-top: $spacing-tiny;
+    font-size: $font-size-small;
+}
+
+.optional {
+    margin-left: $spacing-normal;
+    font-size: $font-size-smaller;
+    text-decoration: none;
+    font-weight: normal;
+    &:before {
+        content: "("
+    }
+    &:after {
+        content: ")"
+    }
+}
