@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Table, Button, Popconfirm, Icon } from 'antd'
+import { Table, Button, Popconfirm, Icon, Tooltip } from 'antd'
 import open from 'open'
 
 import Dependencies from 'dependencies/index'
@@ -91,6 +91,22 @@ class DependenciesTable extends Component {
         return (
             <div>
                 { actionButton }
+                <div className={styles.actionLinks}>
+                    { row.dependency.dependencyLink ?
+                                <Tooltip placement="topRight" title="Homepage">
+                                    <Icon type="home" onClick={() => open(row.dependency.dependencyLink)}/>
+                                </Tooltip>
+                        :
+                            false
+                    }
+                    { row.dependency.dependencyDocumentation ?
+                            <Tooltip placement="topRight" title="Documentation">
+                                <Icon type="book" onClick={() => open(row.dependency.dependencyDocumentation)}/>
+                            </Tooltip>
+                        :
+                            false
+                    }
+                </div>
             </div>
         )
     }
@@ -115,6 +131,7 @@ class DependenciesTable extends Component {
             title: 'Name',
             dataIndex: 'name',
             key: 'name',
+            className: styles.infoCol,
             render: (text, row) => (
                 <div>
                     { row.dependency.dependencyLink ?
