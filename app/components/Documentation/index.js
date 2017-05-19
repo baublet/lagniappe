@@ -8,7 +8,8 @@ import docTree from 'documentation.js'
 
 class Documentation extends Component {
 
-    constructor(props) {
+    constructor(props)
+    {
         super(props)
         this.state = {
             tree: docTree.getTree(),
@@ -16,7 +17,8 @@ class Documentation extends Component {
         }
     }
 
-    render() {
+    render()
+    {
         return (
             <div>
                 <h1>Docs</h1>
