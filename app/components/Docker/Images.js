@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Table, Button, Popconfirm, Row, Col, Icon } from 'antd'
+import { Table, Spin, Icon } from 'antd'
 
 import DockerImageList from 'commands/Docker/Image/List'
 
@@ -94,7 +94,11 @@ class Images extends Component
 
         return (
             <div>
-                <Table dataSource={tableData} columns={tableColumns} />
+                { loading ?
+                    <Spin />
+                :
+                    <Table dataSource={tableData} columns={tableColumns} />
+                }
             </div>
         )
     }
