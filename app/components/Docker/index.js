@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { Icon } from 'antd'
+import { Tabs, Icon } from 'antd'
 
 import Images from './Images'
 
 import styles from './Docker.scss'
+
+const TabPane = Tabs.TabPane
 
 class Docker extends Component {
 
@@ -12,7 +14,13 @@ class Docker extends Component {
         return (
             <div>
                 <h1><Icon type="hdd" /> Docker</h1>
-                <Images />
+                <Tabs type="card" animated={false}>
+                    <TabPane tab="Images" key="1">
+                        <Images />
+                    </TabPane>
+                    <TabPane tab="Containers" key="2">Nothing Here Yet</TabPane>
+                    <TabPane tab="Tab 3" key="3">And Nothing Here!</TabPane>
+                </Tabs>
             </div>
         )
     }
