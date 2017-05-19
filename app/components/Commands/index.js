@@ -9,16 +9,18 @@ import CommandTab from '../CommandWindow/CommandTab'
 class Commands extends Component
 {
 
-    renderWindows() {
-        if(!this.props.command || !this.props.command.windows.length) return <strong></strong>
-        return this.props.command.windows.map(window => {
+    renderWindows()
+    {
+        if(!this.props.commands || !this.props.commands.windows.length) return <strong></strong>
+        return this.props.commands.windows.map(window => {
             return <CommandWindow title={window.windowTitle} lines={window.lines} key={window.id} active={window.active} />
         })
     }
 
-    renderTabs() {
-        if(!this.props.command || !this.props.command.windows.length) return <strong></strong>
-        return this.props.command.windows.map(window => {
+    renderTabs()
+    {
+        if(!this.props.commands || !this.props.commands.windows.length) return <strong></strong>
+        return this.props.commands.windows.map(window => {
             return <CommandTab title={window.windowTitle} key={'tab-' + window.id} id={window.id} active={window.active} finished={window.finished} />
         })
     }
@@ -32,7 +34,7 @@ class Commands extends Component
 
         return (
             <div className={styles.commandsContainer} id={id} style={style}>
-                <div className={styles.commandsContainer__tabsContainer}>
+                <div className={styles.tabsContainer}>
                     {tabs}
                 </div>
                 {windows}
@@ -42,10 +44,4 @@ class Commands extends Component
 
 }
 
-function mapStateToProps(state) {
-   return {
-       command: state.command
-   }
-}
-
-export default connect(mapStateToProps)(Commands)
+export default Commands

@@ -12,14 +12,15 @@ import Split from 'split.js'
 
 class App extends Component {
 
-    constructor(props) {
+    constructor(props)
+    {
         super(props)
 
         this.hsizes = localStorage.getItem('split-horizontal-sizes')
         if (this.hsizes) {
             this.hsizes = JSON.parse(this.hsizes)
         } else {
-            this.hsizes = [50, 50]
+            this.hsizes = [100, 0]
         }
 
         this.vsizes = localStorage.getItem('split-vertical-sizes')
@@ -30,8 +31,8 @@ class App extends Component {
         }
     }
 
-  componentDidMount() {
-
+  componentDidMount()
+  {
     this.hsplit = Split(['#page', '#console'], {
         sizes: this.hsizes,
         direction: 'vertical',
@@ -43,7 +44,8 @@ class App extends Component {
             }
         },
         onDragEnd: () => {
-            localStorage.setItem('split-horizontal-sizes', JSON.stringify(this.hsplit.getSizes()))
+            this.hsizes = this.hsplit.getSizes()
+            localStorage.setItem('split-horizontal-sizes', JSON.stringify(this.hsizes))
         }
     })
 
@@ -56,20 +58,33 @@ class App extends Component {
             }
         },
         onDragEnd: () => {
-            localStorage.setItem('split-vertical-sizes', JSON.stringify(this.vsplit.getSizes()))
+            this.vsizes = this.vsplit.getSizes()
+            localStorage.setItem('split-vertical-sizes', JSON.stringify(this.vsizes))
         }
     })
 
   }
 
-  render() {
-
+  render()
+  {
     const router = this.props.router
+    const commands = this.props.commands
+    const watchers = this.props.watchers
+
+    if(this.hsplit) {
+        if(commands.windows.length) {
+            if (this.hsizes) {
+                this.hsplit.setSizes(this.hsizes)
+            }
+        } else {
+            this.hsplit.setSizes([100, 0])
+        }
+    }
 
     return (
       <div className="applicationWindow">
         <Startup />
-        <Header watchers={this.props.watchers} />
+        <Header watchers={watchers} />
         <div className="sideBarWindowContainer">
             <div className="sideBar" id="sideBar">
                 <Navigation router={router} />
@@ -78,7 +93,7 @@ class App extends Component {
                 <div className="mainWindow--viewport" id="page">
                     {this.props.children}
                 </div>
-                <Commands id="console" />
+                <Commands id="console" commands={commands} />
             </div>
         </div>
         <Footer />
@@ -89,7 +104,8 @@ class App extends Component {
 
 function mapStateToProps(state) {
    return {
-       watchers: state.watcher
+       watchers: state.watcher,
+       commands: state.command
    }
 }
 
