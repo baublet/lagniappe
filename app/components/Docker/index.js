@@ -15,11 +15,13 @@ class Docker extends Component {
             <div>
                 <h1><Icon type="hdd" /> Docker</h1>
                 <Tabs type="card" animated={false}>
+                    <TabPane tab="Dashboard" key="0">
+                        Docker dashboard
+                    </TabPane>
+                    <TabPane tab="Containers" key="2">Nothing Here Yet</TabPane>
                     <TabPane tab="Images" key="1">
                         <Images />
                     </TabPane>
-                    <TabPane tab="Containers" key="2">Nothing Here Yet</TabPane>
-                    <TabPane tab="Tab 3" key="3">And Nothing Here!</TabPane>
                 </Tabs>
             </div>
         )
