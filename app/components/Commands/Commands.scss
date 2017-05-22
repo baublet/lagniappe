@@ -2,16 +2,15 @@
 
 .commandsContainer {
     background: $color-light-gray;
-    padding: $spacing-normal;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
     flex-basis: 25%;
+    position: relative;
+    overflow: hidden;
 }
 
 .tabsContainer {
     display: flex;
     overflow: hidden;
-    min-height: $spacing-normal * 1.5;
 }

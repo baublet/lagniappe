@@ -22,7 +22,7 @@
     clear: both;
     padding: $spacing-tiny 0 $spacing-tiny 0;
     position: relative;
-    white-space: pre;
+    white-space: pre-wrap;
     &::before {
         content: counter(commandWindowLines);
         color: rgba($color-white, .15);
