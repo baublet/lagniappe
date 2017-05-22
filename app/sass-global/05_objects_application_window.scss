@@ -18,13 +18,14 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    max-width: 100%;
 }
 
 .mainWindow--viewport {
     padding: $spacing-normal;
     flex-grow: 1;
     flex-basis: 75%;
-    overflow: auto;
+    overflow-y: scroll;
     border-left: 1px solid $color-gray;
 }
 
