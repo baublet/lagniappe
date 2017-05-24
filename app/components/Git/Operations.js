@@ -28,7 +28,7 @@ export default class Operations extends Component
 
     push() {
         const push = new Push()
-        push.execute(config.cwd).then(() => { this.props.refresh() })
+        push.execute(config.cwd)
     }
 
     undo() {
@@ -38,7 +38,7 @@ export default class Operations extends Component
 
     status() {
         const status = new Status()
-        status.execute(config.cwd).then(() => { this.props.refresh() })
+        status.execute(config.cwd)
     }
 
     menuSelect({ item, key, selectedKeys }) {
