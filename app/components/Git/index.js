@@ -39,7 +39,7 @@ export default class Git extends Component
             currentBranch: '',
             loading: true
         })
-        let currentBranch = new CurrentBranch()
+        const currentBranch = new CurrentBranch()
         currentBranch.execute(config.cwd).then(branch => {
             this.setState({
                 currentBranch: branch,
@@ -51,7 +51,7 @@ export default class Git extends Component
     switchToBranch(branch) {
         const branchParts = branch.split('/')
         const branchName = branchParts.pop()
-        let checkoutBranch = new Checkout()
+        const checkoutBranch = new Checkout()
         this.setState({
             currentBranch: '...',
             loading: true
@@ -92,7 +92,12 @@ export default class Git extends Component
             <div>
                 <Row>
                     <Col span={24}>
-                        <h1><Icon type="copy" /> Git</h1>
+                        <h1>
+                            <Icon type="copy" /> Git
+                            <div className={styles.leaderboardLink}>
+                                <Link to="/git/leaderboard">Leaderboard</Link>
+                            </div>
+                        </h1>
                         <h4>
                             <span className="headingGhost headingGhost--block">Current Branch:</span>
                             <Button type="default" shape="circle" icon="retweet" size="small" onClick={this.handleRefresh.bind(this)} />
