@@ -13,7 +13,7 @@ export default class Status
         }]
         const window = new CommandWindow('git status')
         const process = new CommandProcess(command, window.callback)
-        process.execute()
+        return process.execute()
     }
 
 }
