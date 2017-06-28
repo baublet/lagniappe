@@ -1,5 +1,5 @@
-import { SET_WATCHER_DATA } from '../actions/watcher'
-import deepcopy from '../utils/deepcopy'
+import { SET_WATCHER_DATA } from 'lagniappe/actions/watcher'
+import deepcopy             from 'lagniappe/utils/deepcopy'
 
 export const defaultState = {
     // By default, we don't have any watchers

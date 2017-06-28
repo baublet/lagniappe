@@ -33,7 +33,7 @@ export default validate({
     extensions: ['', '.js', '.jsx', '.json', '.scss'],
     packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main'],
     alias: {
-      'vars': path.join(__dirname, 'app', 'sass-global') + '/01__settings.scss'
+      'vars': path.join(__dirname, 'app', 'lagniappe', 'sass-global') + '/01__settings.scss'
     },
     root: path.resolve('./app'),
   },

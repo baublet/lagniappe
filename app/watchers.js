@@ -1,3 +1,9 @@
+// This file, when called, will load every file in the watchers directory
+// and kick them off.
+//
+// Note: this file and the logic it calls assumes our stores are initialized.
+// If they are not, the watchers themselves will begin to throw errors.
+
 function requireAll(requireContext) {
   return requireContext.keys().map(requireContext);
 }

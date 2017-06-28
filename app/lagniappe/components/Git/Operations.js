@@ -15,33 +15,38 @@ const MenuItem = Menu.Item
 
 export default class Operations extends Component
 {
-
-    resetHard() {
+    resetHard()
+    {
         const reset = new ResetHardWithMaster()
         reset.execute(config.cwd).then(() => { this.props.refresh() })
     }
 
-    pull() {
+    pull()
+    {
         const pull = new Pull()
         pull.execute(config.cwd).then(() => { this.props.refresh() })
     }
 
-    push() {
+    push()
+    {
         const push = new Push()
         push.execute(config.cwd)
     }
 
-    undo() {
+    undo()
+    {
         const undo = new Undo()
         undo.execute(config.cwd).then(() => { this.props.refresh() })
     }
 
-    status() {
+    status()
+    {
         const status = new Status()
         status.execute(config.cwd)
     }
 
-    menuSelect({ item, key, selectedKeys }) {
+    menuSelect({ item, key, selectedKeys })
+    {
         switch(key) {
             case "resetHardHead":
                 this.resetHard()
@@ -61,7 +66,8 @@ export default class Operations extends Component
         }
     }
 
-    render() {
+    render()
+    {
         return (
             <div className="b-spacing--large">
                 <h3>Operations</h3>

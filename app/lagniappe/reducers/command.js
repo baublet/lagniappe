@@ -1,5 +1,7 @@
-import { ADD_WINDOW, ADD_LINE, ADD_LINES, REMOVE_WINDOW, FINISH_WINDOW, FOCUS_WINDOW } from '../actions/command'
-import deepcopy from '../utils/deepcopy'
+import { ADD_WINDOW, ADD_LINE, ADD_LINES,
+         REMOVE_WINDOW, FINISH_WINDOW,
+         FOCUS_WINDOW }                     from '../actions/command'
+import deepcopy                             from '../utils/deepcopy'
 
 export const defaultCommandState = {
     windows: []

@@ -1,5 +1,9 @@
-# Configs
+# App-level lagniappe-related files and settings
 app/config.js
+app/documentation/home.md
+app/config.js
+app/dependencies.js
+app/routes.js
 
 # Logs
 *.log
@@ -46,6 +50,3 @@ main.js
 main.js.map
 
 .idea
-app/documentation/home.md
-app/config.js
-app/dependencies.js

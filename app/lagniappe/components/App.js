@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Header from 'components/Header'
-import Navigation from 'components/Navigation'
-import Commands from 'components/Commands'
-import Footer from 'components/Footer'
+import Header from 'lagniappe/components/Header'
+import Navigation from 'lagniappe/components/Navigation'
+import Commands from 'lagniappe/components/Commands'
+import Footer from 'lagniappe/components/Footer'
 
-import Startup from 'components/Startup'
+import Startup from 'lagniappe/components/Startup'
 
 import Split from 'split.js'
 

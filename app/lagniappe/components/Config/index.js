@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Table, Collapse, Icon } from 'antd'
 
-import DependenciesTable from 'components/DependenciesTable'
+import DependenciesTable from 'lagniappe/components/DependenciesTable'
 
 const CollapsePanel = Collapse.Panel
 

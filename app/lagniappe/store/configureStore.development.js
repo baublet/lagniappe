@@ -1,12 +1,11 @@
 import { createStore, applyMiddleware, compose } from 'redux'
-import thunk from 'redux-thunk'
-import { hashHistory } from 'react-router'
-import { routerMiddleware, push } from 'react-router-redux'
-import createLogger from 'redux-logger'
-import rootReducer from '../reducers'
-
-import * as commandActions from '../actions/command'
-import type { defaultCommandState } from '../reducers/command'
+import thunk                                     from 'redux-thunk'
+import { hashHistory }                           from 'react-router'
+import { routerMiddleware, push }                from 'react-router-redux'
+import createLogger                              from 'redux-logger'
+import rootReducer                               from 'lagniappe/reducers'
+import * as commandActions                       from 'lagniappe/actions/command'
+import type { defaultCommandState }              from 'lagniappe/reducers/command'
 
 const actionCreators = {
   ...commandActions,
@@ -37,8 +36,8 @@ export default function configureStore(initialState) {
   const store = createStore(rootReducer, initialState, enhancer)
 
   if (module.hot) {
-    module.hot.accept('../reducers', () =>
-      store.replaceReducer(require('../reducers')) // eslint-disable-line global-require
+    module.hot.accept('lagniappe/reducers', () =>
+      store.replaceReducer(require('lagniappe/reducers')) // eslint-disable-line global-require
     )
   }
 

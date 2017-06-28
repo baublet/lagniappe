@@ -1,4 +1,4 @@
-import Watcher from './Watcher.js'
+import Watcher from 'lagniappe/Watcher'
 
 export default class InternetConnected extends Watcher {
 
