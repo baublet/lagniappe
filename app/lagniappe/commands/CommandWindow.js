@@ -1,5 +1,5 @@
 import { store } from 'index.js'
-import { addWindow, addLines, finishWindow } from 'actions/command'
+import { addWindow, addLines, finishWindow } from 'lagniappe/actions/command'
 
 export default class CommandWindow
 {

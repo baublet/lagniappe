@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { Link } from 'react-router'
 import { Timeline, Spin, Tooltip, Button, Menu, Dropdown, Icon } from 'antd'
 
-import GitLog from 'commands/Git/Log'
-import Rollback from 'commands/Git/Rollback'
-import Revert from 'commands/Git/Revert'
+import GitLog from 'lagniappe/commands/Git/Log'
+import Rollback from 'lagniappe/commands/Git/Rollback'
+import Revert from 'lagniappe/commands/Git/Revert'
 
-import timeSince from 'utils/timesince'
+import timeSince from 'lagniappe/utils/timesince'
 
 import styles from './Git.scss'
 import config from 'config'

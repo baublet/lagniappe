@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { Link } from 'react-router'
 import { Button, Row, Col, Spin, Icon, Menu } from 'antd'
 
-import CurrentBranch from 'commands/Git/CurrentBranch'
-import Status from 'commands/Git/Status'
-import Checkout from 'commands/Git/Checkout'
+import CurrentBranch from 'lagniappe/commands/Git/CurrentBranch'
+import Status from 'lagniappe/commands/Git/Status'
+import Checkout from 'lagniappe/commands/Git/Checkout'
 import Branches from './Branches'
 import Operations from './Operations'
 

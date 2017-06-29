@@ -4,7 +4,7 @@ import { Button } from 'antd'
 
 import { Row, Col, Steps, Spin, Progress } from 'antd'
 
-import Dependencies from 'dependencies/index'
+import Dependencies from 'lagniappe/dependencies'
 
 import styles from './Startup.scss'
 

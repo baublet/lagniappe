@@ -1,5 +1,5 @@
-import CommandProcess from 'commands/CommandProcess'
-import CommandWindow from 'commands/CommandWindow'
+import CommandProcess from 'lagniappe/commands/CommandProcess'
+import CommandWindow from 'lagniappe/commands/CommandWindow'
 
 export default class CurrentBranch
 {

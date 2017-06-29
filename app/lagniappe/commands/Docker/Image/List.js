@@ -1,5 +1,5 @@
 import { exec } from 'child_process'
-import parseCliTable from 'utils/parseCliTable'
+import parseCliTable from 'lagniappe/utils/parseCliTable'
 
 export default class DockerImageList
 {

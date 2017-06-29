@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { Link } from 'react-router'
 import { Button, Spin, Icon, Tabs , Table, Alert } from 'antd'
 
-import CurrentBranch from 'commands/Git/CurrentBranch'
-import ShortLog from 'commands/Git/ShortLog'
+import CurrentBranch from 'lagniappe/commands/Git/CurrentBranch'
+import ShortLog from 'lagniappe/commands/Git/ShortLog'
 
 import config from 'config'
 import styles from './Git.scss'

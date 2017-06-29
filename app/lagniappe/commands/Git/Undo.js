@@ -1,4 +1,4 @@
-import CommandProcess from 'commands/CommandProcess'
+import CommandProcess from 'lagniappe/commands/CommandProcess'
 
 export default class Undo
 {

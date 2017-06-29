@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { Link } from 'react-router'
 import { Button } from 'antd'
 
-import Command from 'commands/Command'
-import SequenceTest from 'commands/SequenceTest'
-import Tail from 'commands/Tail'
+import Command from 'lagniappe/commands/Command'
+import SequenceTest from 'lagniappe/commands/SequenceTest'
+import Tail from 'lagniappe/commands/Tail'
 
 import Panel from '../Panel'
 import PanelHeading from '../Panel/Heading'

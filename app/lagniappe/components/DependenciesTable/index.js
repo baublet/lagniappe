@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Table, Button, Popconfirm, Icon, Tooltip } from 'antd'
 import open from 'open'
 
-import Dependencies from 'dependencies/index'
+import Dependencies from 'lagniappe/dependencies'
 
 import styles from './DependenciesTable.scss'
 
@@ -120,7 +120,7 @@ class DependenciesTable extends Component {
             className: styles.statusCol,
             render: (text, row) => (
                 <div>
-                { row.dependency._installed ? 
+                { row.dependency._installed ?
                     <Icon type="check-circle-o" className={styles.installed} />
                     :
                     <Icon type="exclamation-circle" className={styles.notInstalled} />

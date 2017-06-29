@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router'
 import { Button, Spin, Input } from 'antd'
 
-import AllBranches from 'commands/Git/AllBranches'
+import AllBranches from 'lagniappe/commands/Git/AllBranches'
 
 import config from 'config'
 import styles from './Git.scss'

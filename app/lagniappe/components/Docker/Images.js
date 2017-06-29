@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { Table, Spin, Icon, Button, Menu, Dropdown, Popconfirm, Alert } from 'antd'
 
-import DockerImageList from 'commands/Docker/Image/List'
-import DockerImageRemove from 'commands/Docker/Image/Remove'
-import DockerImageRemoveAll from 'commands/Docker/Image/RemoveAll'
-import DockerImagePrune from 'commands/Docker/Image/Prune'
-import DockerImageInfo from 'commands/Docker/Image/Info'
+import DockerImageList from 'lagniappe/commands/Docker/Image/List'
+import DockerImageRemove from 'lagniappe/commands/Docker/Image/Remove'
+import DockerImageRemoveAll from 'lagniappe/commands/Docker/Image/RemoveAll'
+import DockerImagePrune from 'lagniappe/commands/Docker/Image/Prune'
+import DockerImageInfo from 'lagniappe/commands/Docker/Image/Info'
 
 import styles from './Docker.scss'
 

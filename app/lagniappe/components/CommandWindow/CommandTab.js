@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styles from './CommandWindow.scss'
-import { store } from '../../index.js'
-import { focusWindow, removeWindow } from '../../actions/command'
+import { store } from 'index.js'
+import { focusWindow, removeWindow } from 'lagniappe/actions/command'
 
 export default class CommandTab extends Component {
 

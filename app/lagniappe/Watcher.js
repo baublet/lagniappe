@@ -1,5 +1,5 @@
-import { store } from '../index.js'
-import { setWatcherData } from '../actions/watcher.js'
+import { store } from 'index.js'
+import { setWatcherData } from 'lagniappe/actions/watcher.js'
 import { exec } from 'child_process'
 
 export default class Watcher {

@@ -5,11 +5,11 @@ import { Icon, Menu, Popconfirm } from 'antd'
 import config from 'config'
 import styles from './Git.scss'
 
-import Pull from 'commands/Git/Pull'
-import Push from 'commands/Git/Push'
-import ResetHardWithMaster from 'commands/Git/ResetHardWithMaster'
-import Undo from 'commands/Git/Undo'
-import Status from 'commands/Git/Status'
+import Pull from 'lagniappe/commands/Git/Pull'
+import Push from 'lagniappe/commands/Git/Push'
+import ResetHardWithMaster from 'lagniappe/commands/Git/ResetHardWithMaster'
+import Undo from 'lagniappe/commands/Git/Undo'
+import Status from 'lagniappe/commands/Git/Status'
 
 const MenuItem = Menu.Item
 
