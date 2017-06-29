@@ -8,6 +8,9 @@ import config               from 'config'
 import styles               from './Jira.scss'
 
 import CheckAuthentication  from 'lagniappe/commands/Jira/CheckAuthentication'
+import MyIssues             from 'lagniappe/commands/Jira/MyIssues'
+
+import IssuesList           from './IssuesList'
 
 export default class Jira extends Component
 {
@@ -15,6 +18,10 @@ export default class Jira extends Component
     {
         super(props)
         this.resetState(false)
+    }
+
+    componentDidMount()
+    {
         this.loadMyIssues()
     }
 
@@ -27,6 +34,8 @@ export default class Jira extends Component
             authorized: false,
             issues: []
         }
+        this.CheckAuthentication = false
+        this.MyIssues = false
         if(mounted) {
             this.setState(state)
         } else {
@@ -38,8 +47,19 @@ export default class Jira extends Component
 
     loadMyIssues()
     {
-        if(!this.state.username || !this.state.password) return false
-
+        if(!this.state.authorized) return false
+        const Issues = this.MyIssues ?
+                        this.MyIssues :
+                        new MyIssues(   config.jira.baseUrl,
+                                        this.state.username,
+                                        this.state.password )
+        this.setState(Object.assign({}, this.state, { issuesLoading: true }))
+        Issues.execute().then(issues => {
+            this.setState(Object.assign({}, this.state, {
+                issues,
+                issuesLoading: false
+            }))
+        })
     }
 
     saveCredentials()
@@ -57,11 +77,14 @@ export default class Jira extends Component
             username,
             password,
             authorized: false,
-            loading: true
+            authLoading: true
         }))
-        const checker = new CheckAuthentication()
-        checker
-        .execute(config.jira.baseUrl, username, password)
+        const CheckAuth = this.CheckAuthentication ?
+                            this.CheckAuthentication :
+                            new CheckAuthentication(config.jira.baseUrl,
+                                                    username, password )
+        CheckAuth
+        .execute()
         .then((success) => {
             if(!success) {
                 return this.resetState()
@@ -69,15 +92,16 @@ export default class Jira extends Component
             this.saveCredentials()
             this.setState(Object.assign({}, this.state, {
                 authorized: true,
-                loading: false
+                authLoading: false
             }))
+            this.loadMyIssues()
         })
     }
 
     credentialsForm()
     {
         const inputDisabled = this.state.authorized
-        const loading = this.state.loading
+        const loading = this.state.authLoading
         const username = this.state.username ? this.state.username : ''
         const password = this.state.password ? this.state.password : ''
         return (
@@ -113,7 +137,7 @@ export default class Jira extends Component
         const issues = this.state.issues
         const username = this.state.username
         const password = this.state.password
-        const loading = this.state.loading
+        const loading = this.state.issuesLoading
         const credentialsForm = this.credentialsForm()
         return (
             <div>
@@ -124,9 +148,21 @@ export default class Jira extends Component
                         </h1>
                     </Col>
                 </Row>
-                <Row>
+                <Row gutter={16}>
                     <Col span={18}>
-
+                            <h3>
+                                <Button
+                                    onClick={this.loadMyIssues.bind(this)}
+                                    size="small" shape="circle"
+                                    icon="retweet"
+                                    className={styles.MyIssuesReloadButton} />
+                                Your Issues
+                            </h3>
+                            { loading ?
+                                <Spin />
+                            :
+                                <IssuesList issues={issues} />
+                            }
                     </Col>
                     <Col span={6}>
                         {credentialsForm}

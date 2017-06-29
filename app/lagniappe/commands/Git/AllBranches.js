@@ -12,7 +12,8 @@ export default class AllBranches
         })
     }
 
-    parseBranches(output) {
+    parseBranches(output)
+    {
         const lines = output.split("\n")
         const branches = []
         for(let i = 0; i < lines.length; i++) {

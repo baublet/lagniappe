@@ -1,17 +1,21 @@
 import Jira from './'
 
-export default class CheckAuthentication extends Jira
+export default class MyIssues extends Jira
 {
-    execute()
+    execute(offset = 0, limit = 25)
     {
         return new Promise((resolve, reject) => {
             const options = {
                 method: 'GET',
                 headers: this.headers,
             }
-            fetch(this.baseUrl, options).then(response => {
+            const url = this.baseUrl + '/rest/api/2/search?jql=assignee%20=%20currentuser()&fields=summary,%20reporter'
+
+            fetch(url, options).then(response => {
                 if(response.status == 200) {
-                    resolve(true)
+                    response.json().then(result => {
+                        resolve(result.issues)
+                    })
                 } else {
                     resolve(false)
                 }
