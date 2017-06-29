@@ -11,6 +11,20 @@ const config = {
         resizable: true,
         transparent: false,
     }
+
+    // Jira integration configuration. Leave blank if you're not using Jira
+    jira: {
+        baseUrl: 'http://my-company.atlassian.net/',
+        comments: true,
+
+        // Custom Jira fields to include when displaying the full task. Only
+        // these custom fields will be shown when you view a ticket.
+        custom_fields: {
+            // E.g., 11009
+            'fieldId': 'Field Label'
+                        // E.g., "Release Task"
+        }
+    }
 }
 
 export default config

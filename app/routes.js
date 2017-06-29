@@ -10,6 +10,7 @@ import Git               from 'lagniappe/components/Git'
 import Leaderboard       from 'lagniappe/components/Git/Leaderboard'
 import Documentation     from 'lagniappe/components/Documentation'
 import DocumentationPage from 'lagniappe/components/Documentation/Page'
+import Jira              from 'lagniappe/components/Jira'
 
 export default (
   <Route path="/" component={App}>
@@ -17,6 +18,9 @@ export default (
     <Route path="/config" component={Config} />
     <Route path="/apps" component={Apps} />
     <Route path="/docker" component={Docker} />
+    <Route path="/jira">
+        <IndexRoute component={Jira} />
+    </Route>
     <Route path="/git">
         <IndexRoute component={Git} />
         <Route path="leaderboard" component={Leaderboard} />

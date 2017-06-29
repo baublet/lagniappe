@@ -57,6 +57,7 @@ export default class Navigation extends Component
                 <MenuItem key="/dev-dash">Dashboard</MenuItem>
                 <MenuItem key="/docker">Docker</MenuItem>
                 <MenuItem key="/git">Git</MenuItem>
+                <MenuItem key="/jira">Jira</MenuItem>
               </SubMenu>
               <SubMenu key="docs" title={<span><Icon type="copy" /><span>Documentation</span></span>}>
                 <MenuItem key="/docs">Home</MenuItem>
