@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { Menu, Icon } from 'antd'
-import { browserHistory } from 'react-router'
-
-import docTree from 'documentation.js'
-
-import styles from './Navigation.scss'
+import { Menu, Icon }       from 'antd'
+import { browserHistory }   from 'react-router'
+import docTree              from 'documentation.js'
+import styles               from './Navigation.scss'
+import menuItems            from 'menu.js'
 
 const SubMenu = Menu.SubMenu
 const MenuItem = Menu.Item
@@ -48,17 +47,28 @@ export default class Navigation extends Component
         this.props.router.push(key)
     }
 
+    customMenuItems()
+    {
+        console.log(menuItems)
+        return menuItems.map(item => {
+            console.log('Item: ', item)
+            const title = !item.icon ? item.title : <span><Icon type={item.icon} />{item.title}</span>
+            return (
+                <SubMenu key={item.url} title={title}>
+                    { item.url || (!item.items || !item.items.length) ? false :
+                        item.items.map(subItem => <MenuItem key={subItem.url}>{subItem.title}</MenuItem>)
+                    }
+                </SubMenu>
+            )
+        })
+    }
+
     render() {
         const navigateTo = this.navigateTo.bind(this)
         const docsMenu = this.docsMenu(this.state.tree)
         return(
             <Menu theme='dark' className={styles.navigation} mode="inline" onClick={navigateTo}>
-              <SubMenu key="devs" title={<span><Icon type="code-o" /><span>Development</span></span>}>
-                <MenuItem key="/dev-dash">Dashboard</MenuItem>
-                <MenuItem key="/docker">Docker</MenuItem>
-                <MenuItem key="/git">Git</MenuItem>
-                <MenuItem key="/jira">Jira</MenuItem>
-              </SubMenu>
+              {this.customMenuItems()}
               <SubMenu key="docs" title={<span><Icon type="copy" /><span>Documentation</span></span>}>
                 <MenuItem key="/docs">Home</MenuItem>
                 <MenuDivider />

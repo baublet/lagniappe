@@ -4,6 +4,7 @@ app/documentation/home.md
 app/config.js
 app/dependencies.js
 app/routes.js
+app/menu.js
 
 # Logs
 *.log

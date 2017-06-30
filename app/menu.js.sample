@@ -1,0 +1,29 @@
+export default [{
+    title: 'Development',
+    icon:  'code-o',
+    url:   false,
+    items: [{
+        title:  'Dashboard',
+        url:    '/dev-dash'
+    },{
+        title:  'Docker',
+        url:    '/docker'
+    },{
+        title:  'Git',
+        url:    '/git'
+    },{
+        title:  'Jira',
+        url:    '/jira'
+    }]
+},{
+    title:  'Test',
+    icon:   'circle-o',
+    url:    '/dev-dash'
+}, {
+    title:  'Test 2',
+    icon:   'check',
+    items:  [{
+        title:  'Hi',
+        url:    '/git'
+    }]
+}]
