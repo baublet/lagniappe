@@ -9,7 +9,7 @@ export default class MyIssues extends Jira
                 method: 'GET',
                 headers: this.headers,
             }
-            const url = this.baseUrl + '/rest/api/2/search?jql=assignee%20=%20currentuser()&fields=summary,%20reporter'
+            const url = this.baseUrl + '/rest/api/2/search?jql=assignee%20=%20currentuser()&fields=summary,reporter,priority,status'
 
             fetch(url, options).then(response => {
                 if(response.status == 200) {

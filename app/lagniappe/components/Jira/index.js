@@ -32,7 +32,8 @@ export default class Jira extends Component
             username: false,
             password: false,
             authorized: false,
-            issues: []
+            issues: [],
+            renderKey: 0,
         }
         this.CheckAuthentication = false
         this.MyIssues = false
@@ -57,7 +58,8 @@ export default class Jira extends Component
         Issues.execute().then(issues => {
             this.setState(Object.assign({}, this.state, {
                 issues,
-                issuesLoading: false
+                issuesLoading: false,
+                renderKey: this.state.renderKey++,
             }))
         })
     }
@@ -139,6 +141,7 @@ export default class Jira extends Component
         const password = this.state.password
         const loading = this.state.issuesLoading
         const credentialsForm = this.credentialsForm()
+        const renderKey = this.state.renderKey
         return (
             <div>
                 <Row>
@@ -161,7 +164,7 @@ export default class Jira extends Component
                             { loading ?
                                 <Spin />
                             :
-                                <IssuesList issues={issues} />
+                                <IssuesList renderKey={renderKey} issues={issues} />
                             }
                     </Col>
                     <Col span={6}>

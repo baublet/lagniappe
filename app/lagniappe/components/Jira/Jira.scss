@@ -12,3 +12,29 @@
     float: left;
     margin-right: $spacing-small;
 }
+
+.IssuesListFilters {
+    margin-bottom: $spacing-normal;
+}
+
+.Closed {
+    text-decoration: line-through;
+}
+
+.KeyRow {
+    word-wrap: normal;
+    white-space: nowrap;
+}
+
+.TitleRow {
+    word-wrap: break-word;
+}
+
+.List__Title {
+    font-weight: bold;
+    display: block;
+}
+
+.TitleRowInfo {
+    font-size: $font-size-tiny;
+}
