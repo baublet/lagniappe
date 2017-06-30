@@ -105,6 +105,7 @@ export default class IssuesList extends Component
     {
         const issues = this.dataArray(this.props.issues)
         const columns = this.columnsArray()
+        const reloadFunction = this.props.reloadFunction
 
         if(this.props.issues.length < 1) {
             return <Alert message="You either do not have any issues or you are not logged in." showIcon type="info" />
@@ -113,13 +114,20 @@ export default class IssuesList extends Component
         return(
             <div className={styles.IssuesList}>
                 <Row gutter={16} className={styles.IssuesListFilters}>
+                    <Col span={1}>
+                        <Button
+                            onClick={reloadFunction}
+                            size="small" shape="circle"
+                            icon="retweet"
+                            className={styles.MyIssuesReloadButton} />
+                    </Col>
                     <Col span={12}>
                         <Search
                             placeholder="Filter"
                             onSearch={value => this.setState(Object.assign({}, this.state, { filter: value }))}
                         />
                     </Col>
-                    <Col span={12}>
+                    <Col span={11}>
                         <Checkbox onChange={e => this.setState(Object.assign({}, this.state, { showClosed: !!e.target.checked }))}>
                             Closed
                         </Checkbox>

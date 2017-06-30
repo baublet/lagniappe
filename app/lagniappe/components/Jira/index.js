@@ -108,28 +108,32 @@ export default class Jira extends Component
         const password = this.state.password ? this.state.password : ''
         return (
             <div className={styles.LoginForm}>
-                <h3>Jira Credentials</h3>
-                <div className={styles.LoginFormGroup}>
-                    <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />}
-                           placeholder="Email Address" disabled={inputDisabled}
-                           ref={node => this.usernameInput = node}
-                           defaultValue={username} />
-                </div>
-                <div className={styles.LoginFormGroup}>
-                    <Input prefix={<Icon type="lock" style={{ fontSize: 13 }} />}
-                           type="password" placeholder="Password"
-                           disabled={inputDisabled}
-                           ref={node => this.passwordInput = node}
-                           defaultValue={password} />
-                </div>
-                {inputDisabled ?
-                    <Button type="default" onClick={this.resetState.bind(this)}>Log Out</Button>
-                :
-                    <Button type="primary"
-                            onClick={this.checkAuthentication.bind(this)}
-                            disabled={loading}
-                            loading={loading}>Log in</Button>
-                }
+                <h5>Jira Credentials</h5>
+                <Row gutter={8}>
+                    <Col span={9}>
+                        <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />}
+                               placeholder="Email Address" disabled={inputDisabled}
+                               ref={node => this.usernameInput = node}
+                               defaultValue={username} />
+                    </Col>
+                    <Col span={9}>
+                        <Input prefix={<Icon type="lock" style={{ fontSize: 13 }} />}
+                               type="password" placeholder="Password"
+                               disabled={inputDisabled}
+                               ref={node => this.passwordInput = node}
+                               defaultValue={password} />
+                    </Col>
+                    <Col span={6}>
+                        {inputDisabled ?
+                            <Button type="default" onClick={this.resetState.bind(this)}>Log Out</Button>
+                        :
+                            <Button type="primary"
+                                    onClick={this.checkAuthentication.bind(this)}
+                                    disabled={loading}
+                                    loading={loading}>Log in</Button>
+                        }
+                    </Col>
+                </Row>
             </div>
         )
     }
@@ -144,33 +148,24 @@ export default class Jira extends Component
         const renderKey = this.state.renderKey
         return (
             <div>
-                <Row>
-                    <Col span={24}>
+                <Row gutter={16}>
+                    <Col span={8}>
                         <h1>
                             <Icon type="appstore" /> Jira
                         </h1>
                     </Col>
-                </Row>
-                <Row gutter={16}>
-                    <Col span={18}>
-                            <h3>
-                                <Button
-                                    onClick={this.loadMyIssues.bind(this)}
-                                    size="small" shape="circle"
-                                    icon="retweet"
-                                    className={styles.MyIssuesReloadButton} />
-                                Your Issues
-                            </h3>
-                            { loading ?
-                                <Spin />
-                            :
-                                <IssuesList renderKey={renderKey} issues={issues} />
-                            }
-                    </Col>
-                    <Col span={6}>
+                    <Col span={16}>
                         {credentialsForm}
                     </Col>
                 </Row>
+                <div>
+                    <h2>Your Issues</h2>
+                    { loading ?
+                        <Spin />
+                    :
+                        <IssuesList renderKey={renderKey} issues={issues} reloadFunction={this.loadMyIssues.bind(this)} />
+                    }
+                </div>
             </div>
         )
     }
