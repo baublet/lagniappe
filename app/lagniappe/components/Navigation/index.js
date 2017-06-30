@@ -49,9 +49,7 @@ export default class Navigation extends Component
 
     customMenuItems()
     {
-        console.log(menuItems)
         return menuItems.map(item => {
-            console.log('Item: ', item)
             const title = !item.icon ? item.title : <span><Icon type={item.icon} />{item.title}</span>
             return (
                 <SubMenu key={item.url} title={title}>
