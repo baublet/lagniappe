@@ -127,7 +127,11 @@ export default class IssuesList extends Component
                 </Row>
                 <Row>
                     <Col span={24}>
-                        <Table size="middle" columns={columns} dataSource={issues} />
+                        <Table size="middle" columns={columns} dataSource={issues}
+                               pagination={{
+                                   simple: false,
+                                   showSizeChanger: true,
+                               }} />
                     </Col>
                 </Row>
             </div>
