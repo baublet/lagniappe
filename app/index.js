@@ -5,6 +5,8 @@ import { Router, hashHistory }  from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import routes                   from 'routes'
 import configureStore           from 'lagniappe/store/configureStore'
+import { LocaleProvider }       from 'antd'
+import enUS                     from 'antd/lib/locale-provider/en_US'
 import './app.global.scss'
 
 export const store = configureStore()
@@ -16,7 +18,9 @@ require('./watchers.js')
 
 render(
   <Provider store={store}>
-    <Router history={history} routes={routes} />
+    <LocaleProvider locale={enUS}>
+        <Router history={history} routes={routes} />
+    </LocaleProvider>
   </Provider>,
   document.getElementById('root')
 )
