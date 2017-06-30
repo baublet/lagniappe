@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import { connect }          from 'react-redux'
 
-import Header from 'lagniappe/components/Header'
-import Navigation from 'lagniappe/components/Navigation'
-import Commands from 'lagniappe/components/Commands'
-import Footer from 'lagniappe/components/Footer'
+import Header               from 'lagniappe/components/Header'
+import Navigation           from 'lagniappe/components/Navigation'
+import Commands             from 'lagniappe/components/Commands'
+import Footer               from 'lagniappe/components/Footer'
 
-import Startup from 'lagniappe/components/Startup'
+import Startup              from 'lagniappe/components/Startup'
 
-import Split from 'split.js'
+import Split                from 'split.js'
 
 class App extends Component {
 
