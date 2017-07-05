@@ -7,9 +7,9 @@ import DockerImageRemoveAll from 'lagniappe/commands/Docker/Image/RemoveAll'
 import DockerImagePrune from 'lagniappe/commands/Docker/Image/Prune'
 import DockerImageInfo from 'lagniappe/commands/Docker/Image/Info'
 
-import styles from './Docker.scss'
+import generalSorterFor from 'lagniappe/utils/generalSorterFor'
 
-export const ORDER_SIZES = ['SECONDS AGO', 'MINUTES AGO', 'HOURS AGO', 'DAYS AGO', 'MONTHS AGO', 'YEARS AGO', ' KB', ' MB', ' GB', ' TB']
+import styles from './Docker.scss'
 
 const ButtonGroup = Button.Group
 const MenuItem = Menu.Item
@@ -100,47 +100,6 @@ class Images extends Component
         })
     }
 
-    getOrderPosition(key)
-    {
-        const keyCap = key.toUpperCase()
-        for(let i = 0; i < ORDER_SIZES.length; i++) {
-            if(keyCap.indexOf(ORDER_SIZES[i]) > -1) return i
-        }
-        return -1
-    }
-
-    sorterFor(key)
-    {
-        return (a, b) => {
-            const aVal = this.getOrderPosition(a[key])
-            const bVal = this.getOrderPosition(b[key])
-
-            // This uses the getOrderPosition function to find out
-            // if there are other metrics than name (e.g., days/months/
-            // years, or MB/GB/TB), compares them first, then falls back
-            // to normal ordering if they match or neither have the
-            // qualitative metrics.
-            // 
-            // So 7 minutes will always be less than 1 month. But when we
-            // compares 1 month to 2 months, we then fall back to alpha
-            // sorting so that 2 months > 1 month.
-            if(aVal > -1 && bVal > -1 && aVal !== bVal)
-            {
-                return aVal - bVal
-            }
-
-            const aAbs = a[key].toUpperCase()
-            const bAbs = b[key].toUpperCase()
-            if (aAbs < bAbs) {
-                return -1
-            }
-            if (aAbs > bAbs) {
-                return 1
-            }
-            return 0
-        }
-    }
-
     rowAction(index, row)
     {
         const handleClick = ({key}) => {
@@ -179,7 +138,7 @@ class Images extends Component
                 title: key,
                 dataIndex: key,
                 key: key,
-                sorter: this.sorterFor(key)
+                sorter: generalSorterFor(key),
             })
         }
 

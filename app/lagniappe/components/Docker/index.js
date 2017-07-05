@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Tabs, Icon } from 'antd'
 
 import Images from './Images'
+import Containers from './Containers'
 
 import styles from './Docker.scss'
 
@@ -18,7 +19,9 @@ class Docker extends Component {
                     <TabPane tab="Dashboard" key="0">
                         Docker dashboard
                     </TabPane>
-                    <TabPane tab="Containers" key="2">Nothing Here Yet</TabPane>
+                    <TabPane tab="Containers" key="2">
+                        <Containers />
+                    </TabPane>
                     <TabPane tab="Images" key="1">
                         <Images />
                     </TabPane>

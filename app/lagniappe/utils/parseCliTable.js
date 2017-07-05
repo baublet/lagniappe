@@ -1,6 +1,6 @@
 export default function parseCliTable(output)
 {
-    const lineMatcher = /(\S+(?: \S+)*)/g
+    const lineMatcher = /(\s{23,}|\S+(?: \S+)*)/g
     const lines = output.split("\n")
     const rows = []
     let headings = []
