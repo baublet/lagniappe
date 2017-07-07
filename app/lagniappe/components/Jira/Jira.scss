@@ -17,6 +17,10 @@
     margin-bottom: $spacing-normal;
 }
 
+.IssueDescription {
+    font-size: $font-size-small;
+}
+
 .Closed {
     text-decoration: line-through;
 }
@@ -42,4 +46,37 @@
 
 .IssueNameOnIssuePage {
     border: none;
+}
+
+.Attachments {
+    margin-top: $spacing-normal;
+    overflow: hidden;
+    width: 100%;
+}
+
+.AttachmentsInnerScroller {
+    min-width: 100%;
+    max-height: 35vh;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.AttachmentBox {
+    display: inline-block;
+    border-radius: 3px;
+    overflow: hidden;
+    vertical-align: middle;
+    margin-left: $spacing-small;
+    cursor: pointer;
+    &:hover .AttachmentAttribution {
+            color: $color-black;
+    }
+}
+
+.AttachmentAttribution {
+    color: $color-gray;
+    font-size: $font-size-tiny;
+    &:hover {
+        color: $color-black;
+    }
 }

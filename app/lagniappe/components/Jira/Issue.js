@@ -10,8 +10,31 @@ import config               from 'config'
 import IssueInfo            from 'lagniappe/commands/Jira/IssueInfo'
 import nl2br                from 'lagniappe/utils/nl2br'
 
+import Image                from 'lagniappe/components/Image'
+
 export default class Issue extends Component
 {
+
+    renderAttachments(attachments)
+    {
+        const auth = 'Basic ' +
+                        btoa(
+                            localStorage.getItem('jira-username') + ':' +
+                            localStorage.getItem('jira-password')
+                        )
+        return attachments.map(attachment => {
+            return attachment.mimeType.indexOf('image') > -1 ?
+                    <div className={styles.AttachmentBox} key={attachment.id}
+                        onClick={() => { open(attachment.content) }}>
+                        <Image src={attachment.thumbnail} headers={{Authorization: auth}} />
+                        <div className={styles.AttachmentAttribution}>
+                            by {attachment.author.displayName}<br />
+                            on {new Date(Date.parse(attachment.created)).toLocaleDateString()}
+                        </div>
+                    </div>
+                    : false
+        })
+    }
 
     render()
     {
@@ -25,10 +48,13 @@ export default class Issue extends Component
         const attachments = this.props.data.fields.attachment
         const assignee = this.props.data.fields.assignee
 
+        const renderedAttachments = this.renderAttachments(attachments)
+
         const reloadFunction = this.props.reloadFunction
 
         return(
             <div>
+                <h2 className={styles.IssueNameOnIssuePage}>{summary}</h2>
                 <h3>
                     <Button
                         onClick={reloadFunction}
@@ -37,8 +63,14 @@ export default class Issue extends Component
                         className={styles.MyIssuesReloadButton} />
                     {key}
                 </h3>
-                <h2 className={styles.IssueNameOnIssuePage}>{summary}</h2>
-                <p>{description}</p>
+                <p className={styles.IssueDescription}>{description}</p>
+                { attachments.length > 0 ?
+                    <div className={styles.Attachments}>
+                        <div className={styles.AttachmentsInnerScroller}>
+                            {renderedAttachments}
+                        </div>
+                    </div>
+                : false }
             </div>
         )
     }

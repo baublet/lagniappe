@@ -22,15 +22,13 @@ export default class Jira extends Component
 
     componentDidMount()
     {
-        if(!this.state.issues.length) {
-            this.loadMyIssues()
-        }
+        this.checkAuthentication()
     }
 
     resetState(mounted = true)
     {
         const state = {
-            loading: false,
+            issuesLoading: false,
             username: false,
             password: false,
             authorized: false,
@@ -42,9 +40,9 @@ export default class Jira extends Component
         if(mounted) {
             this.setState(state)
         } else {
+            state.username = localStorage.getItem('jira-username')
+            state.password = localStorage.getItem('jira-password')
             this.state = state
-            this.state.username = localStorage.getItem('jira-username')
-            this.state.password = localStorage.getItem('jira-password')
         }
     }
 

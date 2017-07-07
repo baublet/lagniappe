@@ -56,6 +56,7 @@ export default class IssuePage extends Component
                 <h1>
                     <Icon type="appstore" /> Jira
                 </h1>
+                <Link to="/jira">&laquo; Back</Link>
                 <div>
                     {loading ?
                         <Spin />
