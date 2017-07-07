@@ -22,7 +22,9 @@ export default class Jira extends Component
 
     componentDidMount()
     {
-        this.loadMyIssues()
+        if(!this.state.issues.length) {
+            this.loadMyIssues()
+        }
     }
 
     resetState(mounted = true)

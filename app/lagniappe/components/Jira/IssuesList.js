@@ -89,7 +89,7 @@ export default class IssuesList extends Component
                 const className = row.status.toUpperCase() == 'CLOSED' ? styles.List__Title + ' ' + styles.Closed : styles.List__Title
                 return (
                     <div className={styles.TitleRow}>
-                        <a className={className} onClick={() => { open(externalUrl) }}>{value}</a>
+                        <Link className={className} to={"/jira/" + row.id}>{value}</Link>
                         <div className={styles.TitleRowInfo}>
                             reported by {row.reporter.displayName}
                             &nbsp; &bull; &nbsp;
