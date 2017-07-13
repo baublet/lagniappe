@@ -72,6 +72,9 @@ export default class PullRequests extends Component
                                     <b className={styles.PRAuthor}>{pr.author.name}</b>, <em className={styles.PRDate}>{timeSince(pr.lastUpdate)} ago</em>
                                 </div>
                             </div>
+                            <div className={styles.PRBranchActions}>
+                                <Button>Hi</Button>
+                            </div>
                         </div>
                     )
                 }) }

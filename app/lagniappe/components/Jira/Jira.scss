@@ -156,6 +156,7 @@
 
 .PRInfo {
     margin-left: $spacing-small;
+    flex-grow: 1;
 }
 
 .PRTitle {
@@ -166,4 +167,7 @@
 .PRMeta {
     margin-top: $spacing-tiny;
     font-size: $font-size-tiny;
+}
+
+.PRBranchActions {
 }
