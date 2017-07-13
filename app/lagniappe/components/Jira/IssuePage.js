@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import { Link }             from 'react-router'
+import { Link, hashHistory }from 'react-router'
 import { Button, Alert, Row,
          Col, Icon, Table,
          Spin }             from 'antd'
 import open                 from 'open'
 
 import styles               from './Jira.scss'
-import config               from 'config'
 
 import IssueInfo            from 'lagniappe/commands/Jira/IssueInfo'
 import Issue                from './Issue'
@@ -18,8 +17,6 @@ export default class IssuePage extends Component
         super(props)
         this.state = {
             loading:   true,
-            username:  false,
-            password:  false,
             issueInfo: {},
         }
     }
@@ -34,11 +31,7 @@ export default class IssuePage extends Component
         const identifier = this.props.params.splat
         const newState = {}
         this.setState(Object.assign({}, this.state, { loading: true }))
-        newState.username = localStorage.getItem('jira-username')
-        newState.password = localStorage.getItem('jira-password')
-        const command = this.issueFinder ?
-                            this.issueFinder :
-                            new IssueInfo(config.jira.baseUrl, newState.username, newState.password)
+        const command = new IssueInfo()
         command.execute(identifier).then(info => {
             newState.issueInfo = info
             newState.loading = false
@@ -53,17 +46,17 @@ export default class IssuePage extends Component
         const data = this.state.issueInfo
         return(
             <div>
-                <h1>
-                    <Icon type="appstore" /> Jira
-                </h1>
-                <Link to="/jira">&laquo; Back</Link>
-                <div>
-                    {loading ?
-                        <Spin />
-                    :
-                        <Issue data={data} reloadFunction={reloadFunction} />
-                    }
-                </div>
+                <Button type="primary"
+                    onClick={() => hashHistory.goBack()}
+                    className={styles.BackLink}
+                >
+                    <Icon type="left" />Go back
+                </Button>
+                {loading ?
+                    <Spin />
+                :
+                    <Issue data={data} reloadFunction={reloadFunction} />
+                }
             </div>
         )
     }

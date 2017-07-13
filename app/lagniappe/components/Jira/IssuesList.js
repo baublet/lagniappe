@@ -108,7 +108,7 @@ export default class IssuesList extends Component
         const reloadFunction = this.props.reloadFunction
 
         if(this.props.issues.length < 1) {
-            return <Alert message="You either do not have any issues or you are not logged in." showIcon type="info" />
+            return <Alert message="You do not have any issues to display here." showIcon type="info" />
         }
 
         return(

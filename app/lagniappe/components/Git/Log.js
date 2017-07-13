@@ -6,7 +6,7 @@ import GitLog from 'lagniappe/commands/Git/Log'
 import Rollback from 'lagniappe/commands/Git/Rollback'
 import Revert from 'lagniappe/commands/Git/Revert'
 
-import timeSince from 'lagniappe/utils/timesince'
+import timeSince from 'lagniappe/utils/timeSince'
 
 import styles from './Git.scss'
 import config from 'config'

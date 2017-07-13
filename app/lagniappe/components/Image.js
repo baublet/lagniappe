@@ -27,6 +27,7 @@ export default class Image extends Component
         })
 
         this.xhr = new XMLHttpRequest()
+        this.xhr.withCredentials = true
         this.xhr.responseType = 'blob'
         this.xhr.onreadystatechange = () => {
             if (this.xhr.readyState == XMLHttpRequest.DONE && this.xhr.status == 200)
@@ -50,9 +51,12 @@ export default class Image extends Component
     {
         const attributes = {}
 
-        for(let prop in props)
+        for(let prop in ATTRIBUTES)
         {
-            attributes[prop] = props[prop]
+            if(props[prop])
+            {
+                attributes[prop] = props[prop]
+            }
         }
 
         return attributes

@@ -1,5 +1,9 @@
 @import "~vars";
 
+.MainJiraWindow {
+    margin-top: $spacing-normal;
+}
+
 .LoginForm {
 
 }
@@ -44,8 +48,42 @@
     color: rgba($color-black, .5);
 }
 
+.FieldLabel {
+    font-size: $font-size-small;
+}
+
 .IssueNameOnIssuePage {
     border: none;
+}
+
+.Ago {
+    color: $color-black;
+    font-weight: bold;
+    display: block;
+    margin: 0 0 $spacing-normal;
+}
+
+.AgoLabel {
+    display: block;
+}
+
+.IssueMeta {
+    font-size: $font-size-small;
+    b {
+        font-size: $font-size-tiny;
+        color: $color-dark-gray;
+    }
+    hr {
+        margin: $spacing-normal 0;
+        border: 0;
+    }
+}
+
+.IssueMetaIcons {
+    margin-bottom: $spacing-normal;
+    i {
+        cursor: pointer;
+    }
 }
 
 .Attachments {
@@ -59,6 +97,10 @@
     max-height: 35vh;
     overflow: hidden;
     overflow-y: scroll;
+    box-shadow: inset 2px 2px 9px 0 rgba(0, 0, 0, .15);
+    background: $color-light-gray;
+    padding: $spacing-small 0;
+    text-align: center;
 }
 
 .AttachmentBox {
@@ -79,4 +121,49 @@
     &:hover {
         color: $color-black;
     }
+}
+
+.BackLink {
+    margin: $spacing-normal 0;
+}
+
+.IssuePrStatus {
+    margin: 0 0 0 1rem;
+    border: 1px solid $color-black;
+    padding: 5px 7px;
+    border-radius: 3px;
+}
+
+.DevStatus {
+    margin-top: $spacing-normal;
+}
+
+:global {
+    .IssueOpen {
+        color: purple;
+        border-color: purple;
+    }
+
+    .IssueMerged {
+        color: $color-green;
+        border-color: $color-green;
+    }
+}
+
+.PullRequest {
+    display: flex;
+}
+
+.PRInfo {
+    margin-left: $spacing-small;
+}
+
+.PRTitle {
+    font-size: $font-size-small;
+    font-weight: bold;
+}
+
+.PRMeta {
+    margin-top: $spacing-tiny;
+    font-size: $font-size-tiny;
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link }             from 'react-router'
 import { Button, Row, Col,
-         Input,
+         Input, Alert,
          Spin, Icon, Menu } from 'antd'
 
 import config               from 'config'
@@ -17,6 +17,8 @@ export default class Jira extends Component
     constructor(props)
     {
         super(props)
+        console.log('Reconstructing Jira')
+        console.log(this.state)
         this.resetState(false)
     }
 
@@ -34,6 +36,7 @@ export default class Jira extends Component
             authorized: false,
             issues: [],
             renderKey: 0,
+            lastIssuesCommand: null,
         }
         this.CheckAuthentication = false
         this.MyIssues = false
@@ -46,22 +49,31 @@ export default class Jira extends Component
         }
     }
 
-    loadMyIssues()
+    loadIssuesCommandToState(issuesCommand)
     {
-        if(!this.state.authorized) return false
-        const Issues = this.MyIssues ?
-                        this.MyIssues :
-                        new MyIssues(   config.jira.baseUrl,
-                                        this.state.username,
-                                        this.state.password )
         this.setState(Object.assign({}, this.state, { issuesLoading: true }))
-        Issues.execute().then(issues => {
+        issuesCommand.execute().then(issues => {
             this.setState(Object.assign({}, this.state, {
                 issues,
                 issuesLoading: false,
                 renderKey: this.state.renderKey++,
+                lastIssuesCommand: issuesCommand,
             }))
         })
+    }
+
+    reloadIssues()
+    {
+        if(this.state.lastIssuesCommand)
+        {
+            this.loadIssuesCommandToState(this.state.lastIssuesCommand)
+        }
+    }
+
+    loadMyIssues()
+    {
+        const Issues = new MyIssues()
+        this.loadIssuesCommandToState(Issues)
     }
 
     saveCredentials()
@@ -81,9 +93,7 @@ export default class Jira extends Component
             authorized: false,
             authLoading: true
         }))
-        const CheckAuth = this.CheckAuthentication ?
-                            this.CheckAuthentication :
-                            new CheckAuthentication(config.jira.baseUrl,
+        const CheckAuth = new CheckAuthentication(config.jira.baseUrl,
                                                     username, password )
         CheckAuth
         .execute()
@@ -138,14 +148,24 @@ export default class Jira extends Component
         )
     }
 
+    childrenWithProps(props)
+    {
+        return React.Children.map(this.props.children, child => {
+            return React.cloneElement(child, props)
+        })
+    }
+
     render()
     {
         const issues = this.state.issues
         const username = this.state.username
         const password = this.state.password
         const loading = this.state.issuesLoading
+        const authorized = this.state.authorized
         const credentialsForm = this.credentialsForm()
         const renderKey = this.state.renderKey
+        const reloadFunction = this.reloadIssues.bind(this)
+        const children = this.childrenWithProps({issues, loading, reloadFunction, renderKey})
         return (
             <div>
                 <Row gutter={16}>
@@ -158,12 +178,11 @@ export default class Jira extends Component
                         {credentialsForm}
                     </Col>
                 </Row>
-                <div>
-                    <h2>Your Issues</h2>
-                    { loading ?
-                        <Spin />
+                <div className={styles.MainJiraWindow}>
+                    { authorized ?
+                        children
                     :
-                        <IssuesList renderKey={renderKey} issues={issues} reloadFunction={this.loadMyIssues.bind(this)} />
+                        <Alert message="You are not logged in." showIcon type="info" />
                     }
                 </div>
             </div>
