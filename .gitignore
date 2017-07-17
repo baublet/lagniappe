@@ -6,6 +6,9 @@ app/dependencies.js
 app/routes.js
 app/menu.js
 
+app/components/Footer/index.js
+app/components/Header/index.js
+
 # Logs
 *.log
 
