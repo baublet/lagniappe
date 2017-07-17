@@ -13,6 +13,7 @@ import DocumentationPage from 'lagniappe/components/Documentation/Page'
 import Jira              from 'lagniappe/components/Jira'
 import Browse            from 'lagniappe/components/Jira/Browse'
 import IssuePage         from 'lagniappe/components/Jira/IssuePage'
+import Valet             from 'lagniappe/components/Valet'
 
 export default (
   <Route path="/" component={App}>
@@ -28,6 +29,7 @@ export default (
         <IndexRoute component={Git} />
         <Route path="leaderboard" component={Leaderboard} />
     </Route>
+    <Route path="/valet" component={Valet} />
     <Route path="/docs">
         <IndexRoute component={Documentation} />
         <Route path="/docs/*" component={DocumentationPage} />
