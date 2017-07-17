@@ -9,30 +9,36 @@ const LayoutHeader = Layout.Header
 
 export default class Header extends Component {
 
-    internetStatus() {
-        const type = this.props.watchers.internet_connected ? "link" : "disconnect"
-        const title = this.props.watchers.internet_connected ? "You are connected to the internet" : "You have no internet connectivity"
-        return (
-            <Tooltip placement="bottomRight" title={title}>
-                <Icon type={type} />
-            </Tooltip>
-        )
-    }
-
-    render() {
-        return (
-            <LayoutHeader className={styles.header}>
+    renderCustomHeader()
+    {
+        const props = this.props
+        try {
+            const CustomHeader = require('components/Header')
+            return <CustomHeader {...props} />
+        } catch(e) {
+            if(!e.message.includes('Cannot find module "components/Header"'))
+            {
+                console.error(e)
+            }
+            return (
                 <Row>
                     <Col span={8}>
                         <Link to="/" className="header__logo">langiappe</Link>
                     </Col>
                     <Col span={16} className={styles.devopsHealth}>
-                        {this.internetStatus()}
                         <Link to="/config">
                             <Icon type="setting" />
                         </Link>
                     </Col>
                 </Row>
+            )
+        }
+    }
+
+    render() {
+        return (
+            <LayoutHeader className={styles.header}>
+                {this.renderCustomHeader()}
             </LayoutHeader>
         )
     }
