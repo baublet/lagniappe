@@ -3,7 +3,6 @@ import { Link }             from 'react-router'
 import { Button, Alert, Row,
          Tooltip, Spin,
          Col, Icon, Table } from 'antd'
-import open                 from 'open'
 
 import styles               from './Jira.scss'
 import config               from 'config'
@@ -11,36 +10,11 @@ import config               from 'config'
 import IssueInfo            from 'lagniappe/commands/Jira/IssueInfo'
 import nl2br                from 'lagniappe/utils/nl2br'
 import timeSince            from 'lagniappe/utils/timeSince'
-
-import Image                from 'lagniappe/components/Image'
+import Attachments          from 'lagniappe/components/Jira/Attachments'
 import PullRequests         from 'lagniappe/components/Jira/PullRequests'
 
 export default class Issue extends Component
 {
-    constructor(props)
-    {
-        super(props)
-        this.auth = 'Basic ' + btoa(localStorage.getItem('jira-username') + ':' +
-                                    localStorage.getItem('jira-password'))
-    }
-
-    renderAttachments()
-    {
-        const attachments = this.props.data.fields.attachment
-        const auth = this.auth
-        return attachments.map(attachment => {
-            return attachment.mimeType.indexOf('image') > -1 ?
-                    <div className={styles.AttachmentBox} key={attachment.id}
-                        onClick={() => { open(attachment.content) }}>
-                        <Image src={attachment.thumbnail} headers={{Authorization: auth}} />
-                        <div className={styles.AttachmentAttribution}>
-                            by {attachment.author.displayName}<br />
-                            {timeSince(attachment.created)} ago
-                        </div>
-                    </div>
-                    : false
-        })
-    }
 
     renderBasics()
     {
@@ -50,7 +24,6 @@ export default class Issue extends Component
         const creator = this.props.data.fields.creator
         const assignee = this.props.data.fields.assignee
         const description = nl2br(this.props.data.fields.description)
-        const auth = this.auth
 
         return(
             <Row gutter={16}>
@@ -94,10 +67,10 @@ export default class Issue extends Component
         const key = this.props.data.key
         const id = this.props.data.id
         const summary = this.props.data.fields.summary
+        const attachments = this.props.data.fields.attachment
         const attachmentCount = this.props.data.fields.attachment.length
 
         const renderedBasics = this.renderBasics()
-        const renderedAttachments = this.renderAttachments()
 
         const reloadFunction = this.props.reloadFunction
 
@@ -116,9 +89,7 @@ export default class Issue extends Component
                 { attachmentCount > 0 ?
                     <div className={styles.Attachments}>
                         <h4 className={styles.FieldLabel}>Attachments</h4>
-                        <div className={styles.AttachmentsInnerScroller}>
-                            {renderedAttachments}
-                        </div>
+                        <Attachments attachments={attachments} />
                     </div>
                 : false }
                 <PullRequests id={id} />

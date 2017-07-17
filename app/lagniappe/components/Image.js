@@ -12,18 +12,31 @@ export default class Image extends Component
         super(props)
         this.state = {
             loading: true,
-            image: false
+            image: false,
+            src: props.src,
         }
     }
 
     componentDidMount()
     {
-        const url = this.props.src
-        const headers = this.props.headers
+        this.loadImage(this.props)
+    }
+
+    componentWillReceiveProps(nextProps)
+    {
+        if(this.props.src !== nextProps.src)
+            this.loadImage(nextProps)
+    }
+
+    loadImage(props)
+    {
+        const url = props.src
+        const headers = props.headers
 
         this.setState({
             loading: true,
             image: false,
+            src: url,
         })
 
         this.xhr = new XMLHttpRequest()
@@ -35,6 +48,7 @@ export default class Image extends Component
                 this.setState({
                     loading: false,
                     image: URL.createObjectURL(this.xhr.response),
+                    src: url,
                 })
             }
         }
