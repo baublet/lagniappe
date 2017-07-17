@@ -1,0 +1,15 @@
+@import "~vars";
+
+
+.devopsHealth {
+    text-align: right;
+    a {
+        margin: 0 $spacing-normal;
+        &:first-child {
+            margin-left: 0;
+        }
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}

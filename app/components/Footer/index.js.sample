@@ -1,0 +1,9 @@
+import React, { Component } from 'react'
+
+export default class Footer extends Component
+{
+    render()
+    {
+        return <p>This is a custom footer for your application.</p>
+    }
+}
