@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { Spin, Tag, Row,
-         Col, Table, Icon
+         Col, Table, Icon,
+         Button
                           } from 'antd'
 
 import Status               from 'lagniappe/commands/Valet/Status'
+import Domain               from 'lagniappe/commands/Valet/Domain'
 
 import styles               from './Valet.scss'
 
@@ -39,38 +41,47 @@ export default class Valet extends Component
     loadValetInformation()
     {
         this.setState(Object.assign({}, this.state, {
-            loading: true
+            loading: true,
+            domain: null,
+            status: this.status.slice(0),
+            paths: [],
+            links: [],
         }))
         const statusCommand = new Status()
         statusCommand.execute(this.status.slice(0)).then((status) => {
             this.setState(Object.assign({}, this.state, {
-                loading: false,
                 status,
             }))
         })
+
+        const domainCommand = new Domain()
+        domainCommand.execute(this.status.slice(0)).then((domain) => {
+            this.setState(Object.assign({}, this.state, {
+                domain,
+                loading: false,
+            }))
+        })
+
+
     }
 
     renderStatus()
     {
         const serviceStatus = this.state.status
-        console.log(serviceStatus)
         return (
             <div>
                 <h2>Status</h2>
-                <ul>
                 {serviceStatus.map(service => {
-                    console.log(service)
                     return (
-                        <li key={service.service}>
+                        <Row key={service.service} className="t-spacing">
                             <strong>{service.niceName}:</strong>
                             &nbsp;
                             <Tag color={service.status ? 'green' : 'red'} className={styles.ServiceStatusTag}>
                                 {service.status ? 'On' : 'Off'}
                             </Tag>
-                        </li>
+                        </Row>
                     )
                 })}
-                </ul>
             </div>
         )
     }
@@ -93,12 +104,15 @@ export default class Valet extends Component
                     </Col>
                     <Col span={12}>
                         {!domain ? false :
-                        <p><strong>Active</strong> on <Tag>.{domain}</Tag></p>
+                        <p><strong>Domain:</strong> <Tag>.{domain}</Tag></p>
                     }
                     </Col>
                 </Row>
+                <Row className="t-spacing--small">
+                    <Button onClick={this.loadValetInformation.bind(this)} icon="retweet" size="small">Reload</Button>
+                </Row>
                 { loading ? <Spin /> :
-                    <Row gutter={16}>
+                    <Row gutter={16} className="t-spacing--large">
                         <Col span={16}>
                             <h2>Links</h2>
                         </Col>
