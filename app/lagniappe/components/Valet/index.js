@@ -1,13 +1,20 @@
 import React, { Component } from 'react'
 import { Spin, Tag, Row,
          Col, Table, Icon,
-         Button
-                          } from 'antd'
+         Button, Menu,
+         Dropdown         } from 'antd'
+
+import open                 from 'open'
 
 import Status               from 'lagniappe/commands/Valet/Status'
 import Domain               from 'lagniappe/commands/Valet/Domain'
+import Links                from 'lagniappe/commands/Valet/Links'
 
 import styles               from './Valet.scss'
+
+const MenuItem = Menu.Item
+const MenuDivider = Menu.Divider
+const DropdownButton = Dropdown.Button
 
 export default class Valet extends Component
 {
@@ -47,6 +54,7 @@ export default class Valet extends Component
             paths: [],
             links: [],
         }))
+
         const statusCommand = new Status()
         statusCommand.execute(this.status.slice(0)).then((status) => {
             this.setState(Object.assign({}, this.state, {
@@ -55,14 +63,19 @@ export default class Valet extends Component
         })
 
         const domainCommand = new Domain()
-        domainCommand.execute(this.status.slice(0)).then((domain) => {
+        domainCommand.execute().then(domain => {
             this.setState(Object.assign({}, this.state, {
                 domain,
-                loading: false,
             }))
         })
 
-
+        const linksCommand = new Links()
+        linksCommand.execute().then(links => {
+            this.setState(Object.assign({}, this.state, {
+                links,
+                loading: false,
+            }))
+        })
     }
 
     renderStatus()
@@ -86,13 +99,58 @@ export default class Valet extends Component
         )
     }
 
+    renderSiteActions(site)
+    {
+        const MenuClickHandler = e => {
+            console.log(e)
+        }
+        const ActionsMenu = (
+            <Menu onClick={MenuClickHandler}>
+                <MenuItem key="share"><Icon type="cloud" /> Share</MenuItem>
+                <MenuItem key={site.secure ? 'unsecure' : 'secure'}>
+                    {site.secure ? <Icon type="unlock" /> : <Icon type="lock" />}
+                    {site.secure ? ' Unsecure' : ' Secure'}
+                </MenuItem>
+                <MenuDivider />
+                <MenuItem key="unlink"><Icon type="close"/> Unlink</MenuItem>
+            </Menu>
+        )
+        return (
+            <Dropdown overlay={ActionsMenu}>
+                <Button>
+                    Actions <Icon type="down" />
+                </Button>
+            </Dropdown>
+        )
+    }
+
+    renderLinks()
+    {
+        let i = 0
+        let domain = this.state.domain
+        return this.state.links.map(link => {
+            return (
+                <Row key={'valetLink' + i++}>
+                    <Col span={18}>
+                        <b><a onClick={() => open(link.url)}>{link.site}</a></b>
+                        <small>.{domain}</small>
+                        <p className={styles.Path}>{link.path}</p>
+                    </Col>
+                    <Col span={6}>
+                        {this.renderSiteActions(link)}
+                    </Col>
+                </Row>
+            )
+        })
+    }
+
     render()
     {
         const loading = this.state.loading
-        const links = this.state.links
         const domain = this.state.domain
         const paths = this.state.paths
         const status = this.renderStatus()
+        const links = this.renderLinks()
 
         return (
             <div>
@@ -104,7 +162,9 @@ export default class Valet extends Component
                     </Col>
                     <Col span={12}>
                         {!domain ? false :
-                        <p><strong>Domain:</strong> <Tag>.{domain}</Tag></p>
+                        <div className={styles.Domain}>
+                            <strong>Domain:</strong> <Tag>.{domain}</Tag>
+                        </div>
                     }
                     </Col>
                 </Row>
@@ -115,6 +175,7 @@ export default class Valet extends Component
                     <Row gutter={16} className="t-spacing--large">
                         <Col span={16}>
                             <h2>Links</h2>
+                            {links}
                         </Col>
                         <Col span={8}>
                             {status}
