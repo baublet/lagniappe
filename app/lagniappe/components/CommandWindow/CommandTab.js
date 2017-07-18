@@ -3,6 +3,7 @@ import styles from './CommandWindow.scss'
 import { store } from 'index.js'
 import { focusWindow, removeWindow } from 'lagniappe/actions/command'
 import config from 'config'
+import { Spin } from 'antd'
 
 export default class CommandTab extends Component {
 
@@ -44,15 +45,20 @@ export default class CommandTab extends Component {
 
     render()
     {
-        const active = this.props.active ? styles.tabLabelActive : styles.tabLabelInactive
-        const finished = this.props.finished ? styles.finished : ''
-        const className = styles.tabLabel + ' ' + active + ' ' + finished
+        const finished = !!this.props.finished
+        const active = this.props.active
+        const activeClass = active ? styles.tabLabelActive : styles.tabLabelInactive
+        const finishedClass = this.props.finished ? styles.finished : ''
+        const className = styles.tabLabel + ' ' + activeClass + ' ' + finishedClass
         const title = this.props.title
         const windowId = this.props.id
         return (
             <div className={className}>
                 {active ? <a className={styles.labelRemove} href="#" onClick={this.removeMe.bind(this)}>x</a> : ''}
-                <span className={styles.labelText} onClick={this.focusMe.bind(this)} onMouseDown={this.handleMouseDown.bind(this)}>{title}</span>
+                <span className={styles.labelText} onClick={this.focusMe.bind(this)} onMouseDown={this.handleMouseDown.bind(this)}>
+                    {!finished ? <Spin size="small" className="r-spacing--small" /> : false}
+                    {title}
+                </span>
             </div>
         )
     }
