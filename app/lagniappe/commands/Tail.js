@@ -11,7 +11,7 @@ export default class Tail
             args: ['-n40', '-f', 'package.json']
         }]
         const window = new CommandWindow('Multiple Commands')
-        const process = new CommandProcess(command, window.callback)
+        const process = new CommandProcess(command, window.callback, window.id)
         process.execute()
     }
 

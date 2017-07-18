@@ -25,7 +25,7 @@ export default class SequenceTest
         }]
 
         const window = new CommandWindow('Multiple Commands')
-        const sequence = new CommandSequence(s, window.callback)
+        const sequence = new CommandSequence(s, window.callback, window.id)
 
         return sequence.execute()
     }

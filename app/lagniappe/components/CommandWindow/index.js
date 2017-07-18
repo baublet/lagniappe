@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM             from 'react-dom'
 import styles               from './CommandWindow.scss'
 import config               from 'config'
+import { Button }           from 'antd'
 
 export default class CommandWindow extends Component
 {
@@ -18,16 +19,26 @@ export default class CommandWindow extends Component
         this.scrollToBottom()
     }
 
-    componentDidUpdate()
+    componentDidUpdate(prevProps, prevState)
     {
-        this.scrollToBottom()
+        // Only scroll to the bottom if new lines were added
+        if(this.props.lines.length > prevProps.lines.length)
+            this.scrollToBottom()
     }
 
-    handleClick(e)
+    handleContext(e)
     {
         console.log(e)
         console.log(config.processes)
         e.preventDefault()
+    }
+
+    handleKill()
+    {
+        if(config.processes[this.props.id])
+        {
+            config.processes[this.props.id].kill()
+        }
     }
 
     renderLines()
@@ -43,9 +54,10 @@ export default class CommandWindow extends Component
         const title = this.props.title
         const lines = this.renderLines()
         const windowId = this.props.id
-        const clickHandler = this.handleClick.bind(this)
+        const contextHandler = this.handleContext
+
         return (
-            <div id={windowId} className={styles.commandWindow} onContextMenu={clickHandler}>
+            <div id={windowId} className={styles.commandWindow} onContextMenu={contextHandler.bind(this)}>
                 <ol className={styles.lines}>
                     {lines}
                 </ol>

@@ -12,7 +12,7 @@ export default class DockerImageInfo
             options: {},
         }]
         const window = new CommandWindow('Docker Image Info')
-        const process = new CommandProcess(command, window.callback)
+        const process = new CommandProcess(command, window.callback, window.id)
         return process.execute()
     }
 

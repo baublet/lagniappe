@@ -12,7 +12,7 @@ export default class Status
             options: { cwd }
         }]
         const window = new CommandWindow('git status')
-        const process = new CommandProcess(command, window.callback)
+        const process = new CommandProcess(command, window.callback, window.id)
         return process.execute()
     }
 

@@ -40,7 +40,10 @@ export default class CommandProcess
 
     kill()
     {
-        this.processes.map(process => process.kill('SIGINT'))
+        console.log(this.processes)
+        this.processes.forEach(process => {
+            process.kill()
+        })
     }
 
     execute()
@@ -55,7 +58,7 @@ export default class CommandProcess
 
                 const process = spawn(command.command, command.args, command.options)
                 const signature = command.id ? command.id : command.command
-                
+
                 this.processes.push(process)
 
                 process.stdout.on('data', data => {

@@ -5,15 +5,24 @@ import { Link } from 'react-router'
 import styles from "./Commands.scss"
 import CommandWindow from '../CommandWindow'
 import CommandTab from '../CommandWindow/CommandTab'
+import { Button }           from 'antd'
 
 class Commands extends Component
 {
+
+    handleKill()
+    {
+        if(config.processes[this.props.id])
+        {
+            config.processes[this.props.id].kill()
+        }
+    }
 
     renderWindows()
     {
         if(!this.props.commands || !this.props.commands.windows.length) return <strong></strong>
         return this.props.commands.windows.map(window => {
-            return <CommandWindow title={window.windowTitle} lines={window.lines} key={window.id} active={window.active} />
+            return <CommandWindow title={window.windowTitle} lines={window.lines} id={window.id} key={window.id} active={window.active} finished={window.finished} />
         })
     }
 

@@ -3,9 +3,10 @@ import styles from './CommandWindow.scss'
 import { store } from 'index.js'
 import { focusWindow, removeWindow } from 'lagniappe/actions/command'
 import config from 'config'
-import { Spin } from 'antd'
+import { Spin, Icon } from 'antd'
 
-export default class CommandTab extends Component {
+export default class CommandTab extends Component
+{
 
     handleMouseDown(e)
     {
@@ -24,7 +25,7 @@ export default class CommandTab extends Component {
 
     focusMe(e)
     {
-        if(this.props.active) return
+        if(this.props.active) return null
         store.dispatch(focusWindow(this.props.id))
     }
 
@@ -40,7 +41,16 @@ export default class CommandTab extends Component {
             config.processes[id].kill()
             delete config.processes[id]
         }
-        console.log(config.processes)
+    }
+
+    handleKill()
+    {
+        const id = this.props.id
+        const active = this.props.active
+        if(active && config.processes[id])
+        {
+            config.processes[id].kill()
+        }
     }
 
     render()
@@ -52,11 +62,13 @@ export default class CommandTab extends Component {
         const className = styles.tabLabel + ' ' + activeClass + ' ' + finishedClass
         const title = this.props.title
         const windowId = this.props.id
+        const killHandler = active ? this.handleKill.bind(this) : () => {}
+
         return (
             <div className={className}>
-                {active ? <a className={styles.labelRemove} href="#" onClick={this.removeMe.bind(this)}>x</a> : ''}
+                {active ? <a className={styles.labelRemove} href="#" onClick={this.removeMe.bind(this)}><Icon type="close" /></a> : ''}
                 <span className={styles.labelText} onClick={this.focusMe.bind(this)} onMouseDown={this.handleMouseDown.bind(this)}>
-                    {!finished ? <Spin size="small" className="r-spacing--small" /> : false}
+                    {!finished ? <Spin size="small" className="r-spacing--small" onMouseDown={killHandler} /> : false}
                     {title}
                 </span>
             </div>

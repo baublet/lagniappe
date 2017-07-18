@@ -12,7 +12,7 @@ export default class DockerImagePrune
             options: { cwd },
         }]
         const window = new CommandWindow('Prune Docker Images')
-        const process = new CommandProcess(command, window.callback)
+        const process = new CommandProcess(command, window.callback, window.id)
         return process.execute()
     }
 

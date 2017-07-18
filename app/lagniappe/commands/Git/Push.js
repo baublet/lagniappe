@@ -13,7 +13,7 @@ export default class Push
                 options: { cwd }
             }]
             const window = new CommandWindow('git push')
-            const process = new CommandProcess(command, window.callback)
+            const process = new CommandProcess(command, window.callback, window.id)
             process.execute().then(()  => resolve() )
                              .catch(() => reject() )
         })

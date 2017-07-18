@@ -12,7 +12,7 @@ export default class Prune
             options: { cwd }
         }]
         const window = new CommandWindow('prune containers')
-        const process = new CommandProcess(command, window.callback)
+        const process = new CommandProcess(command, window.callback, window.id)
         return process.execute()
     }
 

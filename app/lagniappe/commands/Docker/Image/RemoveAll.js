@@ -12,7 +12,7 @@ export default class DockerImageRemoveAll
             options: { cwd },
         }]
         const window = new CommandWindow('Clear Docker Images')
-        const process = new CommandProcess(command, window.callback)
+        const process = new CommandProcess(command, window.callback, window.id)
         return process.execute()
     }
 

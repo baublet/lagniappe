@@ -13,7 +13,7 @@ export default class ResetHardWithMaster
                 options: { cwd }
             }]
             const window = new CommandWindow('git reset --hard origin/master')
-            const process = new CommandProcess(command, window.callback)
+            const process = new CommandProcess(command, window.callback, window.id)
             process.execute().then(()  => { resolve() })
                              .catch(() => { reject() })
         })

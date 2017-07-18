@@ -13,4 +13,5 @@
 .tabsContainer {
     display: flex;
     overflow: hidden;
+    flex-shrink: 0;
 }

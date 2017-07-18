@@ -12,7 +12,7 @@ export default class Share
             options: { cwd }
         }]
         const window = new CommandWindow('valet share')
-        const process = new CommandProcess(command, window.callback)
+        const process = new CommandProcess(command, window.callback, window.id)
         return process.execute()
     }
 

@@ -13,7 +13,7 @@ export default class Revert
                 options: { cwd }
             }]
             const window = new CommandWindow('git revert')
-            const process = new CommandProcess(command, window.callback)
+            const process = new CommandProcess(command, window.callback, window.id)
             process.execute().then(()  => { resolve() })
                              .catch(() => { reject() })
         })
