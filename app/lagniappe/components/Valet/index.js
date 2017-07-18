@@ -9,6 +9,7 @@ import open                 from 'open'
 import Status               from 'lagniappe/commands/Valet/Status'
 import Domain               from 'lagniappe/commands/Valet/Domain'
 import Links                from 'lagniappe/commands/Valet/Links'
+import Share                from 'lagniappe/commands/Valet/Share'
 
 import styles               from './Valet.scss'
 
@@ -55,24 +56,34 @@ export default class Valet extends Component
             links: [],
         }))
 
+        const promises = []
+
         const statusCommand = new Status()
-        statusCommand.execute(this.status.slice(0)).then((status) => {
+        promises.push(statusCommand.execute(this.status.slice(0)).then((status) => {
             this.setState(Object.assign({}, this.state, {
                 status,
             }))
-        })
+        }))
 
         const domainCommand = new Domain()
-        domainCommand.execute().then(domain => {
+        promises.push(domainCommand.execute().then(domain => {
             this.setState(Object.assign({}, this.state, {
                 domain,
             }))
-        })
+        }))
 
         const linksCommand = new Links()
-        linksCommand.execute().then(links => {
+        promises.push(linksCommand.execute().then(links => {
             this.setState(Object.assign({}, this.state, {
                 links,
+            }))
+        }))
+
+        // This waits for all of the above promises, which we push into the array
+        // called "promises", resolve. Once they resolve, we set the state as no
+        // longer loading.
+        Promise.all(promises).then(() => {
+            this.setState(Object.assign({}, this.state, {
                 loading: false,
             }))
         })
@@ -103,10 +114,25 @@ export default class Valet extends Component
     {
         const MenuClickHandler = e => {
             console.log(e)
+            switch(e.key)
+            {
+                case 'share':
+                    const shareCommand = new Share()
+                    shareCommand.execute(site.path)
+                    break
+                case 'secure':
+                    break
+                case 'unsecure':
+                    break
+                case 'unlink':
+                    break
+            }
         }
         const ActionsMenu = (
             <Menu onClick={MenuClickHandler}>
-                <MenuItem key="share"><Icon type="cloud" /> Share</MenuItem>
+                {site.secure ? false :
+                    <MenuItem key="share"><Icon type="cloud" /> Share</MenuItem>
+                }
                 <MenuItem key={site.secure ? 'unsecure' : 'secure'}>
                     {site.secure ? <Icon type="unlock" /> : <Icon type="lock" />}
                     {site.secure ? ' Unsecure' : ' Secure'}
@@ -162,7 +188,7 @@ export default class Valet extends Component
                     </Col>
                     <Col span={12}>
                         {!domain ? false :
-                        <div className={styles.Domain}>
+                        <div className={styles.Domain + ' float--right'}>
                             <strong>Domain:</strong> <Tag>.{domain}</Tag>
                         </div>
                     }
@@ -174,8 +200,14 @@ export default class Valet extends Component
                 { loading ? <Spin /> :
                     <Row gutter={16} className="t-spacing--large">
                         <Col span={16}>
-                            <h2>Links</h2>
-                            {links}
+                            { !links.length ?
+                                <Alert message="No links, yet." showIcon type="info" />
+                            :
+                                <div>
+                                    <h2>Links</h2>
+                                    {links}
+                                </div>
+                            }
                         </Col>
                         <Col span={8}>
                             {status}
