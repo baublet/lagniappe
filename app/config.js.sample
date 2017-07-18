@@ -10,7 +10,7 @@ const config = {
         frame: false,
         resizable: true,
         transparent: false,
-    }
+    },
 
     // Jira integration configuration. Leave blank if you're not using Jira
     jira: {
