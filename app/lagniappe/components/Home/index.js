@@ -18,22 +18,26 @@ const ButtonGroup = Button.Group
 export default class Home extends Component
 {
 
-    testCommand() {
+    testCommand()
+    {
         let command = new Command()
         command.execute()
     }
 
-    testMultipleCommands() {
+    testMultipleCommands()
+    {
         let command = new SequenceTest()
         command.execute()
     }
 
-    testTail() {
+    testTail()
+    {
         let command = new Tail('package.json')
         command.execute()
     }
 
-    render() {
+    render()
+    {
         return (
             <Panel type="fullWidth">
                 <PanelHeading>Development Environment</PanelHeading>
