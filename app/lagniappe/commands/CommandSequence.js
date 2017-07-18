@@ -1,5 +1,7 @@
 import CommandProcess from './CommandProcess'
-import CommandWindow from './CommandWindow'
+import CommandWindow  from './CommandWindow'
+import config         from 'config'
+import guid           from 'lagniappe/utils/guid'
 
 // This class accepts an array of CommandSequence and executes them one after
 // another. This allows you to run commands in a similar fashion to using the
@@ -13,15 +15,17 @@ import CommandWindow from './CommandWindow'
 export default class CommandSequence
 {
 
-    constructor(commands, callback = null)
+    constructor(commands, callback = null, id = null)
     {
         this.commands = commands.length ? commands : [commands]
         this.execute = this.execute.bind(this)
+        this.id = id ? id : guid()
 
         // This turns the array you pass in into individual CommandProcess objects
         // if you pass in a callback. Otherwise, this class will assume that you're
         // handling the callback stuff yourself
-        if(typeof callback == 'function') {
+        if(typeof callback == 'function')
+        {
             this.callback = callback
             let processedCommands = []
             this.commands.forEach(command => {
@@ -31,13 +35,24 @@ export default class CommandSequence
         }
     }
 
+    kill()
+    {
+        this.commands.forEach(command => {
+            command.kill()
+        })
+    }
+
     execute()
     {
+        config.processes[this.id] = this
+
         let promise = Promise.resolve()
+
         this.commands.forEach(command => {
             // Add each sequence a promise chain
             promise = promise.then(command.execute)
         })
+
         return promise
     }
 

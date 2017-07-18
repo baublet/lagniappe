@@ -1,5 +1,5 @@
 import CommandProcess from './CommandProcess'
-import CommandWindow from './CommandWindow'
+import CommandWindow  from './CommandWindow'
 
 export default class Command
 {
@@ -17,7 +17,7 @@ export default class Command
             args: ['-lha']
         }
         const window = new CommandWindow('Test Command')
-        const process = new CommandProcess(command, window.callback)
+        const process = new CommandProcess(command, window.callback, window.id)
         process.execute()
     }
 

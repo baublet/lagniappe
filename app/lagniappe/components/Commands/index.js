@@ -21,7 +21,7 @@ class Commands extends Component
     {
         if(!this.props.commands || !this.props.commands.windows.length) return <strong></strong>
         return this.props.commands.windows.map(window => {
-            return <CommandTab title={window.windowTitle} key={'tab-' + window.id} id={window.id} active={window.active} finished={window.finished} />
+            return <CommandTab title={window.windowTitle} key={window.id} id={window.id} active={window.active} finished={window.finished} />
         })
     }
 

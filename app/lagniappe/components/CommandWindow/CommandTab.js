@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import styles from './CommandWindow.scss'
 import { store } from 'index.js'
 import { focusWindow, removeWindow } from 'lagniappe/actions/command'
+import config from 'config'
 
 export default class CommandTab extends Component {
 
-    handleMouseDown(e) {
+    handleMouseDown(e)
+    {
         switch(e.button) {
             case 0:
                 return this.focusMe(e)
@@ -19,22 +21,34 @@ export default class CommandTab extends Component {
         }
     }
 
-    focusMe(e) {
+    focusMe(e)
+    {
         if(this.props.active) return
         store.dispatch(focusWindow(this.props.id))
     }
 
-    removeMe(e) {
+    removeMe(e)
+    {
+        const id = this.props.id
         e.preventDefault()
-        store.dispatch(removeWindow(this.props.id))
+        store.dispatch(removeWindow(id))
+        // Kill and remove any processes related to this window
+        if(config.processes[id])
+        {
+            console.log('Killing all processes associated with window ID ' + id)
+            config.processes[id].kill()
+            delete config.processes[id]
+        }
+        console.log(config.processes)
     }
 
-    render() {
+    render()
+    {
         const active = this.props.active ? styles.tabLabelActive : styles.tabLabelInactive
         const finished = this.props.finished ? styles.finished : ''
         const className = styles.tabLabel + ' ' + active + ' ' + finished
         const title = this.props.title
-        const windowId = 'window-' + this.props.id
+        const windowId = this.props.id
         return (
             <div className={className}>
                 {active ? <a className={styles.labelRemove} href="#" onClick={this.removeMe.bind(this)}>x</a> : ''}
@@ -42,4 +56,5 @@ export default class CommandTab extends Component {
             </div>
         )
     }
+
 }

@@ -1,4 +1,5 @@
 import { store } from 'index.js'
+import guid      from 'lagniappe/utils/guid'
 import { addWindow, addLines, finishWindow } from 'lagniappe/actions/command'
 
 export default class CommandWindow
@@ -6,7 +7,7 @@ export default class CommandWindow
 
     constructor(title)
     {
-        this.id = this.guid()
+        this.id = guid()
         this.title = title
         store.dispatch( addWindow(this.id, this.title) )
         this.callback = this.callback.bind(this)
@@ -21,22 +22,12 @@ export default class CommandWindow
 
     addLinesToWindow(lines, error)
     {
-        store.dispatch( addLines(this.id, lines, error) )
+        store.dispatch(addLines(this.id, lines, error))
     }
 
     finishWindow()
     {
-        store.dispatch( finishWindow(this.id) )
-    }
-
-    guid() {
-      function s4() {
-        return Math.floor((1 + Math.random()) * 0x10000)
-                   .toString(16)
-                   .substring(1)
-      }
-      return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-        s4() + '-' + s4() + s4() + s4()
+        store.dispatch(finishWindow(this.id))
     }
 
 }

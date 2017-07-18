@@ -7,7 +7,11 @@ import routes                   from 'routes'
 import configureStore           from 'lagniappe/store/configureStore'
 import { LocaleProvider }       from 'antd'
 import enUS                     from 'antd/lib/locale-provider/en_US'
+import config                   from 'config'
 import './app.global.scss'
+
+// Here's where we store our processes so we can kill them later
+config.processes = {}
 
 export const store = configureStore()
 const history = syncHistoryWithStore(hashHistory, store)

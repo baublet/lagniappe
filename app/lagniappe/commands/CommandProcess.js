@@ -1,4 +1,6 @@
 import { spawn } from 'child_process'
+import guid      from 'lagniappe/utils/guid'
+import config    from 'config'
 
 export default class CommandProcess
 {
@@ -27,15 +29,23 @@ export default class CommandProcess
      * }
      */
 
-    constructor(commands, callback)
+    constructor(commands, callback, id = null)
     {
         this.commands = commands.length ? commands : [commands]
         this.callback = callback
         this.execute = this.execute.bind(this)
+        this.id = id ? id : guid()
+        this.processes = []
+    }
+
+    kill()
+    {
+        this.processes.map(process => process.kill('SIGINT'))
     }
 
     execute()
     {
+        config.processes[this.id] = this
         return new Promise((resolve, reject) => {
             let runningCommands = 0
 
@@ -45,6 +55,8 @@ export default class CommandProcess
 
                 const process = spawn(command.command, command.args, command.options)
                 const signature = command.id ? command.id : command.command
+                
+                this.processes.push(process)
 
                 process.stdout.on('data', data => {
                     data = data + ''

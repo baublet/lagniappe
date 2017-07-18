@@ -1,37 +1,51 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import styles from './CommandWindow.scss'
+import ReactDOM             from 'react-dom'
+import styles               from './CommandWindow.scss'
+import config               from 'config'
 
-export default class CommandWindow extends Component {
-
-    scrollToBottom() {
+export default class CommandWindow extends Component
+{
+    scrollToBottom()
+    {
         const node = ReactDOM.findDOMNode(this.consoleBottom)
         // This will be false if we're not currently rendering this window
         if(!node) return
         node.scrollIntoView({behavior: "smooth"})
     }
 
-    componentDidMount() {
+    componentDidMount()
+    {
         this.scrollToBottom()
     }
 
-    componentDidUpdate() {
+    componentDidUpdate()
+    {
         this.scrollToBottom()
     }
 
-    renderLines() {
+    handleClick(e)
+    {
+        console.log(e)
+        console.log(config.processes)
+        e.preventDefault()
+    }
+
+    renderLines()
+    {
         let lines = []
         let i = 0
         return this.props.lines.map( line => <li key={this.props.id + '' + parseInt(i++, 10)} className={styles.line}>{line}</li> )
     }
 
-    render() {
+    render()
+    {
         if(!this.props.active) return false
         const title = this.props.title
         const lines = this.renderLines()
-        const windowId = 'window-' + this.props.id
+        const windowId = this.props.id
+        const clickHandler = this.handleClick.bind(this)
         return (
-            <div id={windowId} className={styles.commandWindow}>
+            <div id={windowId} className={styles.commandWindow} onContextMenu={clickHandler}>
                 <ol className={styles.lines}>
                     {lines}
                 </ol>
