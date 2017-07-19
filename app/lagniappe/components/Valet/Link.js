@@ -37,7 +37,7 @@ export default class Link extends Component
         }
         const ActionsMenu = (
             <Menu onClick={MenuClickHandler}>
-                {site.ssl ? !site.shared :
+                {site.ssl || site.shared ? false :
                     <MenuItem key="share"><Icon type="cloud" /> Share</MenuItem>
                 }
                 <MenuItem key={site.ssl ? 'unsecure' : 'secure'}>
@@ -80,7 +80,7 @@ export default class Link extends Component
                     </Col>
                 </Row>
                 { !shared ? false :
-                  <Alert showIcon message={"Sharing at " + shareUrl} type="info" /> }
+                  <Alert showIcon message={<span>Sharing at <a onClick={() => {open(shareUrl)}}>{shareUrl}</a></span>} type="info" className="t-spacing--small" /> }
             </div>
         )
     }

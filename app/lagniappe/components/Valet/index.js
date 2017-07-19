@@ -6,14 +6,14 @@ import { Spin, Tag, Row,
 
 import open                 from 'open'
 
-import Status               from 'lagniappe/commands/Valet/Status'
 import Domain               from 'lagniappe/commands/Valet/Domain'
 import Links                from 'lagniappe/commands/Valet/Links'
 import Share                from 'lagniappe/commands/Valet/Share'
 
 import styles               from './Valet.scss'
 
-import ValetLink    from 'lagniappe/components/Valet/Link'
+import ValetLink            from 'lagniappe/components/Valet/Link'
+import ValetStatus          from 'lagniappe/components/Valet/Status'
 
 const MenuItem = Menu.Item
 const MenuDivider = Menu.Divider
@@ -26,20 +26,11 @@ export default class Valet extends Component
     {
         super(props)
 
-        // These services make up the core of Laravel Valet
-        this.status = [
-            {service: 'dnsmasq',   info: {}, status: 0, niceName: 'DNS Masq'},
-            {service: 'mariadb',   info: {}, status: 0, niceName: 'MariaDB'},
-            {service: 'nginx',     info: {}, status: 0, niceName: 'NGINX'},
-            {service: 'php\\d\\d', info: {}, status: 0, niceName: 'PHP'},
-        ]
-
         this.state = {
             loading: true,
             links: [],
             domain: null,
             paths: [],
-            status: this.status.slice(0),
             share: {},
         }
     }
@@ -54,20 +45,12 @@ export default class Valet extends Component
         this.setState(Object.assign({}, this.state, {
             loading: true,
             domain: null,
-            status: this.status.slice(0),
             paths: [],
             links: [],
             share: {},
         }))
 
         const promises = []
-
-        const statusCommand = new Status()
-        promises.push(statusCommand.execute(this.status.slice(0)).then((status) => {
-            this.setState(Object.assign({}, this.state, {
-                status,
-            }))
-        }))
 
         const domainCommand = new Domain()
         promises.push(domainCommand.execute().then(domain => {
@@ -91,27 +74,6 @@ export default class Valet extends Component
                 loading: false,
             }))
         })
-    }
-
-    renderStatus()
-    {
-        const serviceStatus = this.state.status
-        return (
-            <div>
-                <h2>Status</h2>
-                {serviceStatus.map(service => {
-                    return (
-                        <Row key={service.service} className="t-spacing">
-                            <strong>{service.niceName}:</strong>
-                            &nbsp;
-                            <Tag color={service.status ? 'green' : 'red'} className={styles.ServiceStatusTag}>
-                                {service.status ? 'On' : 'Off'}
-                            </Tag>
-                        </Row>
-                    )
-                })}
-            </div>
-        )
     }
 
     handleShare(sitePath)
@@ -148,7 +110,6 @@ export default class Valet extends Component
         const loading = this.state.loading
         const domain = this.state.domain
         const paths = this.state.paths
-        const status = this.renderStatus()
         const links = this.renderLinks()
 
         return (
@@ -181,7 +142,7 @@ export default class Valet extends Component
                             }
                         </Col>
                         <Col span={8}>
-                            {status}
+                            <ValetStatus />
                         </Col>
                     </Row>
                 }
