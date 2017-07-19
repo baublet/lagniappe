@@ -9,6 +9,7 @@ import open                 from 'open'
 import Domain               from 'lagniappe/commands/Valet/Domain'
 import Links                from 'lagniappe/commands/Valet/Links'
 import Share                from 'lagniappe/commands/Valet/Share'
+import ValetCommands        from 'lagniappe/commands/Valet'
 
 import styles               from './Valet.scss'
 
@@ -18,6 +19,7 @@ import ValetStatus          from 'lagniappe/components/Valet/Status'
 const MenuItem = Menu.Item
 const MenuDivider = Menu.Divider
 const DropdownButton = Dropdown.Button
+const ButtonGroup = Button.Group
 
 export default class Valet extends Component
 {
@@ -33,6 +35,8 @@ export default class Valet extends Component
             paths: [],
             share: {},
         }
+
+        this.valetCommands = new ValetCommands()
     }
 
     componentDidMount()
@@ -105,19 +109,44 @@ export default class Valet extends Component
         })
     }
 
+    renderActions()
+    {
+        const startHandler = () => {
+            this.valetCommands.start()
+            this.loadValetInformation()
+        }
+        const restartHandler = () => {
+            this.valetCommands.restart()
+            this.loadValetInformation()
+        }
+        const stopHandler = () => {
+            this.valetCommands.stop()
+            this.loadValetInformation()
+        }
+        return (
+            <ButtonGroup>
+                <Button onClick={this.loadValetInformation.bind(this)} icon="retweet" size="small">Reload</Button>
+                <Button onClick={startHandler.bind(this)} icon="play-circle" size="small">Start</Button>
+                <Button onClick={restartHandler.bind(this)} icon="sync" size="small">Restart</Button>
+                <Button onClick={stopHandler.bind(this)} icon="pause-circle" size="small">Stop</Button>
+            </ButtonGroup>
+        )
+    }
+
     render()
     {
         const loading = this.state.loading
         const domain = this.state.domain
         const paths = this.state.paths
         const links = this.renderLinks()
+        const valetActions = this.renderActions()
 
         return (
             <div>
                 <Row gutter={16}>
                     <Col span={12}>
                         <h1>
-                            <Icon type="bar-chart" /> Laravel Valet
+                            <Icon type="car" /> Laravel Valet
                         </h1>
                     </Col>
                     <Col span={12}>
@@ -129,7 +158,7 @@ export default class Valet extends Component
                     </Col>
                 </Row>
                 <Row className="t-spacing--small">
-                    <Button onClick={this.loadValetInformation.bind(this)} icon="retweet" size="small">Reload</Button>
+                    {valetActions}
                 </Row>
                 { loading ? <Spin /> :
                     <Row gutter={16} className="t-spacing--large">
