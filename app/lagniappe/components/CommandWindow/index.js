@@ -3,6 +3,11 @@ import ReactDOM             from 'react-dom'
 import styles               from './CommandWindow.scss'
 import config               from 'config'
 import { Button }           from 'antd'
+import electron             from 'electron'
+import { store }            from 'index.js'
+import { removeWindow }     from 'lagniappe/actions/command'
+
+const ElectronMenu = electron.remote.Menu
 
 export default class CommandWindow extends Component
 {
@@ -26,11 +31,47 @@ export default class CommandWindow extends Component
             this.scrollToBottom()
     }
 
+    contextMenu()
+    {
+        const menu = [{
+                label: 'Copy',
+                role: 'copy',
+            }, {
+                label: 'Paste',
+                role: 'paste',
+            }, {
+                type: 'separator',
+            }, {
+                label: 'Select all',
+                role: 'selectall',
+        }]
+        if(!this.props.finished)
+        {
+            menu.push({type: 'separator'})
+            menu.push({
+                label: 'Stop Command',
+                click: this.handleKill.bind(this)
+            })
+        }
+        menu.push({type: 'separator'})
+        menu.push({
+            label: 'Close Window',
+            click: this.handleRemove.bind(this)
+        })
+        return ElectronMenu.buildFromTemplate(menu)
+    }
+
+    handleRemove()
+    {
+        const id = this.props.id
+        store.dispatch(removeWindow(id))
+        this.handleKill()
+    }
+
     handleContext(e)
     {
-        console.log(e)
-        console.log(config.processes)
         e.preventDefault()
+        this.contextMenu().popup()
     }
 
     handleKill()
@@ -38,6 +79,7 @@ export default class CommandWindow extends Component
         if(config.processes[this.props.id])
         {
             config.processes[this.props.id].kill()
+            delete config.processes[this.props.id]
         }
     }
 
@@ -54,10 +96,10 @@ export default class CommandWindow extends Component
         const title = this.props.title
         const lines = this.renderLines()
         const windowId = this.props.id
-        const contextHandler = this.handleContext
+        const contextHandler = this.handleContext.bind(this)
 
         return (
-            <div id={windowId} className={styles.commandWindow} onContextMenu={contextHandler.bind(this)}>
+            <div id={windowId} className={styles.commandWindow} onContextMenu={contextHandler}>
                 <ol className={styles.lines}>
                     {lines}
                 </ol>

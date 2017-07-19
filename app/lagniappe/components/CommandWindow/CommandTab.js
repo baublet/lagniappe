@@ -1,9 +1,12 @@
-import React, { Component } from 'react'
-import styles from './CommandWindow.scss'
-import { store } from 'index.js'
+import React, { Component }          from 'react'
+import styles                        from './CommandWindow.scss'
+import { store }                     from 'index.js'
 import { focusWindow, removeWindow } from 'lagniappe/actions/command'
-import config from 'config'
-import { Spin, Icon } from 'antd'
+import config                        from 'config'
+import { Spin, Icon }                from 'antd'
+import electron                      from 'electron'
+
+const ElectronMenu = electron.remote.Menu
 
 export default class CommandTab extends Component
 {
@@ -12,32 +15,53 @@ export default class CommandTab extends Component
     {
         switch(e.button) {
             case 0:
-                return this.focusMe(e)
+                return this.handleFocus(e)
             case 1:
-                return this.removeMe(e)
+                return this.handleRemove(e)
             case 2:
                 e.preventDefault()
                 break;
             default:
-                return this.focusMe(e)
+                return this.handleFocus(e)
         }
     }
 
-    focusMe(e)
+    contextMenu()
+    {
+        const menu = [{
+            label: 'Close Tab',
+            click: this.handleRemove.bind(this)
+        }]
+        if(!this.props.finished)
+        {
+            menu.push({
+                label: 'Stop Command',
+                click: this.handleKill.bind(this)
+            })
+        }
+        return ElectronMenu.buildFromTemplate(menu)
+    }
+
+    handleContext(e)
+    {
+        e.preventDefault()
+        this.contextMenu().popup()
+    }
+
+    handleFocus()
     {
         if(this.props.active) return null
         store.dispatch(focusWindow(this.props.id))
     }
 
-    removeMe(e)
+    handleRemove(e)
     {
         const id = this.props.id
-        e.preventDefault()
+        if(e && e.preventDefault) e.preventDefault()
         store.dispatch(removeWindow(id))
         // Kill and remove any processes related to this window
         if(config.processes[id])
         {
-            console.log('Killing all processes associated with window ID ' + id)
             config.processes[id].kill()
             delete config.processes[id]
         }
@@ -63,11 +87,17 @@ export default class CommandTab extends Component
         const title = this.props.title
         const windowId = this.props.id
         const killHandler = active ? this.handleKill.bind(this) : () => {}
+        const mouseDownHandler = this.handleMouseDown.bind(this)
+        const focusHandler = this.handleFocus.bind(this)
+        const removeHandler = this.handleRemove.bind(this)
+        const contextMenuHandler = this.handleContext.bind(this)
 
         return (
             <div className={className}>
-                {active ? <a className={styles.labelRemove} href="#" onClick={this.removeMe.bind(this)}><Icon type="close" /></a> : ''}
-                <span className={styles.labelText} onClick={this.focusMe.bind(this)} onMouseDown={this.handleMouseDown.bind(this)}>
+                {active ? <a className={styles.labelRemove} href="#" onClick={removeHandler}><Icon type="close" /></a> : ''}
+                <span className={styles.labelText} onClick={focusHandler}
+                        onMouseDown={mouseDownHandler}
+                        onContextMenu={contextMenuHandler}>
                     {!finished ? <Spin size="small" className="r-spacing--small" onMouseDown={killHandler} /> : false}
                     {title}
                 </span>
