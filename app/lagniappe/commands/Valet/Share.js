@@ -1,19 +1,21 @@
-import CommandProcess from 'lagniappe/commands/CommandProcess'
-import CommandWindow from 'lagniappe/commands/CommandWindow'
+import { exec } from 'child_process'
 
 export default class Share
 {
 
-    execute(site, cwd = './')
+    execute(path)
     {
-        const command = [{
-            command: 'valet',
-            args: ['share'],
-            options: { cwd }
-        }]
-        const window = new CommandWindow('valet share')
-        const process = new CommandProcess(command, window.callback, window.id)
-        return process.execute()
+        return new Promise((resolve, reject) => {
+            // 1. Kill existing ngrok tunnels
+            // 2. Share the current path (but direct the output to dev/null)
+            // 3. Get the share URL
+            exec('killall ngrok && valet share > /dev/null & && valet fetch-share-url', { cwd: path },
+                 (error, stdout, stderr) => {
+
+                // Only send back the last line, which oughta be our ngrok URL
+                resolve(stdout.split("\n").slice(-1))
+            })
+        })
     }
 
 
