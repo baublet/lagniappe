@@ -13,6 +13,8 @@ import Share                from 'lagniappe/commands/Valet/Share'
 
 import styles               from './Valet.scss'
 
+import ValetLink    from 'lagniappe/components/Valet/Link'
+
 const MenuItem = Menu.Item
 const MenuDivider = Menu.Divider
 const DropdownButton = Dropdown.Button
@@ -37,7 +39,8 @@ export default class Valet extends Component
             links: [],
             domain: null,
             paths: [],
-            status: this.status.slice(0)
+            status: this.status.slice(0),
+            share: {},
         }
     }
 
@@ -54,6 +57,7 @@ export default class Valet extends Component
             status: this.status.slice(0),
             paths: [],
             links: [],
+            share: {},
         }))
 
         const promises = []
@@ -110,44 +114,20 @@ export default class Valet extends Component
         )
     }
 
-    renderSiteActions(site)
+    handleShare(sitePath)
     {
-        const MenuClickHandler = e => {
-            console.log(e)
-            switch(e.key)
-            {
-                case 'share':
-                    const shareCommand = new Share()
-                    shareCommand.execute(site.path)
-                    break
-                case 'secure':
-                    break
-                case 'unsecure':
-                    break
-                case 'unlink':
-                    break
-            }
-        }
-        const ActionsMenu = (
-            <Menu onClick={MenuClickHandler}>
-                {site.secure ? false :
-                    <MenuItem key="share"><Icon type="cloud" /> Share</MenuItem>
+        const shareCommand = new Share()
+        this.setState(Object.assign({}, this.state, {
+            share: {}
+        }))
+        shareCommand.execute(sitePath).then(url => {
+            this.setState(Object.assign({}, this.state, {
+                share: {
+                    path: sitePath,
+                    url,
                 }
-                <MenuItem key={site.secure ? 'unsecure' : 'secure'}>
-                    {site.secure ? <Icon type="unlock" /> : <Icon type="lock" />}
-                    {site.secure ? ' Unsecure' : ' Secure'}
-                </MenuItem>
-                <MenuDivider />
-                <MenuItem key="unlink"><Icon type="close"/> Unlink</MenuItem>
-            </Menu>
-        )
-        return (
-            <Dropdown overlay={ActionsMenu}>
-                <Button>
-                    Actions <Icon type="down" />
-                </Button>
-            </Dropdown>
-        )
+            }))
+        })
     }
 
     renderLinks()
@@ -156,16 +136,9 @@ export default class Valet extends Component
         let domain = this.state.domain
         return this.state.links.map(link => {
             return (
-                <Row key={'valetLink' + i++}>
-                    <Col span={18}>
-                        <b><a onClick={() => open(link.url)}>{link.site}</a></b>
-                        <small>.{domain}</small>
-                        <p className={styles.Path}>{link.path}</p>
-                    </Col>
-                    <Col span={6}>
-                        {this.renderSiteActions(link)}
-                    </Col>
-                </Row>
+                <ValetLink {...link} domain={domain} key={'valetLink' + i++}
+                          shared={link.path == this.state.share.path} shareUrl={this.state.share.url}
+                          shareHandler={this.handleShare.bind(this)} />
             )
         })
     }
@@ -200,13 +173,11 @@ export default class Valet extends Component
                 { loading ? <Spin /> :
                     <Row gutter={16} className="t-spacing--large">
                         <Col span={16}>
+                            <h2>Links</h2>
                             { !links.length ?
                                 <Alert message="No links, yet." showIcon type="info" />
                             :
-                                <div>
-                                    <h2>Links</h2>
-                                    {links}
-                                </div>
+                                links
                             }
                         </Col>
                         <Col span={8}>

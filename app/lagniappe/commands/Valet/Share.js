@@ -1,20 +1,31 @@
-import { exec } from 'child_process'
+import { exec, spawn } from 'child_process'
+import path from 'path'
+
+const REGEX = /https?:\/\/[a-zA-Z0-9]+\.ngrok\.io/i
 
 export default class Share
 {
 
-    execute(path)
+    execute(cwd)
     {
         return new Promise((resolve, reject) => {
-            // 1. Kill existing ngrok tunnels
-            // 2. Share the current path (but direct the output to dev/null)
-            // 3. Get the share URL
-            exec('killall ngrok && valet share > /dev/null & && valet fetch-share-url', { cwd: path },
-                 (error, stdout, stderr) => {
+            const resolvedPath = path.resolve(cwd).trim()
+            if(!resolvedPath) reject('Unable to resolve path: ', cwd)
+            const command = 'cd ' + resolvedPath + ' && valet share > /dev/null &'
 
-                // Only send back the last line, which oughta be our ngrok URL
-                resolve(stdout.split("\n").slice(-1))
+            exec('killall ngrok')
+
+            exec(command, (error, stdout, stderr) => {
+                if(error && !error.message.includes('No matching processes')) return reject('Unable to start ngrok. Error: ' + stdout + stderr)
+                exec('valet fetch-share-url', (error, stdout, stderr) => {
+                    const output = stdout
+                    const url = output.match(REGEX)
+                    if(url && url[0]) return resolve(url[0])
+                    reject('Unable to get the URL. Error: ' + error + stdout + stderr)
+                })
             })
+
+
         })
     }
 

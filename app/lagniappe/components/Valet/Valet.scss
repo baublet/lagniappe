@@ -12,3 +12,9 @@
     font-size: $font-size-tiny;
     word-wrap: break-word;
 }
+
+.linkRow {
+    + .linkRow {
+        margin-top: $spacing-large;
+    }
+}
