@@ -151,10 +151,10 @@ export default class Valet extends Component
                     </Col>
                     <Col span={12}>
                         {!domain ? false :
-                        <div className={styles.Domain + ' float--right'}>
-                            <strong>Domain:</strong> <Tag>.{domain}</Tag>
-                        </div>
-                    }
+                            <div className={styles.Domain + ' float--right'}>
+                                <strong>Domain:</strong> <Tag>.{domain}</Tag>
+                            </div>
+                        }
                     </Col>
                 </Row>
                 <Row className="t-spacing--small">
