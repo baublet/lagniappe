@@ -17,7 +17,8 @@ export default class Php70 extends Dependency {
         this.required = true
     }
 
-    mac() {
+    mac()
+    {
         this.installCommand = 'brew install php70'
         this.uninstallCommand = 'brew uninstall php70'
     }
