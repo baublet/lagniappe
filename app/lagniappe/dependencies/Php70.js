@@ -8,7 +8,7 @@ export default class Php70 extends Dependency {
 
     default()
     {
-        this.dependencyName = 'Php'
+        this.dependencyName = 'PHP 7.0'
         this.dependencyLink = 'http://php.net/'
         this.dependencyDocumentation = 'http://php.net/docs.php'
         this.dependencyDescription = "PHP is a popular general-purpose scripting language that is especially suited to web development."
