@@ -13,7 +13,7 @@ export default class Log
     execute(cwd = './', max = 10, offset = 0)
     {
         return new Promise((resolve, reject) => {
-            exec('git log --pretty=medium HEAD~' + max + '..HEAD~' + offset, { cwd }, (error, stdout, stderr) => {
+            exec('git log --pretty=medium -n ' + max + ' --skip=' + offset, { cwd }, (error, stdout, stderr) => {
                 const parsedCommits = this.parseLog(stdout)
                 resolve(parsedCommits)
             })
