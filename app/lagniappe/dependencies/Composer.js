@@ -10,8 +10,8 @@ export default class Composer extends Dependency {
     }
 
     mac() {
-        this.dependencyLink = 'https://github.com/laravel/valet'
-        this.dependencyDocumentation = 'https://laravel.com/docs/5.4/valet'
+        this.dependencyLink = 'https://getcomposer.org/'
+        this.dependencyDocumentation = 'https://getcomposer.org/doc/'
         this.dependencyDescription = 'Composer is the defacto package manager for PHP.'
 
         this.command = 'composer -V'
